@@ -35,9 +35,17 @@ function RW_Sprayer:processSprayerArea(superFunc, workArea, dT)
 
         --end
 
+        local fieldGroundSystem = g_currentMission.fieldGroundSystem
+
         for x = x1, x2, moistureSystem.cellWidth * 0.5 do
             for z = z1, z2, moistureSystem.cellHeight * 0.5 do
                 --print(x, z, "----")
+
+                local groundTypeValue = fieldGroundSystem:getValueAtWorldPos(FieldDensityMap.GROUND_TYPE, x, 0, z)
+	            local groundType = FieldGroundType.getTypeByValue(groundTypeValue)
+                
+                if groundType == FieldGroundType.NONE then continue end
+
                 moistureSystem:setValuesAtCoords(x, z, target)
             end
         end
@@ -65,3 +73,49 @@ function RW_Sprayer:getSprayerUsage(superFunc, fillType, dT)
 end
 
 Sprayer.getSprayerUsage = Utils.overwrittenFunction(Sprayer.getSprayerUsage, RW_Sprayer.getSprayerUsage)
+
+
+function RW_Sprayer:updateSprayerEffects(force)
+
+    local spec = self.spec_sprayer
+
+    local effectsState = self:getAreEffectsVisible()
+    if effectsState ~= spec.lastEffectsState or force then
+
+        if effectsState then
+
+            local fillType = self:getFillUnitLastValidFillType(self:getSprayerFillUnitIndex())
+            if fillType == FillType.UNKNOWN then
+                fillType = self:getFillUnitFirstSupportedFillType(self:getSprayerFillUnitIndex())
+            end
+
+            if fillType == FillType.WATER then
+
+                g_effectManager:setEffectTypeInfo(spec.effects, FillType.LIQUIDFERTILIZER)
+                g_effectManager:startEffects(spec.effects)
+
+                g_soundManager:playSample(spec.samples.spray)
+
+                local sprayType = self:getActiveSprayType()
+                if sprayType ~= nil then
+                    g_effectManager:setEffectTypeInfo(sprayType.effects, FillType.LIQUIDFERTILIZER)
+                    g_effectManager:startEffects(sprayType.effects)
+
+                    g_animationManager:startAnimations(sprayType.animationNodes)
+
+                    g_soundManager:playSample(sprayType.samples.spray)
+                end
+
+                g_animationManager:startAnimations(spec.animationNodes)
+
+                spec.lastEffectsState = effectsState
+
+            end
+
+        end
+
+    end
+
+end
+
+Sprayer.updateSprayerEffects = Utils.prependedFunction(Sprayer.updateSprayerEffects, RW_Sprayer.updateSprayerEffects)
