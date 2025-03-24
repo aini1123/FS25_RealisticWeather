@@ -1,0 +1,417 @@
+<modDesc descVersion="96">
+    <author>Arrow</author>
+    <version>1.1.0.2</version>
+    <title>
+        <en>Realistic Weather</en>
+        <de>Realistisches Wetter</de>
+        <fr>Météo Réaliste</fr>
+        <pl>Realistyczna Pogoda</pl>
+        <it>Meteo Realistico</it>
+    </title>
+    <description>
+        <en>
+        <![CDATA[ An overhaul to the weather system, focusing mainly on snow.
+Features:
+
+- Adds 3 new "disaster" weather events, blizzards, droughts and extremely thick fog
+- New grass moisture system which dries tedded grass into hay over time
+- Extends the info display in the top right, adding information on temperature, upcoming disasters and predicted snow amount
+- Adds a moisture mechanic to fields; each type of crop has an ideal moisture range, being inside this range increases harvest yield
+- Moisture changes constantly depending on sunlight, temperature and rainfall
+- Crops with extremely low moisture will wither
+- Hail will now cause damage and wear to vehicles left outside
+- Wheel physics changed significantly
+- Maximum amount of snow has been doubled
+- Livestock will leave "footprints" in deep snow (only on high-end systems)
+
+- Blizzards:
+--- Blizzards are rare events that will cause significant snowfall in a short period of time, causing up to 1 metre high snow
+--- Temperature during blizzards can go as low as -15 celsius
+--- Snow will likely remain for much longer time
+
+- Droughts:
+--- Droughts result in extreme heat which will lead to rapid moisture loss in fields
+
+- Fog:
+--- Extremely thick fogs may occur where visibility is extremely low for up to 14 hours
+
+- Wheel Physics:
+--- Friction for all wheel types have been changed to be much more realistic
+--- Friction will now decrease more realistically based on road and vehicle conditions, including vehicle weight, snow amount, and snow wetness
+--- Braking times are now dependant on friction and number of wheels; lower friction will result in longer braking times, whereas more wheels result in faster times
+--- Wheels will gradually destroy snow more realistically, based on the weight the wheel is carrying, snow amount and snow wetness
+--- Heavier vehicles will sink in snow much more than lighter vehicles; sunk vehicles may get completely stuck
+--- Driving cars and heavy equipment in heavy snow will be almost impossible as a result, specific vehicles, such as vehicles with tracks, are required
+
+- Grass Moisture System:
+--- After tedding mowed grass, it will dry into hay over time based on its moisture
+--- Tedded grass has its own individual moisture content based on the moisture of the field when it was mowed
+--- Tedded grass will gain/lose moisture at different rates than fields
+--- New info box when standing on tedded grass, showing its moisture, required moisture, and whether it needs to be tedded (currently disabled on MP)
+--- Please bear in mind that this feature in its current state may cause lag on lower-end systems or on extremely large fields
+
+
+Changelog:
+
+1.1.0.2
+- Fixed an issue causing certain mods to freeze the game
+- Fixed sprayer irrigation not increasing the moisture of every intended cell
+- Lowered the volume of certain ambient sounds
+- Lowered the cost of passive irrigation
+- Lowered water usage of sprayers
+- Harvesting contracts should now account for withering and different moisture values across the field
+
+1.1.0.1
+- Fixed overloading being disabled
+- Fixed irrigation context button disappearing after exiting a vehicle
+- Fixed irrigation starting when pressing relevant keybind in a vehicle
+- Tweaked irrigation costs and amounts
+
+1.1.0.0:
+- Added new cell system covering the entire map, each cell has its own unique moisture and moisture retention based on surrounding cells (cells are 4x4 up to 15x15 depending on PC specs)
+- Re-enabled and improved crop withering at low moisture
+- Crops can now wither in small patches based on their cell's moisture
+- Crops now have a fluctuating percentage of withering every 4 hours
+- Added 2 new irrigation systems; field irrigation through the context menu (paid daily), and irrigation using sprayers
+- Sprayers can now be filled with water which will give 4x as much moisture when irrigating
+- Added automatic grass -> hay drying based on moisture, further details above
+- Bales left outside during rain will now slowly lose content based on rainfall amount
+- Added 12 new ambient sounds, including new sounds for blizzards, different rain amounts, hail, birds and crickets
+- Reduced moisture requirements for sugarcane and sugarbeet
+- Fixed moisture not being synced on MP
+- Fixed certain weather events not being synced on MP
+- Fixed "attempt to index nil with 'temperature'" error]]>
+        </en>
+        <de>
+            <![CDATA[ Eine Überarbeitung des Wettersystems, die sich hauptsächlich auf Schnee konzentriert.
+Merkmale:
+
+- Fügt 3 neue „Katastrophen“-Wetterereignisse hinzu, Schneestürme, Dürren und extrem dichten Nebel
+- Neues Grasbefeuchtungssystem, das das gemähte Gras mit der Zeit zu Heu trocknet
+- Erweitert die Infoanzeige oben rechts um Informationen zu Temperatur, bevorstehenden Katastrophen und vorhergesagter Schneemenge
+- Fügt eine Feuchtigkeitsmechanik zu den Feldern hinzu; jede Kulturart hat einen idealen Feuchtigkeitsbereich, der den Ernteertrag erhöht, wenn er innerhalb dieses Bereichs liegt
+- Der Feuchtigkeitsgehalt ändert sich ständig in Abhängigkeit von Sonneneinstrahlung, Temperatur und Niederschlag
+- Pflanzen mit extrem niedriger Feuchtigkeit werden verdorren
+- Hagel verursacht nun Schäden und Verschleiß an Fahrzeugen, die im Freien stehen
+- Die Physik der Räder wurde erheblich verändert
+- Die maximale Schneemenge wurde verdoppelt
+- Vieh hinterlässt „Fußabdrücke“ im Tiefschnee (nur auf High-End-Systemen)
+
+- Schneestürme:
+--- Blizzards sind seltene Ereignisse, die in kurzer Zeit erhebliche Schneefälle verursachen und bis zu 1 Meter hohen Schnee hervorrufen können
+--- Die Temperatur während eines Blizzards kann bis zu -15 Grad Celsius sinken
+--- Der Schnee bleibt wahrscheinlich für längere Zeit liegen.
+
+- Dürreperioden:
+--- Dürren führen zu extremer Hitze, die zu einem raschen Feuchtigkeitsverlust auf den Feldern führt
+
+- Nebel:
+--- Extrem dichter Nebel kann auftreten, bei dem die Sicht bis zu 14 Stunden lang extrem schlecht ist
+
+- Rad-Physik:
+--- Die Reibung für alle Radtypen wurde geändert und ist nun viel realistischer
+--- Die Reibung nimmt nun realistischer ab, je nach Straßen- und Fahrzeugbedingungen, einschließlich Fahrzeuggewicht, Schneemenge und Schneenässe
+--- Bremszeiten sind nun abhängig von der Reibung und der Anzahl der Räder; geringere Reibung führt zu längeren Bremszeiten, während mehr Räder zu schnelleren Zeiten führen
+--- Die Räder zerstören den Schnee allmählich realistischer, basierend auf dem Gewicht, das das Rad trägt, der Schneemenge und der Schneenässe
+--- Schwerere Fahrzeuge sinken im Schnee viel stärker ein als leichtere Fahrzeuge; eingesunkene Fahrzeuge können komplett stecken bleiben
+--- Das Fahren von Autos und schwerem Gerät in schwerem Schnee wird fast unmöglich sein, daher sind spezielle Fahrzeuge, wie z.B. Fahrzeuge mit Ketten, erforderlich
+
+- Gras-Feuchtigkeits-System:
+--- Nach dem Zetten von gemähtem Gras trocknet es mit der Zeit zu Heu, je nach seiner Feuchtigkeit.
+--- Gemähte Gräser haben ihren eigenen individuellen Feuchtigkeitsgehalt, der auf der Feuchtigkeit des Feldes zum Zeitpunkt des Mähens beruht.
+--- Gemähte Gräser gewinnen/verlieren unterschiedlich schnell an Feuchtigkeit.
+--- Neue Infobox, wenn man auf gemähtem Gras steht, zeigt die Feuchtigkeit, die benötigte Feuchtigkeit und ob es gemäht werden muss (derzeit im MP deaktiviert)
+--- Bitte beachten Sie, dass diese Funktion in ihrem jetzigen Zustand auf weniger leistungsfähigen Systemen oder auf extrem großen Feldern zu Verzögerungen führen kann.
+
+
+Änderungsliste:
+
+1.1.0.2
+- Ein Problem wurde behoben, das bei bestimmten Mods zum Einfrieren des Spiels führte
+- Es wurde behoben, dass die Sprühbewässerung nicht die Feuchtigkeit jeder vorgesehenen Zelle erhöhte
+- Die Lautstärke bestimmter Umgebungsgeräusche wurde verringert
+- Die Kosten für passive Bewässerung wurden gesenkt
+- Der Wasserverbrauch von Sprühern wurde gesenkt
+- Ernteverträge sollten nun das Verwelken und unterschiedliche Feuchtigkeitswerte auf dem Feld berücksichtigen
+
+1.1.0.1
+- Die Überladung wurde deaktiviert
+- Die Kontexttaste für die Bewässerung verschwindet nach dem Verlassen eines Fahrzeugs nicht mehr
+- Es wurde behoben, dass die Bewässerung startet, wenn die entsprechende Taste in einem Fahrzeug gedrückt wird.
+- Kosten und Mengen der Bewässerung wurden optimiert
+
+1.1.0.0:
+- Es wurde ein neues Zellsystem hinzugefügt, das die gesamte Karte abdeckt. Jede Zelle hat ihre eigene, einzigartige Feuchtigkeit und Feuchtigkeitsspeicherung, die auf den umliegenden Zellen basiert (Zellen sind 4x4 bis 15x15, abhängig von den PC-Spezifikationen)
+- Erneute Aktivierung und Verbesserung des Verwelkens von Pflanzen bei niedriger Feuchtigkeit
+- Feldfrüchte können nun in kleinen Abschnitten verdorren, basierend auf der Feuchtigkeit in der Zelle.
+- Die Pflanzen haben jetzt alle 4 Stunden einen schwankenden Prozentsatz an Welken
+- 2 neue Bewässerungssysteme wurden hinzugefügt: Feldbewässerung über das Kontextmenü (täglich zu bezahlen) und Bewässerung mit Sprühgeräten
+- Sprühgeräte können nun mit Wasser gefüllt werden, wodurch 4x so viel Feuchtigkeit bei der Bewässerung erzeugt wird
+- Automatisches Trocknen von Gras -> Heu je nach Feuchtigkeit hinzugefügt, weitere Details siehe oben
+- Ballen, die während des Regens draußen bleiben, verlieren nun langsam ihren Inhalt, je nach Regenmenge
+- 12 neue Umgebungsgeräusche hinzugefügt, darunter neue Sounds für Schneestürme, unterschiedliche Regenmengen, Hagel, Vögel und Grillen
+- Reduzierte Feuchtigkeitsanforderungen für Zuckerrohr und Zuckerrüben
+- Feuchtigkeit wurde im MP nicht synchronisiert
+- Bestimmte Wetterereignisse wurden nicht mit dem MP synchronisiert
+- Fehler „Versuch, mit ‚Temperatur‘ eine Null zu indizieren“ behoben]]>
+        </de>
+        <fr>
+            <![CDATA[ Une révision du système météorologique, principalement axée sur la neige.
+Caractéristiques :
+
+- Ajout de 3 nouveaux événements météorologiques « catastrophes » : blizzards, sécheresses et brouillard extrêmement épais.
+- Nouveau système d'humidification de l'herbe qui sèche l'herbe fanée pour la transformer en foin au fil du temps.
+- Extension de l'écran d'information en haut à droite, ajoutant des informations sur la température, les catastrophes à venir et la quantité de neige prévue.
+- Ajoute un mécanisme d'humidité aux champs ; chaque type de culture a une plage d'humidité idéale, et le fait d'être dans cette plage augmente le rendement de la récolte.
+- L'humidité varie constamment en fonction de l'ensoleillement, de la température et des précipitations.
+- Les cultures dont le taux d'humidité est extrêmement bas se flétrissent.
+- La grêle endommage et use désormais les véhicules laissés à l'extérieur.
+- La physique des roues a été modifiée de manière significative.
+- La quantité maximale de neige a été doublée.
+- Le bétail laissera des « empreintes » dans la neige épaisse (uniquement sur les systèmes haut de gamme).
+
+- Blizzards :
+--- Les blizzards sont des événements rares qui provoquent d'importantes chutes de neige en peu de temps, avec des hauteurs de neige pouvant atteindre 1 mètre.
+--- La température pendant les blizzards peut descendre jusqu'à -15 degrés Celsius.
+--- La neige restera probablement plus longtemps.
+
+- Les sécheresses :
+--- Les sécheresses entraînent une chaleur extrême qui provoque une perte rapide d'humidité dans les champs
+
+- Brouillard :
+--- Des brouillards extrêmement épais peuvent se former là où la visibilité est extrêmement faible pendant une période pouvant aller jusqu'à 14 heures.
+
+- Physique des roues :
+--- Le frottement de tous les types de roues a été modifié pour être beaucoup plus réaliste.
+--- La friction diminue maintenant de façon plus réaliste en fonction de l'état de la route et du véhicule, y compris le poids du véhicule, la quantité de neige et l'humidité de la neige.
+--- Les temps de freinage dépendent maintenant de la friction et du nombre de roues ; une friction plus faible entraînera des temps de freinage plus longs, tandis qu'un plus grand nombre de roues entraînera des temps de freinage plus rapides.
+--- Les roues détruiront progressivement la neige de manière plus réaliste, en fonction du poids de la roue, de la quantité de neige et de l'humidité de la neige.
+--- Les véhicules plus lourds s'enfonceront dans la neige beaucoup plus que les véhicules plus légers ; les véhicules enfoncés peuvent rester complètement bloqués.
+--- La conduite de voitures et d'équipements lourds dans la neige épaisse sera presque impossible ; par conséquent, des véhicules spécifiques, tels que des véhicules à chenilles, sont nécessaires.
+
+- Système d'humidité de l'herbe :
+--- Après le fanage de l'herbe fauchée, celle-ci se transformera en foin au fil du temps, en fonction de son humidité.
+--- L'herbe fanée a son propre taux d'humidité en fonction de l'humidité du champ lorsqu'elle a été fauchée.
+--- L'herbe fanée gagne/perd de l'humidité à des rythmes différents de ceux des champs.
+--- Nouvelle boîte d'information lorsque l'on se trouve sur de l'herbe fanée, indiquant son humidité, l'humidité requise, et si elle doit être fanée (actuellement désactivée sur MP).
+--- Merci de garder à l'esprit que cette fonctionnalité, dans son état actuel, peut causer du lag sur des systèmes bas de gamme ou sur des champs extrêmement grands.
+
+
+Journal des modifications :
+
+1.1.0.2
+- Correction d'un problème provoquant le gel du jeu avec certains mods
+- Correction de l'irrigation par pulvérisateur qui n'augmentait pas l'humidité de chaque cellule prévue.
+- Réduction du volume de certains sons ambiants
+- Réduction du coût de l'irrigation passive
+- Réduction de la consommation d'eau des pulvérisateurs
+- Les contrats de récolte devraient désormais prendre en compte le flétrissement et les différentes valeurs d'humidité dans le champ.
+
+1.1.0.1
+- Correction de la désactivation de la surcharge
+- Correction de la disparition du bouton contextuel d'irrigation après avoir quitté un véhicule
+- Correction du démarrage de l'irrigation lorsque l'on appuie sur le raccourci clavier approprié dans un véhicule
+- Ajustement des coûts et des montants d'irrigation
+
+1.1.0.0 :
+- Ajout d'un nouveau système de cellules couvrant l'ensemble de la carte, chaque cellule a sa propre humidité et sa propre rétention d'humidité en fonction des cellules environnantes (les cellules sont 4x4 jusqu'à 15x15 en fonction des spécifications du PC).
+- Réactivation et amélioration du flétrissement des cultures en cas de faible humidité
+- Les cultures peuvent maintenant se flétrir par petites parcelles en fonction de l'humidité de leur cellule.
+- Les cultures ont maintenant un pourcentage de flétrissement fluctuant toutes les 4 heures.
+- Ajout de 2 nouveaux systèmes d'irrigation : l'irrigation des champs via le menu contextuel (payé quotidiennement), et l'irrigation à l'aide de pulvérisateurs.
+- Les pulvérisateurs peuvent désormais être remplis d'eau, ce qui permet d'obtenir 4 fois plus d'humidité lors de l'irrigation.
+- Ajout du séchage automatique de l'herbe et du foin en fonction de l'humidité, plus de détails ci-dessus.
+- Les balles laissées à l'extérieur pendant la pluie perdront lentement leur contenu en fonction de la quantité de pluie.
+- Ajout de 12 nouveaux sons d'ambiance, dont de nouveaux sons pour les blizzards, les différentes quantités de pluie, la grêle, les oiseaux et les grillons.
+- Réduction des besoins en humidité pour la canne à sucre et la betterave à sucre.
+- Correction de l'humidité non synchronisée sur MP
+- Correction de certains événements météorologiques non synchronisés sur MP
+- Correction de l'erreur « attempt to index nil with “temperature” ».]]>
+        </fr>
+        <pl>
+            <![CDATA[ Zmiana systemu pogodowego, skupiająca się głównie na śniegu.
+Cechy:
+
+- Dodaje 3 nowe „katastrofalne” zjawiska pogodowe: śnieżyce, susze i wyjątkowo gęstą mgłę.
+- Nowy system nawilżania trawy, który z czasem suszy skoszoną trawę na siano.
+- Rozszerzono wyświetlanie informacji w prawym górnym rogu, dodając informacje o temperaturze, nadchodzących katastrofach i przewidywanej ilości śniegu.
+- Dodaje mechanikę wilgotności do pól; każdy rodzaj upraw ma idealny zakres wilgotności, a przebywanie w tym zakresie zwiększa wydajność zbiorów.
+- Wilgotność zmienia się stale w zależności od nasłonecznienia, temperatury i opadów deszczu.
+- Uprawy o ekstremalnie niskiej wilgotności będą więdnąć
+- Grad będzie teraz powodował uszkodzenia i zużycie pojazdów pozostawionych na zewnątrz.
+- Fizyka kół uległa znacznej zmianie
+- Maksymalna ilość śniegu została podwojona
+- Zwierzęta będą zostawiać „ślady” w głębokim śniegu (tylko w zaawansowanych systemach)
+
+- Zamiecie:
+--- Zamiecie to rzadkie wydarzenia, które powodują znaczne opady śniegu w krótkim czasie, powodując śnieg o wysokości do 1 metra.
+--- Temperatura podczas zamieci może spaść nawet do -15 stopni Celsjusza
+--- Śnieg prawdopodobnie utrzyma się przez dłuższy czas
+
+- Susze:
+--- Susze powodują ekstremalne upały, które prowadzą do szybkiej utraty wilgoci na polach
+
+- Mgła:
+--- Mogą wystąpić niezwykle gęste mgły, w których widoczność będzie bardzo niska przez 14 godzin.
+
+- Fizyka kół:
+--- Tarcie dla wszystkich typów kół zostało zmienione, aby było bardziej realistyczne
+--- Tarcie zmniejsza się teraz bardziej realistycznie w zależności od warunków na drodze i w pojeździe, w tym masy pojazdu, ilości śniegu i jego wilgotności.
+--- Czasy hamowania są teraz zależne od tarcia i liczby kół; niższe tarcie spowoduje dłuższe czasy hamowania, podczas gdy więcej kół spowoduje szybsze czasy
+--- Koła będą stopniowo niszczyć śnieg w bardziej realistyczny sposób, w oparciu o ciężar koła, ilość śniegu i jego wilgotność.
+--- Cięższe pojazdy będą zapadać się w śniegu znacznie bardziej niż lżejsze pojazdy; zatopione pojazdy mogą całkowicie utknąć.
+--- Jazda samochodami i ciężkim sprzętem w ciężkim śniegu będzie prawie niemożliwa, w związku z czym wymagane są specjalne pojazdy, takie jak pojazdy z gąsienicami.
+
+- System wilgotności trawy:
+--- Po przetrząśnięciu skoszona trawa z czasem wyschnie na siano w zależności od jej wilgotności
+--- Trawa przetrząsana ma swoją własną indywidualną zawartość wilgoci opartą na wilgotności pola, na którym została skoszona.
+--- Skoszona trawa będzie zyskiwać/tracić wilgoć w innym tempie niż pola
+--- Nowe okno informacyjne podczas stania na skoszonej trawie, pokazujące jej wilgotność, wymaganą wilgotność i to, czy musi być skoszona (obecnie wyłączone na MP)
+--- Należy pamiętać, że ta funkcja w obecnym stanie może powodować opóźnienia na niższych systemach lub na bardzo dużych polach.
+
+
+Dziennik zmian:
+
+1.1.0.2
+- Naprawiono błąd powodujący zawieszanie się gry przez niektóre mody.
+- Naprawiono nawadnianie za pomocą opryskiwacza, które nie zwiększało wilgotności każdej przeznaczonej do tego komórki.
+- Zmniejszono głośność niektórych dźwięków otoczenia.
+- Obniżono koszt nawadniania pasywnego.
+- Zmniejszono zużycie wody przez opryskiwacze.
+- Kontrakty na zbiory powinny teraz uwzględniać więdnięcie i różne wartości wilgotności na polu.
+
+1.1.0.1
+- Naprawiono wyłączanie przeciążenia.
+- Naprawiono znikanie przycisku kontekstowego nawadniania po wyjściu z pojazdu.
+- Naprawiono uruchamianie nawadniania po naciśnięciu odpowiedniego klawisza w pojeździe.
+- Poprawiono koszty i kwoty nawadniania.
+
+1.1.0.0:
+- Dodano nowy system komórek obejmujący całą mapę, każda komórka ma własną unikalną wilgotność i retencję wilgoci w oparciu o otaczające komórki (komórki mają wymiary 4x4 do 15x15 w zależności od specyfikacji komputera).
+- Ponownie włączono i poprawiono więdnięcie upraw przy niskiej wilgotności.
+- Uprawy mogą teraz więdnąć małymi płatami w zależności od wilgotności ich komórki.
+- Uprawy mają teraz zmienny procent więdnięcia co 4 godziny.
+- Dodano 2 nowe systemy nawadniania: nawadnianie pól poprzez menu kontekstowe (płatne codziennie) oraz nawadnianie za pomocą opryskiwaczy.
+- Opryskiwacze można teraz napełniać wodą, co zapewni 4x więcej wilgoci podczas nawadniania.
+- Dodano automatyczne suszenie trawy -> siana na podstawie wilgotności, więcej szczegółów powyżej.
+- Bele pozostawione na zewnątrz podczas deszczu będą teraz powoli tracić zawartość w zależności od ilości opadów.
+- Dodano 12 nowych dźwięków otoczenia, w tym nowe dźwięki zamieci, różnych ilości deszczu, gradu, ptaków i świerszczy.
+- Zmniejszono wymagania dotyczące wilgotności dla trzciny cukrowej i buraków cukrowych.
+- Naprawiono brak synchronizacji wilgotności na MP.
+- Naprawiono brak synchronizacji niektórych zdarzeń pogodowych w MP.
+- Naprawiono błąd „próba indeksowania zera z »temperaturą«”.]]>
+        </pl>
+        <it>
+            <![CDATA[ Una revisione del sistema meteorologico, incentrata principalmente sulla neve.
+Caratteristiche:
+
+- Aggiunti 3 nuovi eventi meteorologici "disastrosi": bufere di neve, siccità e nebbia estremamente fitta.
+- Nuovo sistema di umidità dell'erba, che col tempo trasforma l'erba tagliata in fieno.
+- Estende la visualizzazione delle informazioni in alto a destra, aggiungendo informazioni sulla temperatura, sulle calamità in arrivo e sulla quantità di neve prevista.
+- Aggiunta una meccanica dell'umidità ai campi; ogni tipo di coltura ha un intervallo di umidità ideale, e se rientra in questo intervallo aumenta la resa del raccolto.
+- L'umidità cambia costantemente in base alla luce del sole, alla temperatura e alle precipitazioni.
+- Le colture con un'umidità estremamente bassa appassiscono
+- La grandine ora causa danni e usura ai veicoli lasciati all'aperto
+- La fisica delle ruote è cambiata in modo significativo
+- La quantità massima di neve è stata raddoppiata
+- Il bestiame lascerà "impronte" nella neve alta (solo sui sistemi di fascia alta)
+
+- Bufere di neve:
+--- Le bufere di neve sono eventi rari che causano nevicate significative in un breve periodo di tempo, causando fino a 1 metro di altezza.
+--- La temperatura durante le bufere di neve può scendere fino a -15 gradi Celsius.
+--- La neve rimarrà probabilmente per molto più tempo
+
+- Siccità:
+--- La siccità provoca un caldo estremo che porta a una rapida perdita di umidità nei campi.
+
+- Nebbia:
+--- Possono verificarsi nebbie estremamente fitte che riducono la visibilità fino a 14 ore.
+
+- Fisica delle ruote:
+--- L'attrito per tutti i tipi di ruote è stato modificato per essere molto più realistico.
+--- L'attrito diminuisce in modo più realistico in base alle condizioni della strada e del veicolo, compreso il peso del veicolo, la quantità di neve e l'umidità della neve.
+--- I tempi di frenata dipendono ora dall'attrito e dal numero di ruote; un attrito più basso comporta tempi di frenata più lunghi, mentre un numero maggiore di ruote comporta tempi più rapidi.
+--- Le ruote distruggeranno gradualmente la neve in modo più realistico, in base al peso trasportato dalla ruota, alla quantità di neve e all'umidità della neve.
+--- I veicoli più pesanti affonderanno nella neve molto più di quelli più leggeri; i veicoli affondati possono rimanere completamente bloccati.
+--- Guidare auto e attrezzature pesanti su neve pesante sarà quasi impossibile, di conseguenza sono necessari veicoli specifici, come quelli dotati di cingoli.
+
+- Sistema di umidità dell'erba:
+--- Dopo aver spennato l'erba tagliata, questa si asciugherà in fieno nel tempo in base alla sua umidità.
+--- L'erba tagliata ha un contenuto di umidità individuale basato sull'umidità del campo quando è stata tagliata.
+--- L'erba tagliata guadagnerà/perderà umidità a ritmi diversi rispetto ai campi.
+--- Nuovo riquadro informativo quando ci si trova sull'erba tagliata, che mostra la sua umidità, l'umidità richiesta e se ha bisogno di essere tagliata (attualmente disabilitato su MP).
+--- Tenete presente che questa funzione, allo stato attuale, può causare lag su sistemi di fascia bassa o su campi estremamente grandi.
+
+Changelog:
+
+1.1.0.2
+- Corretto un problema che causava il blocco del gioco per alcune mod.
+- Corretto il problema dell'irrigazione dello spruzzatore che non aumenta l'umidità di tutte le celle previste.
+- Abbassato il volume di alcuni suoni ambientali
+- Ridotto il costo dell'irrigazione passiva
+- Ridotto il consumo d'acqua degli irroratori
+- I contratti di raccolta ora tengono conto dell'appassimento e dei diversi valori di umidità nel campo.
+
+1.1.0.1
+- Corretto il sovraccarico disabilitato
+- Corretto il pulsante contestuale dell'irrigazione che scompare dopo l'uscita da un veicolo.
+- Corretto l'avvio dell'irrigazione quando si preme la relativa combinazione di tasti in un veicolo.
+- Modificati i costi e gli importi dell'irrigazione
+
+1.1.0.0:
+- Aggiunto un nuovo sistema di celle che copre l'intera mappa, ogni cella ha un valore di umidità unico basato sulle celle circostanti (le celle sono 4x4 fino a 15x15 a seconda delle specifiche del PC).
+- Riabilitato e migliorato l'appassimento delle colture a bassa umidità
+- Le colture possono ora appassire in piccoli lembi in base all'umidità della loro cella.
+- Le colture ora hanno una percentuale di appassimento fluttuante ogni 4 ore
+- Aggiunti 2 nuovi sistemi di irrigazione: l'irrigazione del campo attraverso il menu contestuale (pagamento giornaliero) e l'irrigazione con gli spruzzatori
+- Gli spruzzatori possono ora essere riempiti d'acqua, in modo da fornire il doppio dell'umidità durante l'irrigazione
+- Aggiunta l'essiccazione automatica dell'erba e del fieno in base all'umidità, ulteriori dettagli sopra.
+- Le balle lasciate all'aperto durante la pioggia ora perdono lentamente il contenuto in base alla quantità di precipitazioni
+- Aggiunti 12 nuovi suoni ambientali, tra cui nuovi suoni per bufere di neve, diverse quantità di pioggia, grandine, uccelli e grilli.
+- Riduzione dei requisiti di umidità per la canna da zucchero e la barbabietola da zucchero
+- Correzione della mancata sincronizzazione dell'umidità su MP
+- Corretta la mancata sincronizzazione di alcuni eventi meteorologici su MP
+- Corretto l'errore "tentativo di indicizzare nil con 'temperatura'"]]>
+        </it>
+    </description>
+    <iconFilename>icon_RealisticWeather.dds</iconFilename>
+    <multiplayer supported="true"/>
+    <extraSourceFiles>
+        <sourceFile filename="src/densityMaps/DensityMapHeightManager.lua"/>
+        <sourceFile filename="src/environment/weather/Weather.lua"/>
+        <sourceFile filename="src/environment/weather/WeatherInstance.lua"/>
+        <sourceFile filename="src/environment/weather/WeatherStateEvent.lua"/>
+        <sourceFile filename="src/fields/FieldState.lua"/>
+        <sourceFile filename="src/fillTypes/FillTypeManager.lua"/>
+        <sourceFile filename="src/gui/hud/GameInfoDisplay.lua"/>
+        <sourceFile filename="src/gui/hud/RW_InfoDisplayKeyValueBox.lua"/>
+        <sourceFile filename="src/missions/field/HarvestMission.lua"/>
+        <sourceFile filename="src/player/PlayerHUDUpdater.lua"/>
+        <sourceFile filename="src/player/PlayerInputComponent.lua"/>
+        <sourceFile filename="src/sounds/AmbientSoundSystem.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Cutter.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Drivable.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Mower.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Sprayer.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Tedder.lua"/>
+        <sourceFile filename="src/vehicles/wheels/WheelPhysics.lua"/>
+        <sourceFile filename="src/vehicles/wheels/WheelDestruction.lua"/>
+        <sourceFile filename="src/vehicles/WheelsUtil.lua"/>
+        <sourceFile filename="src/FieldIrrigationChangeEvent.lua"/>
+        <sourceFile filename="src/FSBaseMission.lua"/>
+        <sourceFile filename="src/FSCareerMissionInfo.lua"/>
+        <sourceFile filename="src/GrassMoistureSystem.lua"/>
+        <sourceFile filename="src/I18N.lua"/>
+        <sourceFile filename="src/MoistureSyncEvent.lua"/>
+        <sourceFile filename="src/MoistureSystem.lua"/>
+    </extraSourceFiles>
+    <l10n filenamePrefix="translations/translation"/>
+    <inputBinding>
+        <actionBinding action="Irrigation">
+            <binding device="KB_MOUSE_DEFAULT" input="KEY_rctrl KEY_l"/>
+        </actionBinding>
+    </inputBinding>
+    <actions>
+        <action name="Irrigation"/>
+    </actions>
+</modDesc>
