@@ -26,9 +26,9 @@ MoistureSystem.CELL_HEIGHT = {
 MoistureSystem.MAP_WIDTH = 2048
 MoistureSystem.MAP_HEIGHT = 2048
 MoistureSystem.TICKS_PER_UPDATE = 150
-MoistureSystem.IRRIGATION_FACTOR = 0.0000008
-MoistureSystem.SPRAY_FACTOR = 0.0000025
-MoistureSystem.IRRIGATION_BASE_COST = 0.0000005
+MoistureSystem.IRRIGATION_FACTOR = 0.000001
+MoistureSystem.SPRAY_FACTOR = 0.000006
+MoistureSystem.IRRIGATION_BASE_COST = 0.00000025
 
 local moistureSystem_mt = Class(MoistureSystem)
 
@@ -51,6 +51,7 @@ function MoistureSystem.new()
     self.mapWidth, self.mapHeight = MoistureSystem.MAP_WIDTH, MoistureSystem.MAP_HEIGHT
     self.isShowingIrrigationInput = false
     self.irrigationEventId = RW_PlayerInputComponent.IRRIGATION_EVENT_ID
+    self.isSaving = false
 
     self.timeSinceLastUpdate = 0
     self.timeSinceLastUpdateLower = 0
@@ -87,6 +88,8 @@ function MoistureSystem:saveToXMLFile(path)
     local xmlFile = XMLFile.create("moistureXML", path, "moisture")
     if xmlFile == nil then return end
 
+    self.isSaving = true
+
     local key = "moisture"
 
     xmlFile:setFloat(key .. "#cellWidth", self.cellWidth or 5)
@@ -118,6 +121,8 @@ function MoistureSystem:saveToXMLFile(path)
     end)
 
     xmlFile:save(false, true)
+
+    self.isSaving = false
 
 end
 
@@ -409,7 +414,7 @@ function MoistureSystem:update(delta, timescale)
     self.timeSinceLastUpdateLower = self.timeSinceLastUpdateLower + timescale / (MoistureSystem.TICKS_PER_UPDATE)
     self.timeSinceLastUpdateUpper = self.timeSinceLastUpdateUpper + timescale / (MoistureSystem.TICKS_PER_UPDATE)
 
-    if self.ticksSinceLastUpdate >= MoistureSystem.TICKS_PER_UPDATE then
+    if self.ticksSinceLastUpdate >= MoistureSystem.TICKS_PER_UPDATE and not self.isSaving then
 
         local isIrrigatingFields = false
 
