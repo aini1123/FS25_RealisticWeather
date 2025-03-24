@@ -1,0 +1,39 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Brouillard épais"/>
+		<text name="rw_ui_hour" text="pendant %s heure" tag="format"/>
+		<text name="rw_ui_hours" text="pendant %s heures" tag="format"/>
+		<text name="rw_ui_minute" text="pendant %s minute" tag="format"/>
+		<text name="rw_ui_minutes" text="pendant %s minutes" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Le champ %s est sur le point de s'étioler" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Le champ %s s'est desséché" tag="format"/>
+		<text name="rw_ui_currentYield" text="Rendement actuel"/>
+		<text name="rw_ui_moisture" text="Humidité"/>
+		<text name="rw_ui_witherChance" text="Risque de dépérissement"/>
+		<text name="rw_ui_retention" text="Rétention de l'humidité"/>
+		<text name="rw_ui_idealMoisture" text="Humidité idéale"/>
+		<text name="rw_ui_perfectMoisture" text="Hydratation parfaite"/>
+		<text name="rw_ui_blizzard_coming" text="Blizzard à venir"/>
+		<text name="rw_ui_blizzard_now" text="Blizzard En cours"/>
+		<text name="rw_ui_drought_coming" text="Sécheresse à venir"/>
+		<text name="rw_ui_drought_now" text="Sécheresse en cours"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm prévus" tag="format"/>
+
+		<text name="rw_ui_amount" text="Montant"/>
+		<text name="rw_ui_requiredMoisture" text="Humidité requise"/>
+		<text name="rw_ui_needsTedding" text="Nécessite un fanage"/>
+		<text name="rw_ui_yes" text="Oui"/>
+		<text name="rw_ui_no" text="Non"/>
+
+		<text name="input_Irrigation" text="L'irrigation"/>
+		<text name="finance_irrigationUpkeep" text="L'irrigation"/>
+		<text name="rw_ui_irrigation_start" text="Commencer l'irrigation"/>
+		<text name="rw_ui_irrigation_stop" text="Arrêt de l'irrigation"/>
+		<text name="rw_ui_pendingIrrigationCost" text="Coût de l'irrigation en attente"/>
+		<text name="rw_ui_irrigationUpkeep" text="Entretien de l'irrigation"/>
+		<text name="rw_ui_inactive" text="Inactif"/>
+		<text name="rw_ui_active" text="Actif"/>
+
+	</texts>
+</l10n>

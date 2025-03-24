@@ -1,0 +1,39 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Nebbia fitta"/>
+		<text name="rw_ui_hour" text="per %s ora" tag="format"/>
+		<text name="rw_ui_hours" text="per %s ore" tag="format"/>
+		<text name="rw_ui_minute" text="per %s minuto" tag="format"/>
+		<text name="rw_ui_minutes" text="per %s minuti" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Il campo %s sta per appassire" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Il campo %s è appassito" tag="format"/>
+		<text name="rw_ui_currentYield" text="Rendimento attuale"/>
+		<text name="rw_ui_moisture" text="Umidità"/>
+		<text name="rw_ui_witherChance" text="Possibilità di appassimento"/>
+		<text name="rw_ui_retention" text="Ritenzione di umidità"/>
+		<text name="rw_ui_idealMoisture" text="Umidità ideale"/>
+		<text name="rw_ui_perfectMoisture" text="Umidità perfetta"/>
+		<text name="rw_ui_blizzard_coming" text="Bufera di neve in arrivo"/>
+		<text name="rw_ui_blizzard_now" text="Bufera in arrivo"/>
+		<text name="rw_ui_drought_coming" text="Siccità in arrivo"/>
+		<text name="rw_ui_drought_now" text="Siccità in corso"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm Neve prevista" tag="format"/>
+
+		<text name="rw_ui_amount" text="Importo"/>
+		<text name="rw_ui_requiredMoisture" text="Umidità richiesta"/>
+		<text name="rw_ui_needsTedding" text="L'erba tagliata deve essere rivoltata con un Voltafieno"/>
+		<text name="rw_ui_yes" text="Sì"/>
+		<text name="rw_ui_no" text="No"/>
+
+		<text name="input_Irrigation" text="Irrigazione"/>
+		<text name="finance_irrigationUpkeep" text="Irrigazione"/>
+		<text name="rw_ui_irrigation_start" text="Avvia Irrigazione"/>
+		<text name="rw_ui_irrigation_stop" text="Ferma Irrigazione"/>
+		<text name="rw_ui_pendingIrrigationCost" text="In attesa del costo dell'irrigazione"/>
+		<text name="rw_ui_irrigationUpkeep" text="Costo giornaliero della manutenzione"/>
+		<text name="rw_ui_inactive" text="Inattivo"/>
+		<text name="rw_ui_active" text="Attivo"/>
+		
+	</texts>
+</l10n>
