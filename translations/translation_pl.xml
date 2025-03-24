@@ -1,0 +1,22 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Gęsta Mgła"/>
+		<text name="rw_ui_hour" text="przez %s godzinę" tag="format"/>
+		<text name="rw_ui_hours" text="przez %s godziny" tag="format"/>
+		<text name="rw_ui_minute" text="przez %s minutę" tag="format"/>
+		<text name="rw_ui_minutes" text="przez %s minuty" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Pole %s wkrótce uschnie" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Pole %s uschło" tag="format"/>
+		<text name="rw_ui_currentYield" text="Bieżąca rentowność"/>
+		<text name="rw_ui_moisture" text="Wilgotność"/>
+		<text name="rw_ui_idealMoisture" text="Idealna wilgotność"/>
+		<text name="rw_ui_perfectMoisture" text="Doskonała wilgotność"/>
+		<text name="rw_ui_blizzard_coming" text="Nadchodzi Zamieć"/>
+		<text name="rw_ui_blizzard_now" text="Zamieć w toku"/>
+		<text name="rw_ui_drought_coming" text="Nadchodzi susza"/>
+		<text name="rw_ui_drought_now" text="Trwająca suszau"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm oczekiwane" tag="format"/>
+
+	</texts>
+</l10n>

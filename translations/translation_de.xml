@@ -1,0 +1,22 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Dichter Nebel"/>
+		<text name="rw_ui_hour" text="für %s Stunde" tag="format"/>
+		<text name="rw_ui_hours" text="für %s Stunden" tag="format"/>
+		<text name="rw_ui_minute" text="für %s Minute" tag="format"/>
+		<text name="rw_ui_minutes" text="für %s Minuten" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Feld %s ist kurz vor dem Verwelken" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Feld %s ist verwelkt" tag="format"/>
+		<text name="rw_ui_currentYield" text="Laufender Ertrag"/>
+		<text name="rw_ui_moisture" text="Feuchtigkeit"/>
+		<text name="rw_ui_idealMoisture" text="Ideale Feuchtigkeit"/>
+		<text name="rw_ui_perfectMoisture" text="Perfekte Feuchtigkeit"/>
+		<text name="rw_ui_blizzard_coming" text="Blizzard kommt"/>
+		<text name="rw_ui_blizzard_now" text="Blizzard Laufend"/>
+		<text name="rw_ui_drought_coming" text="Dürre im Anmarsch"/>
+		<text name="rw_ui_drought_now" text="Dürre Anhaltend"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm erwartet" tag="format"/>
+
+	</texts>
+</l10n>

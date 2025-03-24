@@ -1,0 +1,161 @@
+<modDesc descVersion="94">
+    <author>Arrow</author>
+    <version>1.0.0.0</version>
+    <title>
+        <en>Realistic Weather</en>
+        <de>Realistisches Wetter</de>
+        <fr>Météo Réaliste</fr>
+        <pl>Realistyczna Pogoda</pl>
+    </title>
+    <description>
+        <en>
+        <![CDATA[ An overhaul to the weather system, focusing mainly on snow.
+Features:
+
+- Adds 3 new "disaster" weather events, blizzards, droughts and extremely thick fog
+- Extends the info display in the top right, adding information on temperature, upcoming disasters and predicted snow amount
+- Adds a moisture mechanic to fields; each type of crop has an ideal moisture range, being inside this range increases harvest yield
+- Moisture changes constantly depending on sunlight, temperature and rainfall
+- Crops with extremely low moisture will wither
+- Hail will now cause damage and wear to vehicles left outside
+- Wheel physics changed significantly
+- Maximum amount of snow has been doubled
+- Livestock will leave "footprints" in deep snow (only on high-end systems)
+
+- Blizzards:
+--- Blizzards are rare events that will cause significant snowfall in a short period of time, causing up to 1 metre high snow
+--- Temperature during blizzards can go as low as -15 celsius
+--- Snow will likely remain for much longer time
+
+- Droughts:
+--- Droughts result in extreme heat which will lead to rapid moisture loss in fields
+
+- Fog:
+--- Extremely thick fogs may occur where visibility is extremely low for up to 14 hours
+
+- Wheel Physics:
+--- Friction for all wheel types have been changed to be much more realistic
+--- Friction will now decrease more realistically based on road and vehicle conditions, including vehicle weight, snow amount, and snow wetness
+--- Braking times are now dependant on friction and number of wheels; lower friction will result in longer braking times, whereas more wheels result in faster times
+--- Wheels will gradually destroy snow more realistically, based on the weight the wheel is carrying, snow amount and snow wetness
+--- Heavier vehicles will sink in snow much more than lighter vehicles; sunk vehicles may get completely stuck
+--- Driving cars and heavy equipment in heavy snow will be almost impossible as a result, specific vehicles, such as vehicles with tracks, are required ]]>
+        </en>
+        <de>
+            <![CDATA[ Eine Überarbeitung des Wettersystems, die sich hauptsächlich auf Schnee konzentriert.
+Merkmale:
+
+- Fügt 3 neue „Katastrophen“-Wetterereignisse hinzu, Schneestürme, Dürren und extrem dichten Nebel
+- Erweitert die Infoanzeige oben rechts um Informationen zu Temperatur, bevorstehenden Katastrophen und vorhergesagter Schneemenge
+- Fügt eine Feuchtigkeitsmechanik zu den Feldern hinzu; jede Kulturart hat einen idealen Feuchtigkeitsbereich, der den Ernteertrag erhöht, wenn er innerhalb dieses Bereichs liegt
+- Der Feuchtigkeitsgehalt ändert sich ständig in Abhängigkeit von Sonneneinstrahlung, Temperatur und Niederschlag
+- Pflanzen mit extrem niedriger Feuchtigkeit werden verdorren
+- Hagel verursacht nun Schäden und Verschleiß an Fahrzeugen, die im Freien stehen
+- Die Physik der Räder wurde erheblich verändert
+- Die maximale Schneemenge wurde verdoppelt
+- Vieh hinterlässt „Fußabdrücke“ im Tiefschnee (nur auf High-End-Systemen)
+
+- Schneestürme:
+--- Blizzards sind seltene Ereignisse, die in kurzer Zeit erhebliche Schneefälle verursachen und bis zu 1 Meter hohen Schnee hervorrufen können
+--- Die Temperatur während eines Blizzards kann bis zu -15 Grad Celsius sinken
+--- Der Schnee bleibt wahrscheinlich für längere Zeit liegen.
+
+- Dürreperioden:
+--- Dürren führen zu extremer Hitze, die zu einem raschen Feuchtigkeitsverlust auf den Feldern führt
+
+- Nebel:
+--- Extrem dichter Nebel kann auftreten, bei dem die Sicht bis zu 14 Stunden lang extrem schlecht ist
+
+- Rad-Physik:
+--- Die Reibung für alle Radtypen wurde geändert und ist nun viel realistischer
+--- Die Reibung nimmt nun realistischer ab, je nach Straßen- und Fahrzeugbedingungen, einschließlich Fahrzeuggewicht, Schneemenge und Schneenässe
+--- Bremszeiten sind nun abhängig von der Reibung und der Anzahl der Räder; geringere Reibung führt zu längeren Bremszeiten, während mehr Räder zu schnelleren Zeiten führen
+--- Die Räder zerstören den Schnee allmählich realistischer, basierend auf dem Gewicht, das das Rad trägt, der Schneemenge und der Schneenässe
+--- Schwerere Fahrzeuge sinken im Schnee viel stärker ein als leichtere Fahrzeuge; eingesunkene Fahrzeuge können komplett stecken bleiben
+--- Das Fahren von Autos und schwerem Gerät in schwerem Schnee wird fast unmöglich sein, daher sind spezielle Fahrzeuge, wie z.B. Fahrzeuge mit Ketten, erforderlich ]]>
+        </de>
+        <fr>
+            <![CDATA[ Une révision du système météorologique, principalement axée sur la neige.
+Caractéristiques :
+
+- Ajout de 3 nouveaux événements météorologiques « catastrophes » : blizzards, sécheresses et brouillard extrêmement épais.
+- Extension de l'écran d'information en haut à droite, ajoutant des informations sur la température, les catastrophes à venir et la quantité de neige prévue.
+- Ajoute un mécanisme d'humidité aux champs ; chaque type de culture a une plage d'humidité idéale, et le fait d'être dans cette plage augmente le rendement de la récolte.
+- L'humidité varie constamment en fonction de l'ensoleillement, de la température et des précipitations.
+- Les cultures dont le taux d'humidité est extrêmement bas se flétrissent.
+- La grêle endommage et use désormais les véhicules laissés à l'extérieur.
+- La physique des roues a été modifiée de manière significative.
+- La quantité maximale de neige a été doublée.
+- Le bétail laissera des « empreintes » dans la neige épaisse (uniquement sur les systèmes haut de gamme).
+
+- Blizzards :
+--- Les blizzards sont des événements rares qui provoquent d'importantes chutes de neige en peu de temps, avec des hauteurs de neige pouvant atteindre 1 mètre.
+--- La température pendant les blizzards peut descendre jusqu'à -15 degrés Celsius.
+--- La neige restera probablement plus longtemps.
+
+- Les sécheresses :
+--- Les sécheresses entraînent une chaleur extrême qui provoque une perte rapide d'humidité dans les champs
+
+- Brouillard :
+--- Des brouillards extrêmement épais peuvent se former là où la visibilité est extrêmement faible pendant une période pouvant aller jusqu'à 14 heures.
+
+- Physique des roues :
+--- Le frottement de tous les types de roues a été modifié pour être beaucoup plus réaliste.
+--- La friction diminue maintenant de façon plus réaliste en fonction de l'état de la route et du véhicule, y compris le poids du véhicule, la quantité de neige et l'humidité de la neige.
+--- Les temps de freinage dépendent maintenant de la friction et du nombre de roues ; une friction plus faible entraînera des temps de freinage plus longs, tandis qu'un plus grand nombre de roues entraînera des temps de freinage plus rapides.
+--- Les roues détruiront progressivement la neige de manière plus réaliste, en fonction du poids de la roue, de la quantité de neige et de l'humidité de la neige.
+--- Les véhicules plus lourds s'enfonceront dans la neige beaucoup plus que les véhicules plus légers ; les véhicules enfoncés peuvent rester complètement bloqués.
+--- La conduite de voitures et d'équipements lourds dans la neige épaisse sera presque impossible ; par conséquent, des véhicules spécifiques, tels que des véhicules à chenilles, sont nécessaires. ]]>
+        </fr>
+        <pl>
+            <![CDATA[ Zmiana systemu pogodowego, skupiająca się głównie na śniegu.
+Cechy:
+
+- Dodaje 3 nowe „katastrofalne” zjawiska pogodowe: śnieżyce, susze i wyjątkowo gęstą mgłę.
+- Rozszerzono wyświetlanie informacji w prawym górnym rogu, dodając informacje o temperaturze, nadchodzących katastrofach i przewidywanej ilości śniegu.
+- Dodaje mechanikę wilgotności do pól; każdy rodzaj upraw ma idealny zakres wilgotności, a przebywanie w tym zakresie zwiększa wydajność zbiorów.
+- Wilgotność zmienia się stale w zależności od nasłonecznienia, temperatury i opadów deszczu.
+- Uprawy o ekstremalnie niskiej wilgotności będą więdnąć
+- Grad będzie teraz powodował uszkodzenia i zużycie pojazdów pozostawionych na zewnątrz.
+- Fizyka kół uległa znacznej zmianie
+- Maksymalna ilość śniegu została podwojona
+- Zwierzęta będą zostawiać „ślady” w głębokim śniegu (tylko w zaawansowanych systemach)
+
+- Zamiecie:
+--- Zamiecie to rzadkie wydarzenia, które powodują znaczne opady śniegu w krótkim czasie, powodując śnieg o wysokości do 1 metra.
+--- Temperatura podczas zamieci może spaść nawet do -15 stopni Celsjusza
+--- Śnieg prawdopodobnie utrzyma się przez dłuższy czas
+
+- Susze:
+--- Susze powodują ekstremalne upały, które prowadzą do szybkiej utraty wilgoci na polach
+
+- Mgła:
+--- Mogą wystąpić niezwykle gęste mgły, w których widoczność będzie bardzo niska przez 14 godzin.
+
+- Fizyka kół:
+--- Tarcie dla wszystkich typów kół zostało zmienione, aby było bardziej realistyczne
+--- Tarcie zmniejsza się teraz bardziej realistycznie w zależności od warunków na drodze i w pojeździe, w tym masy pojazdu, ilości śniegu i jego wilgotności.
+--- Czasy hamowania są teraz zależne od tarcia i liczby kół; niższe tarcie spowoduje dłuższe czasy hamowania, podczas gdy więcej kół spowoduje szybsze czasy
+--- Koła będą stopniowo niszczyć śnieg w bardziej realistyczny sposób, w oparciu o ciężar koła, ilość śniegu i jego wilgotność.
+--- Cięższe pojazdy będą zapadać się w śniegu znacznie bardziej niż lżejsze pojazdy; zatopione pojazdy mogą całkowicie utknąć.
+--- Jazda samochodami i ciężkim sprzętem w ciężkim śniegu będzie prawie niemożliwa, w związku z czym wymagane są specjalne pojazdy, takie jak pojazdy z gąsienicami. ]]>
+        </pl>
+    </description>
+    <iconFilename>icon_RealisticWeather.dds</iconFilename>
+    <multiplayer supported="true"/>
+    <extraSourceFiles>
+        <sourceFile filename="src/environment/weather/Weather.lua"/>
+        <sourceFile filename="src/environment/weather/WeatherInstance.lua"/>
+        <sourceFile filename="src/field/FieldState.lua"/>
+        <sourceFile filename="src/gui/hud/GameInfoDisplay.lua"/>
+        <sourceFile filename="src/player/PlayerHUDUpdater.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Cutter.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Drivable.lua"/>
+        <sourceFile filename="src/vehicles/specializations/Mower.lua"/>
+        <sourceFile filename="src/vehicles/wheels/WheelPhysics.lua"/>
+        <sourceFile filename="src/vehicles/wheels/WheelDestruction.lua"/>
+        <sourceFile filename="src/vehicles/WheelsUtil.lua"/>
+        <sourceFile filename="src/FSBaseMission.lua"/>
+    </extraSourceFiles>
+    <l10n filenamePrefix="translations/translation"/>
+</modDesc>
