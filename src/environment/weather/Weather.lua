@@ -167,7 +167,7 @@ function RW_Weather:update(_, dT)
         local items = g_currentMission.itemSystem.itemByUniqueId
 
         for uniqueId, item in pairs(items) do
-            if g_currentMission.objectsToClassName[item] == "Bale" and item.fillLevel ~= nil and item.nodeId ~= 0 then
+            if g_currentMission.objectsToClassName[item] == "Bale" and item.fillLevel ~= nil and item.nodeId ~= 0 and item.wrappingState == 0 then
                 local x, _, z = getWorldTranslation(item.nodeId)
 
                 if indoorMask:getIsIndoorAtWorldPosition(x, z) then continue end
@@ -190,20 +190,20 @@ function RW_Weather:update(_, dT)
     local moistureDelta = 0
 
     if temp < 0 then wetness = wetness * 0.2 end
-    if wetness > 0 then moistureDelta = moistureDelta + math.clamp(wetness * 0.00075, 0, 0.00075) end
+    if wetness > 0 then moistureDelta = moistureDelta + math.clamp(wetness * 0.000825, 0, 0.000825) end
 
     local sunFactor = (hour >= daylightStart and hour < dayLightEnd and 1) or 0.33
 
     if temp >= 45 then
-        moistureDelta = moistureDelta - (temp * 0.000014 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.000012 * (timescale / 100000) * sunFactor * draughtFactor)
     elseif temp >= 35 then
-        moistureDelta = moistureDelta - (temp * 0.00001 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000088 * (timescale / 100000) * sunFactor * draughtFactor)
     elseif temp >= 25 then
-        moistureDelta = moistureDelta - (temp * 0.000005 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000038 * (timescale / 100000) * sunFactor * draughtFactor)
     elseif temp >= 15 then
-        moistureDelta = moistureDelta - (temp * 0.0000018 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000012 * (timescale / 100000) * sunFactor * draughtFactor)
     elseif temp > 0 then
-        moistureDelta = moistureDelta - (temp * 0.0000008 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000005 * (timescale / 100000) * sunFactor * draughtFactor)
     end
 
     --self.moisture = moisture
