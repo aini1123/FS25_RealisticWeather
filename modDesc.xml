@@ -50,15 +50,24 @@ Features:
 --- New info box when standing on tedded grass, showing its moisture, required moisture, and whether it needs to be tedded (currently disabled on MP)
 --- Please bear in mind that this feature in its current state may cause lag on lower-end systems or on extremely large fields
 
+- Github:
+https://github.com/Arrow-kb/FS25_RealisticWeather
+
 
 Changelog:
 
 1.1.0.2
 - Fixed an issue causing certain mods to freeze the game
-- Fixed sprayer irrigation not increasing the moisture of every intended cell
+- Fixed sprayers not increasing the moisture of every intended cell
+- Fixed sprayers not having a visible spray effect for water
+- Fixed wrapped bales being affected by rain
+- Possible fix for game occasionally temporarily freezing when saving
 - Lowered the volume of certain ambient sounds
 - Lowered the cost of passive irrigation
+- Sprayers are now limited to fields
 - Lowered water usage of sprayers
+- Increased moisture gain through passive irrigation and spraying
+- Lowered passive moisture loss
 - Harvesting contracts should now account for withering and different moisture values across the field
 
 1.1.0.1
@@ -123,16 +132,25 @@ Merkmale:
 --- Neue Infobox, wenn man auf gemähtem Gras steht, zeigt die Feuchtigkeit, die benötigte Feuchtigkeit und ob es gemäht werden muss (derzeit im MP deaktiviert)
 --- Bitte beachten Sie, dass diese Funktion in ihrem jetzigen Zustand auf weniger leistungsfähigen Systemen oder auf extrem großen Feldern zu Verzögerungen führen kann.
 
+- Github:
+https://github.com/Arrow-kb/FS25_RealisticWeather
+
 
 Änderungsliste:
 
 1.1.0.2
-- Ein Problem wurde behoben, das bei bestimmten Mods zum Einfrieren des Spiels führte
-- Es wurde behoben, dass die Sprühbewässerung nicht die Feuchtigkeit jeder vorgesehenen Zelle erhöhte
+- Ein Problem wurde behoben, das dazu führte, dass bestimmte Mods das Spiel einfroren
+- Es wurde behoben, dass Sprühgeräte nicht die Feuchtigkeit jeder beabsichtigten Zelle erhöhten
+- Sprühgeräte hatten keinen sichtbaren Sprüheffekt für Wasser
+- Es wurde behoben, dass eingewickelte Ballen von Regen betroffen waren
+- Mögliche Behebung des Problems, dass das Spiel beim Speichern gelegentlich einfriert
 - Die Lautstärke bestimmter Umgebungsgeräusche wurde verringert
 - Die Kosten für passive Bewässerung wurden gesenkt
-- Der Wasserverbrauch von Sprühern wurde gesenkt
-- Ernteverträge sollten nun das Verwelken und unterschiedliche Feuchtigkeitswerte auf dem Feld berücksichtigen
+- Sprühgeräte sind nun auf Felder beschränkt
+- Der Wasserverbrauch der Sprühgeräte wurde gesenkt
+- Erhöhte Feuchtigkeitszunahme durch passive Bewässerung und Sprühen
+- Geringerer passiver Feuchtigkeitsverlust
+- Ernteverträge sollten nun das Welken und unterschiedliche Feuchtigkeitswerte auf dem Feld berücksichtigen
 
 1.1.0.1
 - Die Überladung wurde deaktiviert
@@ -196,16 +214,25 @@ Caractéristiques :
 --- Nouvelle boîte d'information lorsque l'on se trouve sur de l'herbe fanée, indiquant son humidité, l'humidité requise, et si elle doit être fanée (actuellement désactivée sur MP).
 --- Merci de garder à l'esprit que cette fonctionnalité, dans son état actuel, peut causer du lag sur des systèmes bas de gamme ou sur des champs extrêmement grands.
 
+- Github:
+https://github.com/Arrow-kb/FS25_RealisticWeather
+
 
 Journal des modifications :
 
 1.1.0.2
 - Correction d'un problème provoquant le gel du jeu avec certains mods
-- Correction de l'irrigation par pulvérisateur qui n'augmentait pas l'humidité de chaque cellule prévue.
+- Correction des pulvérisateurs qui n'augmentent pas l'humidité de chaque cellule prévue.
+- Correction des pulvérisateurs n'ayant pas d'effet de pulvérisation visible pour l'eau
+- Correction des balles enrubannées affectées par la pluie
+- Correction possible du blocage temporaire du jeu lors de la sauvegarde.
 - Réduction du volume de certains sons ambiants
 - Réduction du coût de l'irrigation passive
+- Les pulvérisateurs sont désormais limités aux champs
 - Réduction de la consommation d'eau des pulvérisateurs
-- Les contrats de récolte devraient désormais prendre en compte le flétrissement et les différentes valeurs d'humidité dans le champ.
+- Augmentation du gain d'humidité grâce à l'irrigation passive et à la pulvérisation
+- Diminution de la perte d'humidité passive
+- Les contrats de récolte doivent désormais tenir compte du flétrissement et des différentes valeurs d'humidité dans le champ.
 
 1.1.0.1
 - Correction de la désactivation de la surcharge
@@ -269,16 +296,25 @@ Cechy:
 --- Nowe okno informacyjne podczas stania na skoszonej trawie, pokazujące jej wilgotność, wymaganą wilgotność i to, czy musi być skoszona (obecnie wyłączone na MP)
 --- Należy pamiętać, że ta funkcja w obecnym stanie może powodować opóźnienia na niższych systemach lub na bardzo dużych polach.
 
+- Github:
+https://github.com/Arrow-kb/FS25_RealisticWeather
+
 
 Dziennik zmian:
 
 1.1.0.2
 - Naprawiono błąd powodujący zawieszanie się gry przez niektóre mody.
-- Naprawiono nawadnianie za pomocą opryskiwacza, które nie zwiększało wilgotności każdej przeznaczonej do tego komórki.
+- Naprawiono opryskiwacze, które nie zwiększały wilgotności każdej komórki.
+- Naprawiono opryskiwacze, które nie miały widocznego efektu rozpylania wody.
+- Naprawiono wpływ deszczu na owinięte bele.
+- Możliwa poprawka powodująca tymczasowe zawieszanie się gry podczas zapisywania.
 - Zmniejszono głośność niektórych dźwięków otoczenia.
-- Obniżono koszt nawadniania pasywnego.
-- Zmniejszono zużycie wody przez opryskiwacze.
-- Kontrakty na zbiory powinny teraz uwzględniać więdnięcie i różne wartości wilgotności na polu.
+- Obniżono koszt pasywnego nawadniania.
+- Opryskiwacze są teraz ograniczone do pól
+- Zmniejszono zużycie wody przez opryskiwacze
+- Zwiększony przyrost wilgoci dzięki pasywnemu nawadnianiu i opryskiwaniu.
+- Obniżona pasywna utrata wilgoci
+- Umowy dotyczące zbiorów powinny teraz uwzględniać więdnięcie i różne wartości wilgotności na polu.
 
 1.1.0.1
 - Naprawiono wyłączanie przeciążenia.
@@ -342,15 +378,24 @@ Caratteristiche:
 --- Nuovo riquadro informativo quando ci si trova sull'erba tagliata, che mostra la sua umidità, l'umidità richiesta e se ha bisogno di essere tagliata (attualmente disabilitato su MP).
 --- Tenete presente che questa funzione, allo stato attuale, può causare lag su sistemi di fascia bassa o su campi estremamente grandi.
 
+- Github:
+https://github.com/Arrow-kb/FS25_RealisticWeather
+
 Changelog:
 
 1.1.0.2
 - Corretto un problema che causava il blocco del gioco per alcune mod.
-- Corretto il problema dell'irrigazione dello spruzzatore che non aumenta l'umidità di tutte le celle previste.
+- Corretto il problema degli spruzzatori che non aumentano l'umidità di tutte le celle previste.
+- Gli spruzzatori non avevano un effetto di spruzzatura visibile per l'acqua.
+- Corretto l'effetto della pioggia sulle balle fasciate
+- Possibile correzione del blocco temporaneo del gioco durante i salvataggi
 - Abbassato il volume di alcuni suoni ambientali
 - Ridotto il costo dell'irrigazione passiva
-- Ridotto il consumo d'acqua degli irroratori
-- I contratti di raccolta ora tengono conto dell'appassimento e dei diversi valori di umidità nel campo.
+- Gli spruzzatori sono ora limitati ai campi
+- Riduzione del consumo d'acqua degli irroratori
+- Aumento del guadagno di umidità attraverso l'irrigazione passiva e l'irrorazione
+- Riduzione della perdita di umidità passiva
+- I contratti di raccolta devono ora tenere conto dell'appassimento e dei diversi valori di umidità sul campo
 
 1.1.0.1
 - Corretto il sovraccarico disabilitato
