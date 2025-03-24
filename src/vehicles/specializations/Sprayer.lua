@@ -20,7 +20,7 @@ function RW_Sprayer:processSprayerArea(superFunc, workArea, dT)
         local width = math.abs(wx - sx)
         local height = math.abs(hz - sz)
 
-        print(sz, wz, hz, "-------------------")
+        --print(sz, wz, hz, "-------------------")
         local x1 = math.min(sx, wx, hx)
         local z1 = math.min(sz, wz, hz)
         local x2 = math.max(sx, wx, hx)
@@ -37,12 +37,12 @@ function RW_Sprayer:processSprayerArea(superFunc, workArea, dT)
 
         for x = x1, x2, moistureSystem.cellWidth * 0.5 do
             for z = z1, z2, moistureSystem.cellHeight * 0.5 do
-                print(x, z, "----")
+                --print(x, z, "----")
                 moistureSystem:setValuesAtCoords(x, z, target)
             end
         end
 
-        print("---------------------------------------------")
+        --print("---------------------------------------------")
 
         moistureSystem.needsSync = true
 

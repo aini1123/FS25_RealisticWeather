@@ -62,7 +62,7 @@ function RW_GameInfoDisplay:draw()
         self.carouselShownChars2 = 0
         self.carouselWidth = width * 28
         self.pendingCarouselReset = false
-        self.pendingCarouselResetThreshold = self.carouselWidth * 0.25
+        self.pendingCarouselResetThreshold = self.carouselWidth * 0.33
         self.carouselOffset = self.carouselWidth * 0.03
         self.carouselX1 = self.carouselWidth - self.carouselOffset
         self.carouselX2 = self.carouselWidth * 1.5 - self.carouselOffset
