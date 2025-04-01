@@ -21,7 +21,6 @@
 
 		<GuiElement profile="rw_headerContainer">
 			
-			<Button profile="rw_headerButton" position="0px 0px" text="" handleFocus="false"/>
 			<Button profile="rw_headerButton" position="20px 0px" width="120px" text="$l10n_rw_ui_moisture" onClick="onClickSortButton" id="moistureButton"/>
 			<Button profile="rw_headerButton" position="140px 0px" width="120px" text="$l10n_rw_ui_today" onClick="onClickSortButton" id="trendButton"/>
 			<Button profile="rw_headerButton" position="260px 0px" width="220px" text="$l10n_rw_ui_retention" onClick="onClickSortButton" id="retentionButton"/>
