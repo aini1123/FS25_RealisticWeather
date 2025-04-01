@@ -1,4 +1,5 @@
 RW_FSBaseMission = {}
+local modDirectory = g_currentModDirectory
 
 RW_FSBaseMission.FRUIT_TYPES_MOISTURE = {
     ["BARLEY"] = {
@@ -129,10 +130,81 @@ end
 FSBaseMission.getHarvestScaleMultiplier = Utils.overwrittenFunction(FSBaseMission.getHarvestScaleMultiplier, RW_FSBaseMission.getHarvestScaleMultiplier)
 
 
+local function fixInGameMenu(frame, pageName, uvs, position, predicateFunc)
+
+	local inGameMenu = g_gui.screenControllers[InGameMenu]
+	position = position or #inGameMenu.pagingElement.pages + 1
+
+	for k, v in pairs({pageName}) do
+		inGameMenu.controlIDs[v] = nil
+	end
+
+	for i = 1, #inGameMenu.pagingElement.elements do
+		local child = inGameMenu.pagingElement.elements[i]
+		if child == inGameMenu["pageStatistics"] then
+			abovePrices = i;
+		end
+	end
+	
+	inGameMenu[pageName] = frame
+	inGameMenu.pagingElement:addElement(inGameMenu[pageName])
+
+	inGameMenu:exposeControlsAsFields(pageName)
+
+	for i = 1, #inGameMenu.pagingElement.elements do
+		local child = inGameMenu.pagingElement.elements[i]
+		if child == inGameMenu[pageName] then
+			table.remove(inGameMenu.pagingElement.elements, i)
+			table.insert(inGameMenu.pagingElement.elements, position, child)
+			break
+		end
+	end
+
+	for i = 1, #inGameMenu.pagingElement.pages do
+		local child = inGameMenu.pagingElement.pages[i]
+		if child.element == inGameMenu[pageName] then
+			table.remove(inGameMenu.pagingElement.pages, i)
+			table.insert(inGameMenu.pagingElement.pages, position, child)
+			break
+		end
+	end
+
+	inGameMenu.pagingElement:updateAbsolutePosition()
+	inGameMenu.pagingElement:updatePageMapping()
+	
+	inGameMenu:registerPage(inGameMenu[pageName], position, predicateFunc)
+	inGameMenu:addPageTab(inGameMenu[pageName], modDirectory .. "gui/icons.dds", GuiUtils.getUVs(uvs))
+
+	for i = 1, #inGameMenu.pageFrames do
+		local child = inGameMenu.pageFrames[i]
+		if child == inGameMenu[pageName] then
+			table.remove(inGameMenu.pageFrames, i)
+			table.insert(inGameMenu.pageFrames, position, child)
+			break
+		end
+	end
+
+	inGameMenu:rebuildTabList()
+
+end
+
+
 function RW_FSBaseMission:onStartMission()
     removeModEventListener(GrassMoistureSystem)
+
+    g_overlayManager:addTextureConfigFile(modDirectory .. "gui/icons.xml", "realistic_weather")
+
     if g_modIsLoaded["FS25_RealisticLivestock"] then RW_Weather.isRealisticLivestockLoaded = true end
     if g_modIsLoaded["FS25_ExtendedGameInfoDisplay"] then RW_GameInfoDisplay.isExtendedGameInfoDisplayLoaded = true end
+
+    local realisticWeatherFrame = RealisticWeatherFrame.new() 
+	g_gui:loadGui(modDirectory .. "gui/RealisticWeatherFrame.xml", "RealisticWeatherFrame", realisticWeatherFrame, true)
+
+    fixInGameMenu(realisticWeatherFrame, "realisticWeatherFrame", {260,0,256,256}, 4, function() return true end)
+
+    realisticWeatherFrame:initialize()
+
+    
 end
 
 FSBaseMission.onStartMission = Utils.prependedFunction(FSBaseMission.onStartMission, RW_FSBaseMission.onStartMission)
