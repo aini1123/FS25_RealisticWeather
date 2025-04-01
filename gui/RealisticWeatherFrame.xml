@@ -1,0 +1,128 @@
+<GUI name="RealisticWeatherFrame">
+	
+	<GuiElement profile="fs25_menuContainer">
+		<GuiElement profile="fs25_menuHeaderPanel">
+			<Bitmap profile="fs25_menuHeaderIconBg">
+				<Bitmap profile="rw_headerIcon"/>
+			</Bitmap>
+			<Text profile="fs25_menuHeaderTitle" id="categoryHeaderText" text="$l10n_rw_ui_moisture"/>
+			<RoundCorner profile="fs25_shopMoneyBoxBg" id="shopMoneyBoxBg"/>
+			<BoxLayout profile="fs25_shopMoneyBox" id="shopMoneyBox">
+				<Text profile="fs25_shopBalance" text="$l10n_ui_balance:"/>
+				<Text profile="fs25_shopMoney" id="currentBalanceText"/>
+			</BoxLayout>
+		</GuiElement>
+
+		<GuiElement profile="rw_fieldListContainer">
+
+			<MultiTextOption profile="rw_fieldMultiTextOption" id="fieldList" onClick="onClickFieldList"/>
+			
+		</GuiElement>
+
+		<GuiElement profile="rw_headerContainer">
+			
+			<Button profile="rw_headerButton" position="0px 0px" text="" handleFocus="false"/>
+			<Button profile="rw_headerButton" position="20px 0px" width="120px" text="$l10n_rw_ui_moisture" onClick="onClickSortButton" id="moistureButton"/>
+			<Button profile="rw_headerButton" position="140px 0px" width="120px" text="$l10n_rw_ui_today" onClick="onClickSortButton" id="trendButton"/>
+			<Button profile="rw_headerButton" position="260px 0px" width="220px" text="$l10n_rw_ui_retention" onClick="onClickSortButton" id="retentionButton"/>
+			<Button profile="rw_headerButton" position="480px 0px" width="220px" text="$l10n_rw_ui_witherChance" onClick="onClickSortButton" id="witherChanceButton"/>
+			<Button profile="rw_headerButton" position="700px 0px" width="80px" text="X" onClick="onClickSortButton" id="xButton"/>
+			<Button profile="rw_headerButton" position="780px 0px" width="80px" text="Z" onClick="onClickSortButton" id="zButton"/>
+			<Bitmap profile="fs25_vehiclesHeaderIconSortAscending" position="10px 0px" id="sortingIcon_true"/>
+			<Bitmap profile="fs25_vehiclesHeaderIconSortDescending" position="10px 0px" id="sortingIcon_false"/>
+			<ThreePartBitmap profile="fs25_lineSeparatorBottom" position="0px -2dp"/>
+			
+		</GuiElement>
+		
+		<SmoothList profile="rw_moistureList" id="moistureList">
+			<ListItem profile="rw_moistureListItem">
+				<Text profile="rw_moistureListText" position="20px 0px" name="moisture"/>
+				<Bitmap profile="rw_trendArrow" position="158px 0px" name="trendArrow"/>
+				<Text profile="rw_moistureListText" position="140px 0px" name="trend"/>
+				<Text profile="rw_moistureListText" position="260px 0px" name="retention"/>
+				<Text profile="rw_moistureListText" position="480px 0px" name="witherChance"/>
+				<Text profile="rw_moistureListText" position="700px 0px" name="x"/>
+				<Text profile="rw_moistureListText" position="780px 0px" name="z"/>
+			</ListItem>
+		</SmoothList>
+		
+		<ThreePartBitmap profile="rw_sliderBox">
+			<Slider profile="fs25_listSlider" dataElementId="moistureList"/>
+		</ThreePartBitmap>
+		
+	</GuiElement>
+
+	<GUIProfiles>
+
+		<Profile name="rw_headerIcon" extends="baseReference" with="anchorMiddleCenter">
+			<size value="50px 50px"/>
+			<imageSliceId value="realistic_weather.main_icon"/>
+			<imageColor value="$preset_fs25_colorMainDark"/>
+		</Profile>
+
+		<Profile name="rw_headerContainer" extends="emptyPanel" with="anchorTopStretchingX">
+			<height value="32px"/>
+			<position value="0px -100px"/>
+		</Profile>
+
+		<Profile name="rw_fieldListContainer" extends="emptyPanel" with="anchorTopStretchingX">
+			<height value="80px"/>
+		</Profile>
+		
+		<Profile name="rw_headerButton" extends="baseReference">
+			<height value="32px"/>
+			<imageColor value="0 0 0 0"/>
+			<textFocusedColor value="$preset_fs25_colorMainHighlight"/>
+			<textHighlightedColor value="$preset_fs25_colorMainHighlight"/>
+			<textSize value="18px"/>
+			<textBold value="true"/>
+			<textUpperCase value="true"/>
+			<textAlignment value="right"/>
+			<textColor value="$preset_colorWhite_50"/>
+			<textDisabledColor value="$preset_colorDisabled"/>
+		</Profile>
+
+		<Profile name="rw_moistureListText" extends="baseReference" with="anchorStretchingYLeft">
+			<size value="155px 32px"/>
+			<textBold value="false"/>
+			<textSize value="16px"/>
+			<textColor value="$preset_fs25_colorMainLight"/>
+			<textSelectedColor value="$preset_fs25_colorMainDark"/>
+			<textDisabledColor value="$preset_colorDisabled"/>
+		</Profile>
+
+		<Profile name="rw_moistureList" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">
+			<position value="0px -140px"/>
+			<absoluteSizeOffset value="0px 160px"/>
+		</Profile>
+			
+		<Profile name="rw_moistureListItem" extends="baseReference" with="anchorTopStretchingX alternating">
+			<height value="32px"/>
+			<imageColor value="$preset_fs25_colorGrey"/>
+			<imageSelectedColor value="$preset_fs25_colorMainHighlight"/>
+			<alternateBackgroundColor value="$preset_fs25_colorGreyDark_50"/>
+		</Profile>
+
+		<Profile name="rw_sliderBox" extends="fs25_listSliderBox" with="anchorTopStretchingX pivotTopRight">
+			<position value="28px -40px"/>
+			<absoluteSizeOffset value="0px 80px"/>
+		</Profile>
+
+		<Profile name="rw_fieldMultiTextOption" extends="fs25_dialogMultiTextOption">
+			<size value="360px 40px"/>
+			<position value="-140px 0px"/>
+		</Profile>
+
+		<Profile name="rw_trendArrow" extends="baseReference" with="anchorMiddleLeft">
+			<size value="18px 18px"/>
+			<imageSliceId value="gui.priceTrend"/>
+			<imageColor value="$preset_colorTransparent"/>
+		</Profile>
+		
+		<Profile name="rw_trendArrowDown" extends="rw_trendArrow">
+			<imageInvertY value="true"/>
+		</Profile>
+		
+	</GUIProfiles>
+	
+</GUI>
