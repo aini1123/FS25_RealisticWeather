@@ -27,7 +27,7 @@ MoistureSystem.MAP_WIDTH = 2048
 MoistureSystem.MAP_HEIGHT = 2048
 MoistureSystem.TICKS_PER_UPDATE = 150
 MoistureSystem.IRRIGATION_FACTOR = 0.000001
-MoistureSystem.SPRAY_FACTOR = 0.000006
+MoistureSystem.SPRAY_FACTOR = 0.00002
 MoistureSystem.IRRIGATION_BASE_COST = 0.00000025
 
 local moistureSystem_mt = Class(MoistureSystem)
@@ -114,6 +114,7 @@ function MoistureSystem:saveToXMLFile(path)
             xmlFile:setFloat(columnKey .. "#z", column.z)
             xmlFile:setFloat(columnKey .. "#m", column.moisture)
             xmlFile:setFloat(columnKey .. "#r", column.retention)
+            xmlFile:setFloat(columnKey .. "#t", column.trend)
             if column.witherChance ~= nil and column.witherChance ~= 0 then xmlFile:setFloat(columnKey .. "#w", column.witherChance) end
 
         end)
@@ -180,11 +181,12 @@ function MoistureSystem:loadFromXMLFile(mapXmlFile)
                 local z = xmlFile:getFloat(columnKey .. "#z", 0)
                 local moisture = xmlFile:getFloat(columnKey .. "#m", 0)
                 local retention = xmlFile:getFloat(columnKey .. "#r", 1)
+                local trend = xmlFile:getFloat(columnKey .. "#t", moisture)
                 local witherChance = xmlFile:getFloat(columnKey .. "#w", 0)
 
                 if numRows == 0 then numColumns = numColumns + 1 end
 
-                row.columns[z] = { ["z"] = z, ["moisture"] = math.clamp(moisture, 0, 1), ["witherChance"] = witherChance, ["retention"] = retention }
+                row.columns[z] = { ["z"] = z, ["moisture"] = math.clamp(moisture, 0, 1), ["witherChance"] = witherChance, ["retention"] = retention, ["trend"] = trend }
 
             end)
 
@@ -299,7 +301,7 @@ function MoistureSystem:generateNewMapMoisture(xmlFile)
             moisture = math.clamp(moisture, 0, 1)
             moisture = math.clamp(moisture, baseMoisture * 0.25, baseMoisture * 1.75)
 
-            row.columns[z] = { ["z"] = z, ["moisture"] = moisture, ["witherChance"] = 0, ["retention"] = math.clamp(moisture / baseMoisture, 0.25, 1.75) }
+            row.columns[z] = { ["z"] = z, ["moisture"] = moisture, ["witherChance"] = 0, ["retention"] = math.clamp(moisture / baseMoisture, 0.25, 1.75), ["trend"] = moisture }
 
         end
 
@@ -527,6 +529,10 @@ end
 
 function MoistureSystem:onDayChanged()
 
+    for _, row in pairs(self.rows) do
+        for _, column in pairs(row.columns) do column.trend = column.moisture end
+    end
+
     if self.isServer then
 
         for id, field in pairs(self.irrigatingFields) do
@@ -684,17 +690,24 @@ function MoistureSystem.irrigationInputCallback()
 
     local id = moistureSystem:getIrrigationInputField()
 
+    moistureSystem:setFieldIrrigationState(id)
+
+end
+
+
+function MoistureSystem:setFieldIrrigationState(id)
+
     if id == nil then return end
 
-    if moistureSystem.irrigatingFields[id] ~= nil then
+    if self.irrigatingFields[id] ~= nil then
 
-        local field = moistureSystem.irrigatingFields[id]
+        local field = self.irrigatingFields[id]
 
         if field.isActive and field.pendingCost <= 0 then
 
             if g_client ~= nil then FieldIrrigationChangeEvent.sendEvent(id, true) end
 
-            table.removeElement(moistureSystem.irrigatingFields, id)
+            table.removeElement(self.irrigatingFields, id)
             return
 
         end
@@ -709,7 +722,7 @@ function MoistureSystem.irrigationInputCallback()
 
     if g_client ~= nil then FieldIrrigationChangeEvent.sendEvent(id, false, true, true) end
 
-    moistureSystem.irrigatingFields[id] = {
+    self.irrigatingFields[id] = {
         ["id"] = id,
         ["pendingCost"] = 0,
         ["isActive"] = true
@@ -749,4 +762,86 @@ end
 
 function MoistureSystem:onLeaveVehicle()
     g_inputBinding:setActionEventActive(self.irrigationEventId, true)
+end
+
+
+function MoistureSystem:getCellsInsidePolygon(polygon)
+
+    local cells = {}
+	local cx, cz = 0, 0
+
+	for i = 1, #polygon, 2 do
+
+		local x, z = polygon[i], polygon[i + 1]
+
+		if x == nil or z == nil then break end
+
+		cx = cx + x
+		cz = cz + z
+
+	end
+
+	cx = cx / (#polygon / 2)
+	cz = cz / (#polygon / 2)
+
+	for i = 1, #polygon, 2 do
+
+		local x, z = polygon[i], polygon[i + 1]
+
+		if x == nil or z == nil then break end
+
+		local nextX = polygon[i + 2] or polygon[1]
+		local nextZ = polygon[i + 3] or polygon[2]
+		
+		local minX, maxX = math.round(math.min(x, nextX, cx)), math.round(math.max(x, nextX, cx))
+		local minZ, maxZ = math.round(math.min(z, nextZ, cz)), math.round(math.max(z, nextZ, cz))
+	
+
+		for px = minX, maxX, self.cellWidth do
+
+            local row = self.rows[px]
+
+            local rowOffset = 1
+            while row == nil and rowOffset < self.cellWidth do
+                
+                row = self.rows[px - rowOffset]
+                rowOffset = rowOffset + 1
+
+            end
+
+            if row == nil then break end
+		
+			for pz = minZ, maxZ, self.cellHeight do
+
+                local column = row.columns[pz]
+
+                local columnOffset = 1
+                while column == nil and columnOffset < self.cellHeight do
+                
+                    column = row.columns[pz - columnOffset]
+                    columnOffset = columnOffset + 1
+
+                end
+
+                if column == nil then break end
+
+                local cell = {
+                    ["x"] = row.x,
+                    ["z"] = column.z,
+                    ["moisture"] = column.moisture,
+                    ["retention"] = column.retention,
+                    ["trend"] = column.trend,
+                    ["witherChance"] = column.witherChance
+                }
+
+                if not table.hasElement(cells, cell) then table.insert(cells, cell) end
+
+			end
+
+		end
+
+	end
+
+	return cells
+
 end
