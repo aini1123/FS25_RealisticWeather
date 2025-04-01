@@ -15,3 +15,4 @@ Planned:
 - Slurry spreader compatiblity with irrigation
 - Performance improvements
 - Ability to rebuild the moisture map with custom arguments
+- Visual flooding of fields at high moisture
