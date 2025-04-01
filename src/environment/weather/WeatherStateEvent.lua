@@ -45,9 +45,10 @@ function RW_WeatherStateEvent:readStream(_, streamId, connection)
                 local z = streamReadFloat32(streamId)
                 local moisture = streamReadFloat32(streamId)
                 local retention = streamReadFloat32(streamId)
+                local trend = streamReadFloat32(streamId)
                 local witherChance = streamReadFloat32(streamId)
 
-                row.columns[z] = { ["z"] = z, ["moisture"] = moisture, ["witherChance"] = witherChance, ["retention"] = retention }
+                row.columns[z] = { ["z"] = z, ["moisture"] = moisture, ["witherChance"] = witherChance, ["retention"] = retention, ["trend"] = trend }
 
             end
 
@@ -118,6 +119,7 @@ function RW_WeatherStateEvent:writeStream(_, connection, _)
                     streamWriteFloat32(connection, column.z)
                     streamWriteFloat32(connection, column.moisture)
                     streamWriteFloat32(connection, column.retention)
+                    streamWriteFloat32(connection, column.trend)
                     streamWriteFloat32(connection, column.witherChance or 0)
 
                 end
