@@ -161,6 +161,7 @@ function RW_Weather:update(_, dT)
 
     local rainfall = self:getRainFallScale()
     local snowfall = self:getSnowFallScale()
+    local hailfall = self:getHailFallScale()
 
     if rainfall > 0 or snowfall > 0 then
 
@@ -187,10 +188,10 @@ function RW_Weather:update(_, dT)
     --local moisture = self.moisture or (math.random(12, 25) / 100)
     --local oldMoisture = moisture * 1
 
-    local moistureDelta = 0
+    --if temp < 0 then wetness = wetness * 0.35 end
+    --if wetness > 0 then moistureDelta = moistureDelta + math.clamp(wetness * 0.001825, 0, 0.0001) end
 
-    if temp < 0 then wetness = wetness * 0.2 end
-    if wetness > 0 then moistureDelta = moistureDelta + math.clamp(wetness * 0.000825, 0, 0.000825) end
+    local moistureDelta = math.clamp((rainfall + snowfall * 0.75 + hailfall * 0.15) * 0.009 * (timescale / 100000), 0, 0.00005)
 
     local sunFactor = (hour >= daylightStart and hour < dayLightEnd and 1) or 0.33
 
