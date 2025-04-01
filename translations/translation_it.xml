@@ -34,6 +34,8 @@
 		<text name="rw_ui_irrigationUpkeep" text="Costo giornaliero della manutenzione"/>
 		<text name="rw_ui_inactive" text="Inattivo"/>
 		<text name="rw_ui_active" text="Attivo"/>
+
+		<text name="rw_ui_today" text="Today"/>
 		
 	</texts>
 </l10n>

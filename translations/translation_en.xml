@@ -34,6 +34,8 @@
         <text name="rw_ui_irrigationUpkeep" text="Irrigation Upkeep"/>
 		<text name="rw_ui_inactive" text="Inactive"/>
 		<text name="rw_ui_active" text="Active"/>
+
+		<text name="rw_ui_today" text="Today"/>
 		
 	</texts>
 </l10n>

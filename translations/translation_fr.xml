@@ -35,5 +35,7 @@
 		<text name="rw_ui_inactive" text="Inactif"/>
 		<text name="rw_ui_active" text="Actif"/>
 
+		<text name="rw_ui_today" text="Today"/>
+
 	</texts>
 </l10n>

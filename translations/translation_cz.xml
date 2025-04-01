@@ -34,6 +34,8 @@
         <text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
 		<text name="rw_ui_inactive" text="Neaktivní"/>
 		<text name="rw_ui_active" text="Aktivní"/>
+
+		<text name="rw_ui_today" text="Today"/>
 		
 	</texts>
 </l10n>
