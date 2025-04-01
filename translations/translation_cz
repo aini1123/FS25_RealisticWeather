@@ -1,0 +1,39 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Hustá mlha"/>
+		<text name="rw_ui_hour" text="za %s hodinu" tag="format"/>
+		<text name="rw_ui_hours" text="za %s hodin" tag="format"/>
+		<text name="rw_ui_minute" text="za %s minutu" tag="format"/>
+		<text name="rw_ui_minutes" text="za %s minut" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Pole %s brzy uschne" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Pole %s uschlo" tag="format"/>
+		<text name="rw_ui_currentYield" text="Aktuální výnos"/>
+		<text name="rw_ui_moisture" text="Vlhkost"/>
+		<text name="rw_ui_witherChance" text="Šance na uvadnutí"/>
+		<text name="rw_ui_retention" text="Udržení vlhkosti"/>
+		<text name="rw_ui_idealMoisture" text="Ideální vlhkost"/>
+		<text name="rw_ui_perfectMoisture" text="Dokonalá vlhkost"/>
+		<text name="rw_ui_blizzard_coming" text="Blizzard přichází"/>
+		<text name="rw_ui_blizzard_now" text="Blizzard probíhá"/>
+		<text name="rw_ui_drought_coming" text="Přichází sucho"/>
+		<text name="rw_ui_drought_now" text="Probíhající sucho"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm očekáváno" tag="format"/>
+		
+		<text name="rw_ui_amount" text="Částka"/>
+		<text name="rw_ui_requiredMoisture" text="Požadovaná vlhkost"/>
+		<text name="rw_ui_needsTedding" text="Potřebuje otrhat"/>
+		<text name="rw_ui_yes" text="Ano"/>
+		<text name="rw_ui_no" text="Ne"/>
+
+        <text name="input_Irrigation" text="Zavlažování"/>
+        <text name="finance_irrigationUpkeep" text="Zavlažování"/>
+        <text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
+        <text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
+        <text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
+        <text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
+		<text name="rw_ui_inactive" text="Neaktivní"/>
+		<text name="rw_ui_active" text="Aktivní"/>
+		
+	</texts>
+</l10n>
