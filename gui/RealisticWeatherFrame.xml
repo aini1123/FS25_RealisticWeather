@@ -21,27 +21,29 @@
 
 		<GuiElement profile="rw_headerContainer">
 			
-			<Button profile="rw_headerButton" position="20px 0px" width="120px" text="$l10n_rw_ui_moisture" onClick="onClickSortButton" id="moistureButton"/>
-			<Button profile="rw_headerButton" position="140px 0px" width="120px" text="$l10n_rw_ui_today" onClick="onClickSortButton" id="trendButton"/>
-			<Button profile="rw_headerButton" position="260px 0px" width="220px" text="$l10n_rw_ui_retention" onClick="onClickSortButton" id="retentionButton"/>
-			<Button profile="rw_headerButton" position="480px 0px" width="220px" text="$l10n_rw_ui_witherChance" onClick="onClickSortButton" id="witherChanceButton"/>
-			<Button profile="rw_headerButton" position="700px 0px" width="80px" text="X" onClick="onClickSortButton" id="xButton"/>
-			<Button profile="rw_headerButton" position="780px 0px" width="80px" text="Z" onClick="onClickSortButton" id="zButton"/>
-			<Bitmap profile="fs25_vehiclesHeaderIconSortAscending" position="10px 0px" id="sortingIcon_true"/>
-			<Bitmap profile="fs25_vehiclesHeaderIconSortDescending" position="10px 0px" id="sortingIcon_false"/>
+			<Button profile="rw_headerButton" position="5px 0px" width="55px" text="$l10n_contract_details_field" onClick="onClickSortButton" id="fieldButton"/>
+			<Button profile="rw_headerButton" position="60px 0px" width="120px" text="$l10n_rw_ui_moisture" onClick="onClickSortButton" id="moistureButton"/>
+			<Button profile="rw_headerButton" position="180px 0px" width="120px" text="$l10n_rw_ui_today" onClick="onClickSortButton" id="trendButton"/>
+			<Button profile="rw_headerButton" position="300px 0px" width="220px" text="$l10n_rw_ui_retention" onClick="onClickSortButton" id="retentionButton"/>
+			<Button profile="rw_headerButton" position="520px 0px" width="220px" text="$l10n_rw_ui_witherChance" onClick="onClickSortButton" id="witherChanceButton"/>
+			<Button profile="rw_headerButton" position="740px 0px" width="80px" text="X" onClick="onClickSortButton" id="xButton"/>
+			<Button profile="rw_headerButton" position="820px 0px" width="80px" text="Z" onClick="onClickSortButton" id="zButton"/>
+			<Bitmap profile="fs25_vehiclesHeaderIconSortAscending" position="10px 0px" id="sortingIcon_false"/>
+			<Bitmap profile="fs25_vehiclesHeaderIconSortDescending" position="10px 0px" id="sortingIcon_true"/>
 			<ThreePartBitmap profile="fs25_lineSeparatorBottom" position="0px -2dp"/>
 			
 		</GuiElement>
 		
 		<SmoothList profile="rw_moistureList" id="moistureList">
 			<ListItem profile="rw_moistureListItem">
-				<Text profile="rw_moistureListText" position="20px 0px" name="moisture"/>
-				<Bitmap profile="rw_trendArrow" position="158px 0px" name="trendArrow"/>
-				<Text profile="rw_moistureListText" position="140px 0px" name="trend"/>
-				<Text profile="rw_moistureListText" position="260px 0px" name="retention"/>
-				<Text profile="rw_moistureListText" position="480px 0px" name="witherChance"/>
-				<Text profile="rw_moistureListText" position="700px 0px" name="x"/>
-				<Text profile="rw_moistureListText" position="780px 0px" name="z"/>
+				<Text profile="rw_moistureListTextRight" position="5px 0px" name="field"/>
+				<Text profile="rw_moistureListText" position="60px 0px" name="moisture"/>
+				<Bitmap profile="rw_trendArrow" position="198px 0px" name="trendArrow"/>
+				<Text profile="rw_moistureListText" position="180px 0px" name="trend"/>
+				<Text profile="rw_moistureListText" position="300px 0px" name="retention"/>
+				<Text profile="rw_moistureListText" position="520px 0px" name="witherChance"/>
+				<Text profile="rw_moistureListText" position="740px 0px" name="x"/>
+				<Text profile="rw_moistureListText" position="820px 0px" name="z"/>
 			</ListItem>
 		</SmoothList>
 		
@@ -88,6 +90,10 @@
 			<textColor value="$preset_fs25_colorMainLight"/>
 			<textSelectedColor value="$preset_fs25_colorMainDark"/>
 			<textDisabledColor value="$preset_colorDisabled"/>
+		</Profile>
+
+		<Profile name="rw_moistureListTextRight" extends="rw_moistureListText">
+			<textAlignment value="left"/>
 		</Profile>
 
 		<Profile name="rw_moistureList" extends="emptyPanel" with="anchorStretchingYLeft pivotTopLeft">

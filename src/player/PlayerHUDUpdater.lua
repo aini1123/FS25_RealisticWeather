@@ -47,7 +47,7 @@ function RW_PlayerHUDUpdater:showFieldInfo(x, z)
     box:clear()
     local moistureSystem = g_currentMission.moistureSystem
 
-    if moistureSystem == nil then return end
+    if moistureSystem == nil or moistureSystem.moistureOverlayBehaviour == 1 or (self.fieldInfo.groundType == FieldGroundType.NONE and moistureSystem.moistureOverlayBehaviour == 2) then return end
 
     local values = moistureSystem:getValuesAtCoords(x, z, { "moisture", "witherChance", "retention" })
 

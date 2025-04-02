@@ -11,7 +11,7 @@ function RW_Sprayer:processSprayerArea(superFunc, workArea, dT)
         if moistureSystem == nil then return changedArea, totalArea end
 
         local fillType = self.spec_sprayer.workAreaParameters.sprayFillType
-        local target = { ["moisture"] = MoistureSystem.SPRAY_FACTOR * (fillType == FillType.WATER and 4 or 1) }
+        local target = { ["moisture"] = MoistureSystem.SPRAY_FACTOR * (fillType == FillType.WATER and 4 or 1) * moistureSystem.moistureGainModifier }
 
         local sx, _, sz = getWorldTranslation(workArea.start)
         local wx, _, wz = getWorldTranslation(workArea.width)

@@ -1,0 +1,38 @@
+<GUI onOpen="onOpen" onClose="onClose" onCreate="onCreate">
+	<GuiElement profile="newLayer"/>
+	<Bitmap profile="dialogFullscreenBg" id="dialogBg"/>
+	<GuiElement profile="rw_moistureArgsDialogBg" id="dialogElement">
+		<ThreePartBitmap profile="fs25_dialogBgMiddleSmall"/>
+		<ThreePartBitmap profile="fs25_dialogBgTopSmall"/>
+		<ThreePartBitmap profile="fs25_dialogBgBottom"/>
+		<GuiElement profile="rw_moistureArgsDialogContainer">
+			<Text profile="fs25_dialogTitle" id="dialogTitleElement" position="0px -10px" text="$l10n_rw_settings_rebuildMoistureMap_label"/>
+			<Text profile="fs25_dialogText" id="dialogTextElement" position="0px -60px" text="$l10n_rw_ui_cellWidth"/>
+			<MultiTextOption profile="rw_moistureArgsDialogMultiTextOption" position="0px -90px" id="widthInput" focusInit="onOpen">
+				<Text profile="fs25_multiTextOptionText" width="220px" name="text"/>
+			</MultiTextOption>
+			<Text profile="fs25_dialogText" id="dialogTextElement" position="0px -160px" text="$l10n_rw_ui_cellHeight"/>
+			<MultiTextOption profile="rw_moistureArgsDialogMultiTextOption" position="0px -190px" id="heightInput">
+				<Text profile="fs25_multiTextOptionText" width="220px" name="text"/>
+			</MultiTextOption>
+		</GuiElement>
+		<BoxLayout profile="fs25_dialogButtonBox" id="buttonsPC">
+			<Button profile="buttonActivate" text="Recommended" onClick="onClickRecommended" id="recommendedButton"/>
+			<Bitmap profile="fs25_dialogButtonBoxSeparator"/>
+			<Button profile="buttonBack" text="$l10n_button_back" onClick="onClickBack" id="noButton"/>
+			<Bitmap profile="fs25_dialogButtonBoxSeparator"/>
+			<Button profile="buttonOK" text="$l10n_button_ok" onClick="onClickOk" id="yesButton"/>
+		</BoxLayout>
+	</GuiElement>
+	<GUIProfiles>
+		<Profile name="rw_moistureArgsDialogBg" extends="fs25_optionDialogBg">
+			<height value="500px"/>
+		</Profile>
+		<Profile name="rw_moistureArgsDialogContainer" extends="fs25_dialogContentContainer" with="anchorTopStretchingX">
+			<height value="450px"/>
+		</Profile>
+		<Profile name="rw_moistureArgsDialogMultiTextOption" extends="fs25_optionDialogMultiTextOption" with="anchorTopCenter">
+			<width value="250px"/>
+		</Profile>
+	</GUIProfiles>
+</GUI>

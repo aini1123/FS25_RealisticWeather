@@ -1,6 +1,6 @@
 MoistureSystem = {}
 
-MoistureSystem.VERSION = "1.1.0.2"
+MoistureSystem.VERSION = "1.1.2.0"
 
 table.insert(FinanceStats.statNames, "irrigationUpkeep")
 FinanceStats.statNameToIndex["irrigationUpkeep"] = #FinanceStats.statNames
@@ -39,9 +39,6 @@ function MoistureSystem.new()
     self.mission = g_currentMission
     self.rows = {}
     self.isServer = self.mission:getIsServer()
-    self.moistureDeltaLower = 0
-    self.moistureDeltaUpper = 0
-    self.currentUpdateIteration = 1
     self.lastMoistureDelta = 0
     self.ticksSinceLastUpdate = MoistureSystem.TICKS_PER_UPDATE + 1
     self.currentHourlyUpdateQuarter = 1
@@ -53,15 +50,31 @@ function MoistureSystem.new()
     self.irrigationEventId = RW_PlayerInputComponent.IRRIGATION_EVENT_ID
     self.isSaving = false
 
-    self.timeSinceLastUpdate = 0
-    self.timeSinceLastUpdateLower = 0
-    self.timeSinceLastUpdateUpper = 0
-
     self.pendingIrrigationCosts = 0
     self.irrigatingFields = {}
     self.irrigationInputField = nil
 
     self.needsSync = false
+
+    self.witheringEnabled = true
+    self.witheringChance = 1
+    self.performanceIndex = 2
+    self.moistureGainModifier = 1
+    self.moistureLossModifier = 1
+    self.moistureOverlayBehaviour = 3
+    self.moistureFrameBehaviour = 1
+
+    self.currentUpdateIteration = 1
+    self.updateIterations = {
+        {
+            ["moistureDelta"] = 0,
+            ["timeSinceLastUpdate"] = 0
+        },
+        {
+            ["moistureDelta"] = 0,
+            ["timeSinceLastUpdate"] = 0
+        }
+    }
 
     MoneyType.IRRIGATION_UPKEEP = MoneyType.register("irrigationUpkeep", "rw_ui_irrigationUpkeep")
     MoneyType.LAST_ID = MoneyType.LAST_ID + 1
@@ -212,33 +225,53 @@ function MoistureSystem:sendInitialState(connection)
 end
 
 
-function MoistureSystem:setInitialState(cellWidth, cellHeight, mapWidth, mapHeight, moistureDeltaLower, moistureDeltaUpper, lastMoistureDelta, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields)
+function MoistureSystem:setInitialState(cellWidth, cellHeight, mapWidth, mapHeight, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields)
 
-    self.cellWidth, self.cellHeight, self.mapWidth, self.mapHeight, self.moistureDeltaLower, self.moistureDeltaUpper, self.lastMoistureDelta, self.currentHourlyUpdateQuarter, self.numRows, self.numColumns, self.rows, self.irrigatingFields = cellWidth, cellHeight, mapWidth, mapHeight, moistureDeltaLower, moistureDeltaUpper, lastMoistureDelta, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields
+    self.cellWidth, self.cellHeight, self.mapWidth, self.mapHeight, self.currentHourlyUpdateQuarter, self.numRows, self.numColumns, self.rows, self.irrigatingFields = cellWidth, cellHeight, mapWidth, mapHeight, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields
 
 end
 
 
-function MoistureSystem:generateNewMapMoisture(xmlFile)
+function MoistureSystem:generateNewMapMoisture(xmlFile, force)
 
     print(string.format("--- RealisticWeather (%s) ---", MoistureSystem.VERSION), "--- Generating map moisture cell system")
 
-    if xmlFile == nil then return end
+    if not force then
 
-    local performanceIndex = Utils.getPerformanceClassId()
+        if xmlFile == nil then return end
 
-    if g_server ~= nil and g_server.netIsRunning and performanceIndex <= 3 then
-        performanceIndex = 4
-        print("--- Generating on server mode")
+        local performanceIndex = Utils.getPerformanceClassId()
+
+        if g_server ~= nil and g_server.netIsRunning and performanceIndex <= 3 then
+            performanceIndex = 4
+            print("--- Generating on server mode")
+        end
+
+        self.cellWidth, self.cellHeight = MoistureSystem.CELL_WIDTH[performanceIndex], MoistureSystem.CELL_HEIGHT[performanceIndex]
+
+        local width, height = getXMLInt(xmlFile, "map#width"), getXMLInt(xmlFile, "map#height")
+
+        self.mapWidth, self.mapHeight = width, height
+    
+    else
+
+        print("--- Force deleting and rebuilding moisture map")
+
+        self.rows = {}
+        self.isSaving = true
+        
+        for _, updateIteration in pairs(self.updateIterations) do
+            updateIteration.moistureDelta = 0
+            updateIteration.timeSinceLastUpdate = 0
+        end
+
+        self.currentUpdateIteration = 1
+
+        for _, irrigatingFields in pairs(self.irrigatingFields) do irrigatingField.isActive = false end
+
     end
 
-    self.cellWidth, self.cellHeight = MoistureSystem.CELL_WIDTH[performanceIndex], MoistureSystem.CELL_HEIGHT[performanceIndex]
-
-    local width, height = getXMLInt(xmlFile, "map#width"), getXMLInt(xmlFile, "map#height")
-
-    print(string.format("--- Map dimensions: %sx%s", width, height), string.format("--- Cell dimensions: %sx%s", self.cellWidth, self.cellHeight))
-
-    self.mapWidth, self.mapHeight = width, height
+    print(string.format("--- Map dimensions: %sx%s", self.mapWidth, self.mapHeight), string.format("--- Cell dimensions: %sx%s", self.cellWidth, self.cellHeight))
 
     local firstRow = true
     local numRows = 0
@@ -247,7 +280,7 @@ function MoistureSystem:generateNewMapMoisture(xmlFile)
     local i = 0
 
 
-    for x = -width / 2, width / 2, self.cellWidth do
+    for x = -self.mapWidth / 2, self.mapWidth / 2, self.cellWidth do
 
         local row = { ["x"] = x, ["columns"] = {} }
 
@@ -258,7 +291,7 @@ function MoistureSystem:generateNewMapMoisture(xmlFile)
 
         math.randomseed(i + currentTime)
 
-        for z = -height / 2, height / 2, self.cellHeight do
+        for z = -self.mapHeight / 2, self.mapHeight / 2, self.cellHeight do
 
             local moisture
 
@@ -313,6 +346,7 @@ function MoistureSystem:generateNewMapMoisture(xmlFile)
 
     self.numRows = numRows
     self.numColumns = numColumns
+    self.isSaving = false
 
     print(string.format("--- Generated %s rows with %s columns each", numRows, numColumns))
 
@@ -321,7 +355,7 @@ end
 
 function MoistureSystem:getValuesAtCoords(x, z, values)
 
-    if values == nil or #values == 0 then return nil end
+    if values == nil or #values == 0 or self.isSaving then return nil end
 
     local rX, rZ = math.round(x), math.round(z)
     local row
@@ -341,9 +375,25 @@ function MoistureSystem:getValuesAtCoords(x, z, values)
             local returnValues = {}
 
             for _, value in pairs(values) do
+
                 returnValues[value] = value == "retention" and column[value] or math.clamp(column[value] or 0, 0, 1)
                 if value == "moisture" then
-                    local delta = row.x <= 0 and self.moistureDeltaLower or self.moistureDeltaUpper
+                    
+                    local updaterWidth = self.mapWidth / #self.updateIterations
+                    local delta
+
+                    for boundary = 1, #self.updateIterations do
+                        local lowerBound, upperBound = -self.mapWidth / 2 + ((boundary - 1) * updaterWidth), -self.mapWidth / 2 + (boundary * updaterWidth)
+                        if row.x >= lowerBound and row.x < upperBound then
+                            delta = self.updateIterations[boundary].moistureDelta
+                        end
+                    end
+
+
+                    -- updateIterations 4
+                    -- mapWidth 2048
+                    -- boundaries = 0, 512, 1024, 1536
+                    -- boundaries = -1024 - -512, -512 - 0, 0 - 512, 512 - 1024
 
                     local safeZoneFactor = 1
 
@@ -361,6 +411,8 @@ function MoistureSystem:getValuesAtCoords(x, z, values)
                         returnValues[value] = returnValues[value] + delta * (2 - column.retention) * safeZoneFactor
                     end
                 end
+
+                if not self.witheringEnabled and value == "witherChance" then returnValues[value] = 0 end
             end
 
             return returnValues
@@ -374,7 +426,7 @@ end
 
 function MoistureSystem:setValuesAtCoords(x, z, values)
 
-    if values == nil then return end
+    if values == nil or self.isSaving then return end
 
     local rX, rZ = math.round(x), math.round(z)
     local row
@@ -411,10 +463,10 @@ end
 
 function MoistureSystem:update(delta, timescale)
 
-    self.moistureDeltaLower = self.moistureDeltaLower + delta
-    self.moistureDeltaUpper = self.moistureDeltaUpper + delta
-    self.timeSinceLastUpdateLower = self.timeSinceLastUpdateLower + timescale / (MoistureSystem.TICKS_PER_UPDATE)
-    self.timeSinceLastUpdateUpper = self.timeSinceLastUpdateUpper + timescale / (MoistureSystem.TICKS_PER_UPDATE)
+    for _, updateIteration in pairs(self.updateIterations) do
+        updateIteration.moistureDelta = updateIteration.moistureDelta + delta
+        updateIteration.timeSinceLastUpdate = updateIteration.timeSinceLastUpdate + timescale / (MoistureSystem.TICKS_PER_UPDATE)
+    end
 
     if self.ticksSinceLastUpdate >= MoistureSystem.TICKS_PER_UPDATE and not self.isSaving then
 
@@ -427,25 +479,24 @@ function MoistureSystem:update(delta, timescale)
             end
         end
 
-        local maxRows = self.numRows / 2
+        local maxRows = self.numRows / #self.updateIterations
         local i = 0
 
-        local x = -self.mapWidth / 2
+        if self.currentUpdateIteration > #self.updateIterations then self.currentUpdateIteration = 1 end
+        
+        local updaterWidth = self.mapWidth / #self.updateIterations
+        local x = -self.mapWidth / 2 + (self.currentUpdateIteration - 1) * updaterWidth
 
-        if self.currentUpdateIteration == 2 then x = x + self.cellWidth * self.numRows * 0.5 end
-
-        local moistureDelta = self.currentUpdateIteration == 1 and self.moistureDeltaLower or self.moistureDeltaUpper
-        local timeSinceLastUpdate = self.currentUpdateIteration == 1 and self.timeSinceLastUpdateLower or self.timeSinceLastUpdateUpper
+        local moistureDelta = self.updateIterations[self.currentUpdateIteration].moistureDelta
+        local timeSinceLastUpdate = self.updateIterations[self.currentUpdateIteration].timeSinceLastUpdate
 
         x = math.round(x)
 
-        local correctionOffset = -self.cellWidth
-
-        while self.rows[x] == nil and correctionOffset < self.cellWidth do
-
-            x = x + correctionOffset
-            correctionOffset = correctionOffset + 1
-
+        for correctionOffset = -self.cellWidth, self.cellWidth do
+            if self.rows[x + correctionOffset] ~= nil then
+                x = x + correctionOffset
+                break
+            end
         end
 
         if self.rows[x] ~= nil then
@@ -472,7 +523,7 @@ function MoistureSystem:update(delta, timescale)
 
                         if fieldId ~= nil and self.irrigatingFields[fieldId] ~= nil and self.irrigatingFields[fieldId].isActive then
 
-                            irrigationFactor = MoistureSystem.IRRIGATION_FACTOR * timeSinceLastUpdate
+                            irrigationFactor = MoistureSystem.IRRIGATION_FACTOR * timeSinceLastUpdate * self.moistureGainModifier
                             self.irrigatingFields[fieldId].pendingCost = self.irrigatingFields[fieldId].pendingCost + self.cellWidth * self.cellHeight * timeSinceLastUpdate * MoistureSystem.IRRIGATION_BASE_COST
 
                         end
@@ -505,20 +556,17 @@ function MoistureSystem:update(delta, timescale)
 
         end
 
-        self.lastMoistureDelta = (self.currentUpdateIteration == 1 and self.moistureDeltaLower or self.moistureDeltaUpper) * 1
+        self.lastMoistureDelta = self.updateIterations[self.currentUpdateIteration].moistureDelta * 1
 
-        if self.currentUpdateIteration == 1 then
-            self.moistureDeltaLower = 0
-            self.timeSinceLastUpdateLower = 0
-        else
-            self.moistureDeltaUpper = 0
-            self.timeSinceLastUpdateUpper = 0
-        end
+        self.updateIterations[self.currentUpdateIteration].moistureDelta = 0
+        self.updateIterations[self.currentUpdateIteration].ticksSinceLastUpdate = 0
 
         self.moistureDelta = 0
         self.ticksSinceLastUpdate = 0
         self.timeSinceLastUpdate = 0
-        self.currentUpdateIteration = self.currentUpdateIteration == 1 and 2 or 1
+        self.currentUpdateIteration = self.currentUpdateIteration + 1
+
+        if self.currentUpdateIteration > #self.updateIterations then self.currentUpdateIteration = 1 end
 
     end
 
@@ -571,6 +619,18 @@ end
 
 function MoistureSystem:onHourChanged()
 
+    if self.isSaving then return end
+
+    if not self.witheringEnabled then
+        if self.isServer and self.needsSync and g_server ~= nil and g_server.netIsRunning then
+
+            self.needsSync = false
+            g_server:broadcastEvent(MoistureSyncEvent.new(self.numRows, self.numColumns, self.rows), false)
+
+        end
+        return
+    end
+
     local i = 0
     local maxRows = self.numRows / 4
 
@@ -582,13 +642,11 @@ function MoistureSystem:onHourChanged()
 
     x = math.round(x)
 
-    local correctionOffset = -self.cellWidth
-
-    while self.rows[x] == nil and correctionOffset < self.cellWidth do
-
-        x = x + correctionOffset
-        correctionOffset = correctionOffset + 1
-
+    for correctionOffset = -self.cellWidth, self.cellWidth do
+        if self.rows[x + correctionOffset] ~= nil then
+            x = x + correctionOffset
+            break
+        end
     end
 
     -- a maximum number of withering cells per hour is required otherwise the game has massive lag spikes, especially during/after droughts
@@ -637,7 +695,7 @@ function MoistureSystem:onHourChanged()
 
                 local witherChance = column.witherChance or 0
 
-                witherChance = witherChance + ((lowMoisture * 0.25 - column.moisture) / (lowMoisture * 4)) * 0.25
+                witherChance = witherChance + ((lowMoisture * 0.25 - column.moisture) / (lowMoisture * 4)) * 0.25 * self.witheringChance
 
                 witherChance = math.clamp(witherChance, 0, 1)
 
@@ -831,7 +889,7 @@ function MoistureSystem:getCellsInsidePolygon(polygon)
                     ["moisture"] = column.moisture,
                     ["retention"] = column.retention,
                     ["trend"] = column.trend,
-                    ["witherChance"] = column.witherChance
+                    ["witherChance"] = self.witheringEnabled and column.witherChance or 0
                 }
 
                 if not table.hasElement(cells, cell) then table.insert(cells, cell) end
@@ -843,5 +901,37 @@ function MoistureSystem:getCellsInsidePolygon(polygon)
 	end
 
 	return cells
+
+end
+
+
+function MoistureSystem.onSettingChanged(name, state)
+
+    local moistureSystem = g_currentMission.moistureSystem
+
+    if moistureSystem == nil then return end
+
+    moistureSystem[name] = state
+
+    if name == "performanceIndex" then
+
+        moistureSystem.currentUpdateIteration = 1
+        moistureSystem.updateIterations = {}
+
+        for i = 1, state do
+            table.insert(moistureSystem.updateIterations, {
+                ["moistureDelta"] = 0,
+                ["timeSinceLastUpdate"] = 0
+            })
+        end
+
+    end
+
+end
+
+
+function MoistureSystem.onClickRebuildMoistureMap()
+    
+    MoistureArgumentsDialog.show()
 
 end

@@ -166,17 +166,22 @@ function RW_Weather:update(_, dT)
     if rainfall > 0 or snowfall > 0 then
 
         local items = g_currentMission.itemSystem.itemByUniqueId
+        local balesToDelete = {}
 
         for uniqueId, item in pairs(items) do
-            if g_currentMission.objectsToClassName[item] == "Bale" and item.fillLevel ~= nil and item.nodeId ~= 0 and item.wrappingState == 0 then
+            if g_currentMission.objectsToClassName[item] == "Bale" and item.fillLevel ~= nil and item.nodeId ~= 0 and item.wrappingState == 0 and (item.fillType == FillType.SILAGE or item.fillType == FillType.GRASS_WINDROW or item.fillType == FillType.DRYGRASS_WINDROW) then
                 local x, _, z = getWorldTranslation(item.nodeId)
 
                 if indoorMask:getIsIndoorAtWorldPosition(x, z) then continue end
 
                 local fillLevel = item.fillLevel
                 item.fillLevel = math.max(fillLevel - (rainfall + (snowfall * 0.4)) * 0.0001 * timescale, 0)
+
+                if item.fillLevel <= 0 then table.insert(balesToDelete, item) end
             end
         end
+
+        for i = #balesToDelete, 1, -1 do balesToDelete[i]:delete() end
 
     end
 
@@ -191,27 +196,29 @@ function RW_Weather:update(_, dT)
     --if temp < 0 then wetness = wetness * 0.35 end
     --if wetness > 0 then moistureDelta = moistureDelta + math.clamp(wetness * 0.001825, 0, 0.0001) end
 
-    local moistureDelta = math.clamp((rainfall + snowfall * 0.75 + hailfall * 0.15) * 0.009 * (timescale / 100000), 0, 0.00005)
+    local moistureSystem = g_currentMission.moistureSystem
+
+    local moistureDelta = math.clamp((rainfall + snowfall * 0.75 + hailfall * 0.15) * 0.009 * (timescale / 100000), 0, 0.00005) * moistureSystem.moistureGainModifier
 
     local sunFactor = (hour >= daylightStart and hour < dayLightEnd and 1) or 0.33
 
     if temp >= 45 then
-        moistureDelta = moistureDelta - (temp * 0.000012 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.000012 * (timescale / 100000) * sunFactor * draughtFactor) * moistureSystem.moistureLossModifier
     elseif temp >= 35 then
-        moistureDelta = moistureDelta - (temp * 0.0000088 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000088 * (timescale / 100000) * sunFactor * draughtFactor) * moistureSystem.moistureLossModifier
     elseif temp >= 25 then
-        moistureDelta = moistureDelta - (temp * 0.0000038 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000038 * (timescale / 100000) * sunFactor * draughtFactor) * moistureSystem.moistureLossModifier
     elseif temp >= 15 then
-        moistureDelta = moistureDelta - (temp * 0.0000012 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000012 * (timescale / 100000) * sunFactor * draughtFactor) * moistureSystem.moistureLossModifier
     elseif temp > 0 then
-        moistureDelta = moistureDelta - (temp * 0.0000005 * (timescale / 100000) * sunFactor * draughtFactor)
+        moistureDelta = moistureDelta - (temp * 0.0000005 * (timescale / 100000) * sunFactor * draughtFactor) * moistureSystem.moistureLossModifier
     end
 
     --self.moisture = moisture
 
 
     g_currentMission.grassMoistureSystem:update(moistureDelta)
-    g_currentMission.moistureSystem:update(moistureDelta, timescale)
+    moistureSystem:update(moistureDelta, timescale)
 
 
 

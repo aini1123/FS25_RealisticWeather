@@ -14,6 +14,8 @@ function RealisticWeatherFrame.new()
 	self.fieldData = {}
 	self.mapWidth, self.mapHeight = 2048, 2048
 	self.buttonStates = {}
+	self.hasContent = false
+	self.cachedBehaviour = 0
 
 	return self
 
@@ -52,6 +54,15 @@ function RealisticWeatherFrame:initialize()
 		["profile"] = "buttonSelect"
 	}
 
+	self.refreshButtonInfo = {
+		["inputAction"] = InputAction.MENU_EXTRA_1,
+		["text"] = g_i18n:getText("button_refresh"),
+		["callback"] = function()
+			self:onClickRefresh()
+		end,
+		["profile"] = "buttonMenuSwitch"
+	}
+	
 end
 
 
@@ -62,7 +73,13 @@ end
 
 function RealisticWeatherFrame:onFrameOpen()
 	RealisticWeatherFrame:superClass().onFrameOpen(self)   
-    self:updateContent()
+    if not self.hasContent or (g_currentMission.moistureSystem ~= nil and g_currentMission.moistureSystem.moistureFrameBehaviour ~= self.cachedBehaviour) then
+		self:updateContent()
+	else
+		self:resetButtonStates()
+		self:updateMenuButtons()
+		self.moistureList:reloadData()
+	end
 end
 
 
@@ -73,12 +90,19 @@ end
 
 function RealisticWeatherFrame:updateContent()
 
+	self.hasContent = true
+
 	local ownedFields = {}
+	local allFields = {}
 	local fieldTexts = {}
 	
 	local moistureSystem = g_currentMission.moistureSystem
 
-	if moistureSystem ~= nil then self.mapWidth, self.mapHeight = moistureSystem.mapWidth, moistureSystem.mapHeight end
+	if moistureSystem == nil then return end
+
+	self.mapWidth, self.mapHeight, self.showAll = moistureSystem.mapWidth, moistureSystem.mapHeight, moistureSystem.moistureFrameBehaviour == 1
+
+	self.cachedBehaviour = moistureSystem.moistureFrameBehaviour
 
 	if g_localPlayer ~= nil and g_localPlayer.farmId ~= nil and g_localPlayer.farmId ~= FarmlandManager.NO_OWNER_FARM_ID then
 		
@@ -92,15 +116,23 @@ function RealisticWeatherFrame:updateContent()
 			if owner == farm then
 				local id = field:getId()
 				table.insert(ownedFields, id)
-				table.insert(fieldTexts, "Field " .. id)
+				if self.showAll then table.insert(fieldTexts, "Field " .. id) end
+			end
+
+			if not self.showAll then
+				local id = field:getId()
+				table.insert(allFields, id)
 			end
 
 		end
 
 	end
 
+	if not self.showAll then fieldTexts = { g_i18n:getText("rw_ui_ownedFields"), g_i18n:getText("rw_ui_allFields") } end
+
 	self.fieldList:setTexts(fieldTexts)
 	self.ownedFields = ownedFields
+	self.allFields = allFields
 	self.selectedField = 1
 	self.fieldList:setState(self.selectedField)
 
@@ -117,9 +149,9 @@ function RealisticWeatherFrame:updateMenuButtons()
 
 	if moistureSystem == nil then return end
 
-	self.menuButtonInfo = { self.backButtonInfo, self.nextPageButtonInfo, self.prevPageButtonInfo }
+	self.menuButtonInfo = { self.backButtonInfo, self.nextPageButtonInfo, self.prevPageButtonInfo, self.refreshButtonInfo }
 
-	if #self.ownedFields > 0 and self.ownedFields[self.selectedField] ~= nil then
+	if (#self.ownedFields > 0 and self.ownedFields[self.selectedField] ~= nil) or (not self.showAll and #self.allFields > 0) then
 
 		local isBeingIrrigated, _ = moistureSystem:getIsFieldBeingIrrigated(self.ownedFields[self.selectedField])
 		self.irrigationButtonInfo.text = g_i18n:getText(isBeingIrrigated and "rw_ui_irrigation_stop" or "rw_ui_irrigation_start")
@@ -136,7 +168,9 @@ function RealisticWeatherFrame:onClickFieldList(index)
 
 	self.selectedField = index
 
-	self:updateFieldInfo()
+	self:resetButtonStates()
+	self:updateMenuButtons()
+	self.moistureList:reloadData()
 
 end
 
@@ -144,12 +178,13 @@ end
 function RealisticWeatherFrame:resetButtonStates()
 
 	self.buttonStates = {
-		[self.moistureButton] = { ["sorter"] = false, ["target"] = "moisture" },
-		[self.trendButton] = { ["sorter"] = false, ["target"] = "trend" },
-		[self.retentionButton] = { ["sorter"] = false, ["target"] = "retention" },
-		[self.witherChanceButton] = { ["sorter"] = false, ["target"] = "witherChance" },
-		[self.xButton] = { ["sorter"] = false, ["target"] = "x" },
-		[self.zButton] = { ["sorter"] = false, ["target"] = "z" }
+		[self.fieldButton] = { ["sorter"] = false, ["target"] = "field", ["pos"] = "-5px" },
+		[self.moistureButton] = { ["sorter"] = false, ["target"] = "moisture", ["pos"] = "12px" },
+		[self.trendButton] = { ["sorter"] = false, ["target"] = "trend", ["pos"] = "35px" },
+		[self.retentionButton] = { ["sorter"] = false, ["target"] = "retention", ["pos"] = "12px" },
+		[self.witherChanceButton] = { ["sorter"] = false, ["target"] = "witherChance", ["pos"] = "22px" },
+		[self.xButton] = { ["sorter"] = false, ["target"] = "x", ["pos"] = "36px" },
+		[self.zButton] = { ["sorter"] = false, ["target"] = "z", ["pos"] = "36px" }
 	}
 
 	self.sortingIcon_true:setVisible(false)
@@ -163,19 +198,111 @@ function RealisticWeatherFrame:updateFieldInfo()
 	self:resetButtonStates()
 	self:updateMenuButtons()
 
-	local fieldId = self.ownedFields[self.selectedField]
-	local field = g_fieldManager:getFieldById(fieldId)
 	local fieldData = {}
+	local ownedFieldData = {}
+	local allFieldData = {}
 	local moistureSystem = g_currentMission.moistureSystem
 
-	if field ~= nil and moistureSystem ~= nil then
+	for _, fieldId in pairs(self.ownedFields) do
 
-		local polygon = field.densityMapPolygon
-		fieldData = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList())
+		local field = g_fieldManager:getFieldById(fieldId)
+		local data = {}
+
+		if field ~= nil and moistureSystem ~= nil then
+
+			local polygon = field.densityMapPolygon
+			data = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList())
+
+		end
+
+		if self.showAll then
+
+			table.insert(fieldData, data)
+
+		else
+
+			local averageData = {
+				["moisture"] = 0,
+				["trend"] = 0,
+				["retention"] = 0,
+				["witherChance"] = 0,
+				["x"] = 0,
+				["z"] = 0
+			}
+
+			for _, cell in pairs(data) do
+
+				for key, value in pairs(averageData) do averageData[key] = value + cell[key] end
+
+			end
+
+			if #data ~= 0 then 
+				for key, value in pairs(averageData) do averageData[key] = value / #data end
+			end
+
+			averageData.field = fieldId
+
+			table.insert(ownedFieldData, averageData)
+
+		end
+
+	end
+
+	if not self.showAll then
+
+		for _, fieldId in pairs(self.allFields) do
+
+			local data = {}
+
+			for _, ownedField in pairs(ownedFieldData) do
+				if ownedField.field == fieldId then
+					data = ownedField
+					break
+				end
+			end
+
+			local field = g_fieldManager:getFieldById(fieldId)
+
+			if field ~= nil and moistureSystem ~= nil then
+
+				local polygon = field.densityMapPolygon
+				data = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList())
+
+			end
+
+			local averageData = {
+				["moisture"] = 0,
+				["trend"] = 0,
+				["retention"] = 0,
+				["witherChance"] = 0,
+				["x"] = 0,
+				["z"] = 0
+			}
+
+			for _, cell in pairs(data) do
+
+				for key, value in pairs(averageData) do averageData[key] = value + cell[key] end
+
+			end
+
+			if #data ~= 0 then 
+				for key, value in pairs(averageData) do averageData[key] = value / #data end
+			end
+
+			averageData.field = fieldId
+
+			table.insert(allFieldData, averageData)
+
+		end
 
 	end
 
 	self.fieldData = fieldData
+	self.ownedFieldData = ownedFieldData
+	self.allFieldData = allFieldData
+
+	self.fieldButton:setVisible(not self.showAll)
+
 	self.moistureList:reloadData()
 
 end
@@ -187,7 +314,7 @@ end
 
 
 function RealisticWeatherFrame:getNumberOfItemsInSection(list, section)
-        return #self.fieldData
+        return self.showAll and #self.fieldData[self.selectedField] or (self.selectedField == 1 and #self.ownedFieldData or #self.allFieldData)
 end
 
 
@@ -198,7 +325,8 @@ end
 
 function RealisticWeatherFrame:populateCellForItemInSection(list, section, index, cell)
 
-	local item = self.fieldData[index]
+	local data = self.showAll and self.fieldData[self.selectedField] or (self.selectedField == 1 and self.ownedFieldData or self.allFieldData)
+	local item = data[index]
 
 	local trend = (item.moisture - item.trend) * 100
 	local colour = { 0, 0, 0, 0}
@@ -214,14 +342,16 @@ function RealisticWeatherFrame:populateCellForItemInSection(list, section, index
 
 	end
 
+	if not self.showAll then cell:getAttribute("field"):setText(item.field) end
+
 	cell:getAttribute("trendArrow"):setImageColor(nil, unpack(colour))
 
 	cell:getAttribute("moisture"):setText(string.format("%.3f%%", item.moisture * 100))
 	cell:getAttribute("trend"):setText(string.format("%.3f%%", trend))
 	cell:getAttribute("retention"):setText(string.format("%.2f%%", item.retention * 100))
 	cell:getAttribute("witherChance"):setText(string.format("%.2f%%", item.witherChance * 100))
-	cell:getAttribute("x"):setText(item.x + self.mapWidth / 2)
-	cell:getAttribute("z"):setText(item.z + self.mapHeight / 2)
+	cell:getAttribute("x"):setText(math.round(item.x + self.mapWidth / 2))
+	cell:getAttribute("z"):setText(math.round(item.z + self.mapHeight / 2))
 
 end
 
@@ -232,14 +362,14 @@ function RealisticWeatherFrame:onClickSortButton(button)
 
 	self["sortingIcon_" .. tostring(buttonState.sorter)]:setVisible(false)
 	self["sortingIcon_" .. tostring(not buttonState.sorter)]:setVisible(true)
-	self["sortingIcon_" .. tostring(not buttonState.sorter)]:setPosition(button.position[1] + GuiUtils.getNormalizedXValue("10px"), 0)
+	self["sortingIcon_" .. tostring(not buttonState.sorter)]:setPosition(button.position[1] + GuiUtils.getNormalizedXValue(buttonState.pos), 0)
 
 	buttonState.sorter = not buttonState.sorter
 	
 	local sorter = buttonState.sorter
 	local target = buttonState.target
 
-	table.sort(self.fieldData, function(a, b)
+	table.sort(self.showAll and self.fieldData[self.selectedField] or (self.selectedField == 1 and self.ownedFieldData or self.allFieldData), function(a, b)
 		if sorter then return a[target] > b[target] end
 
 		return a[target] < b[target] 
@@ -259,4 +389,9 @@ function RealisticWeatherFrame:onClickIrrigation()
 	moistureSystem:setFieldIrrigationState(self.ownedFields[self.selectedField])
 	self:updateMenuButtons()
 
+end
+
+
+function RealisticWeatherFrame:onClickRefresh()
+	self:updateContent()
 end

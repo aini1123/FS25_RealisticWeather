@@ -36,6 +36,53 @@
 		<text name="rw_ui_active" text="Active"/>
 
 		<text name="rw_ui_today" text="Today"/>
+		<text name="rw_ui_cellWidth" text="Cell Width"/>
+		<text name="rw_ui_cellHeight" text="Cell Height"/>
+		<text name="rw_ui_ownedFields" text="Owned Fields"/>
+		<text name="rw_ui_allFields" text="All Fields"/>
+		
+		
+		
+		<!--  SETTINGS  -->
+
+
+		<text name="rw_settings" text="Realistic Weather"/>
+		
+		<text name="rw_settings_witheringEnabled_label" text="Crop Withering"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="Crops will not wither from low moisture"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="Crops will wither from low moisture"/>
+		<text name="rw_settings_witheringEnabled_texts_1" text="Off"/>
+		<text name="rw_settings_witheringEnabled_texts_2" text="On"/>
+		
+		<text name="rw_settings_rebuildMoistureMap_label" text="Rebuild Moisture Map"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Delete and rebuild the moisture map with custom arguments"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="Rebuild Moisture Map"/>
+
+		<text name="rw_settings_performanceIndex_label" text="Performance Index"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="Increase this value to improve performance"/>
+
+		<text name="rw_settings_witheringChance_label" text="Withering Chance"/>
+		<text name="rw_settings_witheringChance_tooltip" text="Change the likelihood of crops withering due to low moisture"/>
+
+		<text name="rw_settings_moistureGainModifier_label" text="Moisture Gain Modifier"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="Change the amount of moisture gained"/>
+
+		<text name="rw_settings_moistureLossModifier_label" text="Moisture Loss Modifier"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="Change the amount of moisture lost"/>
+
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="Moisture Overlay"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="The moisture overlay will never be shown"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="The moisture overlay will only be shown when in a field"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="The moisture overlay will always be shown"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Off"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Limited"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="On"/>
+
+		<text name="rw_settings_moistureFrameBehaviour_label" text="Moisture Screen"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="The moisture screen in the main menu will show all cells in the selected field"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="The moisture screen in the main menu will show the average values of each field (better for performance)"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detailed"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limited"/>
 		
 	</texts>
 </l10n>

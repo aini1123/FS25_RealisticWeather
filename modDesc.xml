@@ -1,6 +1,6 @@
 <modDesc descVersion="96">
     <author>Arrow</author>
-    <version>1.1.1.0</version>
+    <version>1.1.2.0</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -55,6 +55,19 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 
 Changelog:
+
+1.1.2.0
+- Added a settings menu (located in the Game Settings menu)
+- Added the following settings options:
+--- Enable/disable withering
+--- Withering chance modifier
+--- Moisture gain modifier
+--- Moisture loss modifier
+--- Performance index modifier
+--- Moisture overlay behaviour
+--- Moisture screen behaviour
+--- Ability to rebuild the moisture map with custom arguments
+- Fixed empty bales remaining after rotting
 
 1.1.1.0
 - Added new moisture menu, containing various moisture related values for cells across owned fields and an option to toggle irrigation for fields inside the menu
@@ -272,6 +285,8 @@ Journal des modifications :
         <sourceFile filename="src/fillTypes/FillTypeManager.lua"/>
         <sourceFile filename="src/gui/hud/GameInfoDisplay.lua"/>
         <sourceFile filename="src/gui/hud/RW_InfoDisplayKeyValueBox.lua"/>
+        <sourceFile filename="src/gui/InGameMenuSettingsFrame.lua"/>
+        <sourceFile filename="src/gui/MoistureArgumentsDialog.lua"/>
         <sourceFile filename="src/gui/RealisticWeatherFrame.lua"/>
         <sourceFile filename="src/missions/field/HarvestMission.lua"/>
         <sourceFile filename="src/player/PlayerHUDUpdater.lua"/>
@@ -292,6 +307,8 @@ Journal des modifications :
         <sourceFile filename="src/I18N.lua"/>
         <sourceFile filename="src/MoistureSyncEvent.lua"/>
         <sourceFile filename="src/MoistureSystem.lua"/>
+        <sourceFile filename="src/RWSettings.lua"/>
+		<sourceFile filename="src/RW_BroadcastSettingsEvent.lua"/>
     </extraSourceFiles>
     <l10n filenamePrefix="translations/translation"/>
     <inputBinding>

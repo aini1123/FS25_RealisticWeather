@@ -190,7 +190,10 @@ end
 
 
 function RW_FSBaseMission:onStartMission()
+
     removeModEventListener(GrassMoistureSystem)
+
+	RWSettings.applyDefaultSettings()
 
     g_overlayManager:addTextureConfigFile(modDirectory .. "gui/icons.xml", "realistic_weather")
 
@@ -204,7 +207,17 @@ function RW_FSBaseMission:onStartMission()
 
     realisticWeatherFrame:initialize()
 
-    
+    MoistureArgumentsDialog.register()
+
 end
 
 FSBaseMission.onStartMission = Utils.prependedFunction(FSBaseMission.onStartMission, RW_FSBaseMission.onStartMission)
+
+
+function RW_FSBaseMission:sendInitialClientState(connection, _, _)
+
+    print("sendInitialClientState")
+
+end
+
+--FSBaseMission.sendInitialClientState = Utils.prependedFunction(FSBaseMission.sendInitialClientState, RW_FSBaseMission.sendInitialClientState)
