@@ -12,7 +12,7 @@ New:
   - Crop withering chance modifier
   - Moisture gain modifier
   - Moisture loss modifier
-  - Performance index (increasing will improve FPS massively)
+  - Performance index (increasing will improve FPS)
   - Ability to rebuild the moisture map with custom arguments
   - Moisture overlay behaviour
   - Moisture screen behaviour
