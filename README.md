@@ -2,6 +2,8 @@ Current development branch of Realistic Weather (v1.1.2.0), not yet available on
 
 Current ModHub version is v1.1.0.2
 
+Be warned that I have not yet tested this on multiplayer and the settings may not work as intended on multiplayer servers.
+
 New:
 - Added menu screen to view moisture system variables of cells across owned fields:
 ![fsScreen_2025_04_01_13_10_35](https://github.com/user-attachments/assets/2f931258-2422-47dd-9510-8c433160a093)
