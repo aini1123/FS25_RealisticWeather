@@ -9,7 +9,11 @@ New:
 In Progress:
 - Add settings menu to control various aspects
 - Currently implemented settings (not yet included on github):
-- - Enable/disable crops withering from moisture
+  - Enable/disable crops withering from moisture
+  - Crop withering chance modifier
+  - Moisture gain modifier
+  - Moisture loss modifier
+  - Performance index (increasing will improve FPS massively)
 
 Planned:
 - Slurry spreader compatiblity with irrigation
