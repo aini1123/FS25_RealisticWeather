@@ -309,12 +309,14 @@ end
 
 
 function RealisticWeatherFrame:getNumberOfSections()
+	if (self.showAll and self.fieldData == nil) or (not self.showAll and self.selectedIndex == 1 and self.ownedFieldData == nil or self.allFieldData == nil) then return 0 end
 	return 1
 end
 
 
 function RealisticWeatherFrame:getNumberOfItemsInSection(list, section)
-        return self.showAll and #self.fieldData[self.selectedField] or (self.selectedField == 1 and #self.ownedFieldData or #self.allFieldData)
+        if (self.showAll and self.fieldData == nil) or (not self.showAll and self.selectedIndex == 1 and self.ownedFieldData == nil or self.allFieldData == nil) then return 0 end
+	return self.showAll and #self.fieldData[self.selectedField] or (self.selectedField == 1 and #self.ownedFieldData or #self.allFieldData)
 end
 
 
