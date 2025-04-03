@@ -14,10 +14,10 @@
 		<text name="rw_ui_retention" text="Retenção de umidade"/>
 		<text name="rw_ui_idealMoisture" text="Umidade ideal"/>
 		<text name="rw_ui_perfectMoisture" text="Umidade perfeita"/>
-		<text name="rw_ui_blizzard_coming" text="Nevasca chegando"/>
-		<text name="rw_ui_blizzard_now" text="Nevasca em andamento"/>
-		<text name="rw_ui_drought_coming" text="Seca chegando"/>
-		<text name="rw_ui_drought_now" text="Seca em andamento"/>
+		<text name="rw_ui_blizzard_coming" text="Nevasca Chegando"/>
+		<text name="rw_ui_blizzard_now" text="Nevasca em Andamento"/>
+		<text name="rw_ui_drought_coming" text="Seca Chegando"/>
+		<text name="rw_ui_drought_now" text="Seca em Andamento"/>
 		<text name="rw_ui_snowExpected" text="%scm - %scm esperados" tag="format"/>
 
 		<text name="rw_ui_amount" text="Quantidade"/>
@@ -36,10 +36,10 @@
 		<text name="rw_ui_active" text="Ativo"/>
 
 		<text name="rw_ui_today" text="Hoje"/>
-		<text name="rw_ui_cellWidth" text="Largura da célula"/>
-		<text name="rw_ui_cellHeight" text="Altura da célula"/>
-		<text name="rw_ui_ownedFields" text="Campos próprios"/>
-		<text name="rw_ui_allFields" text="Todos os campos"/>
+		<text name="rw_ui_cellWidth" text="Largura da Célula"/>
+		<text name="rw_ui_cellHeight" text="Altura da Célula"/>
+		<text name="rw_ui_ownedFields" text="Campos Próprios"/>
+		<text name="rw_ui_allFields" text="Todos os Campos"/>
 		
 		
 		
