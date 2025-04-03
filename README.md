@@ -1,4 +1,4 @@
-Current development branch of Realistic Weather (v1.1.2.0), not yet available on ModHub.
+Current development branch of Realistic Weather (v1.1.2.1), not yet available on ModHub.
 
 Current ModHub version is v1.1.0.2
 
