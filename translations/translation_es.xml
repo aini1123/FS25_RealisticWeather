@@ -1,0 +1,87 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Niebla densa"/>
+		<text name="rw_ui_hour" text="durante %s hora" tag="format"/>
+		<text name="rw_ui_hours" text="durante %s horas" tag="format"/>
+		<text name="rw_ui_minute" text="durante %s minuto" tag="format"/>
+		<text name="rw_ui_minutes" text="durante %s minutos" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="El campo %s está a punto de marchitarse" tag="format"/>
+		<text name="rw_ui_hasWithered" text="El campo %s se ha marchitado" tag="format"/>
+		<text name="rw_ui_currentYield" text="Rendimiento actual"/>
+		<text name="rw_ui_moisture" text="Humedad"/>
+		<text name="rw_ui_witherChance" text="Probabilidad de marchitamiento"/>
+		<text name="rw_ui_retention" text="Retención de humedad"/>
+		<text name="rw_ui_idealMoisture" text="Humedad ideal"/>
+		<text name="rw_ui_perfectMoisture" text="Humedad perfecta"/>
+		<text name="rw_ui_blizzard_coming" text="Tormenta de nieve próxima"/>
+		<text name="rw_ui_blizzard_now" text="Tormenta de nieve en curso"/>
+		<text name="rw_ui_drought_coming" text="Sequía próxima"/>
+		<text name="rw_ui_drought_now" text="Sequía en curso"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm esperados" tag="format"/>
+		
+		<text name="rw_ui_amount" text="Cantidad"/>
+		<text name="rw_ui_requiredMoisture" text="Humedad requerida"/>
+		<text name="rw_ui_needsTedding" text="Necesita esparcido"/>
+		<text name="rw_ui_yes" text="Sí"/>
+		<text name="rw_ui_no" text="No"/>
+
+        <text name="input_Irrigation" text="Riego"/>
+        <text name="finance_irrigationUpkeep" text="Riego"/>
+        <text name="rw_ui_irrigation_start" text="Iniciar riego"/>
+        <text name="rw_ui_irrigation_stop" text="Detener riego"/>
+        <text name="rw_ui_pendingIrrigationCost" text="Costo de riego pendiente"/>
+        <text name="rw_ui_irrigationUpkeep" text="Mantenimiento de riego"/>
+		<text name="rw_ui_inactive" text="Inactivo"/>
+		<text name="rw_ui_active" text="Activo"/>
+
+		<text name="rw_ui_today" text="Hoy"/>
+		<text name="rw_ui_cellWidth" text="Ancho de celda"/>
+		<text name="rw_ui_cellHeight" text="Altura de celda"/>
+		<text name="rw_ui_ownedFields" text="Campos propios"/>
+		<text name="rw_ui_allFields" text="Todos los campos"/>
+		
+
+		
+		<!--  CONFIGURACIONES  -->
+
+		<text name="rw_settings" text="Clima realista"/>
+		
+		<text name="rw_settings_witheringEnabled_label" text="Marchitamiento de cultivos"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="Los cultivos no se marchitarán por baja humedad"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="Los cultivos se marchitarán por baja humedad"/>
+		<text name="rw_settings_witheringEnabled_texts_1" text="Desactivado"/>
+		<text name="rw_settings_witheringEnabled_texts_2" text="Activado"/>
+		
+		<text name="rw_settings_rebuildMoistureMap_label" text="Reconstruir mapa de humedad"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Eliminar y reconstruir el mapa de humedad con argumentos personalizados"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="Reconstruir mapa de humedad"/>
+
+		<text name="rw_settings_performanceIndex_label" text="Índice de rendimiento"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="Aumenta este valor para mejorar el rendimiento"/>
+
+		<text name="rw_settings_witheringChance_label" text="Probabilidad de marchitamiento"/>
+		<text name="rw_settings_witheringChance_tooltip" text="Cambia la probabilidad de que los cultivos se marchiten por baja humedad"/>
+
+		<text name="rw_settings_moistureGainModifier_label" text="Modificador de ganancia de humedad"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="Cambia la cantidad de humedad ganada"/>
+
+		<text name="rw_settings_moistureLossModifier_label" text="Modificador de pérdida de humedad"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="Cambia la cantidad de humedad perdida"/>
+
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="Superposición de humedad"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="La superposición de humedad nunca se mostrará"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="La superposición de humedad solo se mostrará cuando estés en un campo"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="La superposición de humedad siempre se mostrará"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Desactivado"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Limitado"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="Activado"/>
+
+		<text name="rw_settings_moistureFrameBehaviour_label" text="Pantalla de humedad"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="La pantalla de humedad en el menú principal mostrará todas las celdas del campo seleccionado"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="La pantalla de humedad en el menú principal mostrará los valores promedio de cada campo (mejor para el rendimiento)"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detallado"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limitado"/>
+		
+	</texts>
+</l10n>
