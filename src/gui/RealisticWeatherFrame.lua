@@ -12,10 +12,12 @@ function RealisticWeatherFrame.new()
 	self.fieldTexts = {}
 	self.selectedField = 1
 	self.fieldData = {}
+	self.allFields = {}
 	self.mapWidth, self.mapHeight = 2048, 2048
 	self.buttonStates = {}
 	self.hasContent = false
 	self.cachedBehaviour = 0
+	self.selectedFieldId = nil
 
 	return self
 
@@ -151,13 +153,19 @@ function RealisticWeatherFrame:updateMenuButtons()
 
 	self.menuButtonInfo = { self.backButtonInfo, self.nextPageButtonInfo, self.prevPageButtonInfo, self.refreshButtonInfo }
 
-	if (#self.ownedFields > 0 and self.ownedFields[self.selectedField] ~= nil) or (not self.showAll and #self.allFields > 0) then
+	if (self.showAll and self.ownedFields ~= nil and self.ownedFields[self.selectedField] ~= nil) or (not self.showAll and self.selectedFieldId ~= nil) then
 
-		local isBeingIrrigated, _ = moistureSystem:getIsFieldBeingIrrigated(self.ownedFields[self.selectedField])
+		local isBeingIrrigated, _ = moistureSystem:getIsFieldBeingIrrigated(self.showAll and self.ownedFields[self.selectedField] or self.selectedFieldId)
 		self.irrigationButtonInfo.text = g_i18n:getText(isBeingIrrigated and "rw_ui_irrigation_stop" or "rw_ui_irrigation_start")
-		table.insert(self.menuButtonInfo, self.irrigationButtonInfo)
+		self.irrigationButtonInfo.disabled = false
+
+	else
+
+		self.irrigationButtonInfo.disabled = true
 
 	end
+
+	table.insert(self.menuButtonInfo, self.irrigationButtonInfo)
 	
 	self:setMenuButtonInfoDirty()
 
@@ -196,7 +204,6 @@ end
 function RealisticWeatherFrame:updateFieldInfo()
 
 	self:resetButtonStates()
-	self:updateMenuButtons()
 
 	local fieldData = {}
 	local ownedFieldData = {}
@@ -211,11 +218,16 @@ function RealisticWeatherFrame:updateFieldInfo()
 		if field ~= nil and moistureSystem ~= nil then
 
 			local polygon = field.densityMapPolygon
-			data = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList())
+			data = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList()) or {}
 
 		end
 
 		if self.showAll then
+
+			-- extremely large lists are obviously not healthy for the game interface and can cause crashes or massive lag just by being displayed
+			-- i could just limit it at 1500, ie, show 1500 even if there are 3000, but then that may be confusing for players
+
+			if #data >= 1500 then data = {} end
 
 			table.insert(fieldData, data)
 
@@ -266,7 +278,7 @@ function RealisticWeatherFrame:updateFieldInfo()
 			if field ~= nil and moistureSystem ~= nil then
 
 				local polygon = field.densityMapPolygon
-				data = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList())
+				data = moistureSystem:getCellsInsidePolygon(polygon:getVerticesList()) or {}
 
 			end
 
@@ -304,19 +316,22 @@ function RealisticWeatherFrame:updateFieldInfo()
 	self.fieldButton:setVisible(not self.showAll)
 
 	self.moistureList:reloadData()
+	self:updateMenuButtons()
 
 end
 
 
 function RealisticWeatherFrame:getNumberOfSections()
-	if (self.showAll and (self.fieldData == nil or self.fieldData[self.selectedField] == nil)) or (not self.showAll and self.selectedIndex == 1 and self.ownedFieldData == nil or self.allFieldData == nil) then return 0 end
+	if (self.showAll and self.fieldData[self.selectedField] == nil) or (not self.showAll and ((self.selectedField == 1 and self.ownedFieldData == nil) or (self.selectedField == 2 and self.allFieldData == nil))) then return 0 end
+
 	return 1
 end
 
 
 function RealisticWeatherFrame:getNumberOfItemsInSection(list, section)
-        if (self.showAll and (self.fieldData == nil or self.fieldData[self.selectedField] == nil)) or (not self.showAll and self.selectedIndex == 1 and self.ownedFieldData == nil or self.allFieldData == nil) then return 0 end
-	return self.showAll and #self.fieldData[self.selectedField] or (self.selectedField == 1 and #self.ownedFieldData or #self.allFieldData)
+		if (self.showAll and self.fieldData[self.selectedField] == nil) or (not self.showAll and ((self.selectedField == 1 and self.ownedFieldData == nil) or (self.selectedField == 2 and self.allFieldData == nil))) then return 0 end
+
+        return self.showAll and #self.fieldData[self.selectedField] or (self.selectedField == 1 and #self.ownedFieldData or #self.allFieldData)
 end
 
 
@@ -339,12 +354,12 @@ function RealisticWeatherFrame:populateCellForItemInSection(list, section, index
 
 	elseif trend < 0 then
 
-		colour = { 1, math.max(1 - math.abs(trend) * 0.75, 0), 0, 1}
+		colour = { 1, math.max(1 - math.abs(trend) * 0.75, 0), 0, 1 }
 		cell:getAttribute("trendArrow"):applyProfile("rw_trendArrowDown")
 
 	end
 
-	if not self.showAll then cell:getAttribute("field"):setText(item.field) end
+	cell:getAttribute("field"):setText(self.showAll and "" or item.field)
 
 	cell:getAttribute("trendArrow"):setImageColor(nil, unpack(colour))
 
@@ -354,6 +369,12 @@ function RealisticWeatherFrame:populateCellForItemInSection(list, section, index
 	cell:getAttribute("witherChance"):setText(string.format("%.2f%%", item.witherChance * 100))
 	cell:getAttribute("x"):setText(math.round(item.x + self.mapWidth / 2))
 	cell:getAttribute("z"):setText(math.round(item.z + self.mapHeight / 2))
+	
+	if not self.showAll then 
+		cell.setSelected = Utils.appendedFunction(cell.setSelected, function(cell, selected)
+			if selected then self:onClickListItem(cell) end
+		end)
+	end
 
 end
 
@@ -386,9 +407,9 @@ function RealisticWeatherFrame:onClickIrrigation()
 
 	local moistureSystem = g_currentMission.moistureSystem
 
-	if moistureSystem == nil or #self.ownedFields == 0 or self.ownedFields[self.selectedField] == nil then return end
+	if moistureSystem == nil or (self.showAll and (#self.ownedFields == 0 or self.ownedFields[self.selectedField] == nil)) or (not self.showAll and self.selectedFieldId == nil) then return end
 
-	moistureSystem:setFieldIrrigationState(self.ownedFields[self.selectedField])
+	moistureSystem:setFieldIrrigationState(self.showAll and self.ownedFields[self.selectedField] or self.selectedFieldId)
 	self:updateMenuButtons()
 
 end
@@ -396,4 +417,33 @@ end
 
 function RealisticWeatherFrame:onClickRefresh()
 	self:updateContent()
+end
+
+
+function RealisticWeatherFrame:onClickListItem(item)
+
+	if self.showAll then return end
+
+	self.selectedFieldId = nil
+
+	local data = self.selectedField == 1 and self.ownedFieldData or self.allFieldData
+
+	local index = item.indexInSection
+
+	if data == nil or data[index] == nil or g_localPlayer == nil then
+		self:updateMenuButtons()
+		return
+	end
+
+	local fieldId = data[index].field
+	local field = g_fieldManager:getFieldById(fieldId)
+	local playerFarm = g_localPlayer.farmId
+
+	if field ~= nil and playerFarm ~= FarmManager.SPECTATOR_FARM_ID then
+		local owner = field:getOwner()
+		if owner == playerFarm then self.selectedFieldId = fieldId end
+	end
+
+	self:updateMenuButtons()
+
 end

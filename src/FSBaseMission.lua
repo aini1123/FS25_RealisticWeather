@@ -141,8 +141,9 @@ local function fixInGameMenu(frame, pageName, uvs, position, predicateFunc)
 
 	for i = 1, #inGameMenu.pagingElement.elements do
 		local child = inGameMenu.pagingElement.elements[i]
-		if child == inGameMenu["pageStatistics"] then
-			abovePrices = i;
+		if child == inGameMenu.pageAnimals then
+			position = i
+            break
 		end
 	end
 	
@@ -208,6 +209,23 @@ function RW_FSBaseMission:onStartMission()
     realisticWeatherFrame:initialize()
 
     MoistureArgumentsDialog.register()
+
+    
+
+
+    --local path = modDirectory .. "i3d/water.i3d"
+    --local waterPlane = g_i3DManager:loadI3DFile(path, true, true)
+
+    --link(getRootNode(), waterPlane)
+
+    --local x, z = -770.4586181640625, 232.4373016357422
+
+    --local terrainHeight = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
+    
+    --setWorldTranslation(waterPlane, x, terrainHeight + 0.1, z)
+    --setWorldTranslation(waterPlane, -770.4586181640625, 49.00000228881836, 232.4373016357422)
+
+
 
 end
 

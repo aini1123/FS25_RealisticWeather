@@ -13,7 +13,8 @@ function RW_FieldState:update(x, z)
     else
         self.moisture = values.moisture
         local isBeingIrrigated, _ = moistureSystem:getIsFieldBeingIrrigated(self.farmlandId)
-        local irrigationFactor = isBeingIrrigated and (MoistureSystem.IRRIGATION_FACTOR * (x <= 0 and moistureSystem.timeSinceLastUpdateLower or moistureSystem.timeSinceLastUpdateUpper)) or 0
+        local updater = moistureSystem:getUpdaterAtX(x)
+        local irrigationFactor = isBeingIrrigated and (MoistureSystem.IRRIGATION_FACTOR * updater.timeSinceLastUpdate) or 0
         self.moisture = math.clamp(self.moisture + irrigationFactor * (values.retention or 1), 0, 1)
     end
 

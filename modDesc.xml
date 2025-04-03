@@ -1,6 +1,6 @@
 <modDesc descVersion="96">
     <author>Arrow</author>
-    <version>1.1.2.0</version>
+    <version>1.1.2.1</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -55,6 +55,17 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 
 Changelog:
+
+1.1.2.1
+- Fixed an error when opening the moisture menu possibly related to custom fields
+- Fixed the moisture menu not being in the right position in the tab
+- Fixed heavy lag upon opening/refreshing the moisture menu
+- Fixed the settings being reset to default when saving the game
+- Limited the moisture menu to only show information for fields with less than 1500 cells on "Detailed" mode
+- The moisture menu is now set to "Limited" by default
+- Added working irrigation button for "Limited" moisture screen based on the highlighted field
+- Improved the "Performance Index" setting mechanics
+- Added Spanish translation
 
 1.1.2.0
 - Added a settings menu (located in the Game Settings menu)

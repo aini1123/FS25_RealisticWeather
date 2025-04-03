@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="water.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="2" filename="$data/maps/textures/shared/water_normal.dds"/>
+    <File fileId="3" filename="$data/shaders/oceanShader.xml"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="waterSim_01_mat" materialId="5" diffuseColor="1 1 1 1" specularColor="1 1 1" customShaderId="3">
+      <Normalmap fileId="2"/>
+      <Refractionmap coeff="1" bumpScale="0.1" withSSRData="false"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="water.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="waterPlane" scale="11 1 4.3" shapeId="1" static="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" clipDistance="100" nodeId="8" castsShadows="false" receiveShadows="true" materialIds="5"/>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="8">
+      <Attribute name="onCreate" type="scriptCallback" value="Environment.onCreateWater"/>
+    </UserAttribute>
+  </UserAttributes>
+
+</i3D>

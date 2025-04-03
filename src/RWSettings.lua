@@ -39,7 +39,7 @@ RWSettings.SETTINGS = {
 		["type"] = "MultiTextOption",
 		["default"] = 2,
 		["valueType"] = "int",
-		["values"] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 },
+		["values"] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 },
 		["callback"] = MoistureSystem.onSettingChanged
 	},
 
@@ -74,7 +74,7 @@ RWSettings.SETTINGS = {
 		["index"] = 8,
 		["type"] = "BinaryOption",
 		["dynamicTooltip"] = true,
-		["default"] = 1,
+		["default"] = 2,
 		["values"] = { 1, 2 },
 		["callback"] = MoistureSystem.onSettingChanged
 	}
@@ -107,7 +107,7 @@ function RWSettings.loadFromXMLFile()
 
 				setting.state = xmlFile:getInt(key .. "." .. name .. "#value", setting.default)
 
-				if setting.state > #setting.values then setting.state = setting.default end
+				if setting.state > #setting.values then setting.state = #setting.values end
 
 			end
 

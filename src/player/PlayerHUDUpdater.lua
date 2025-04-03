@@ -58,7 +58,8 @@ function RW_PlayerHUDUpdater:showFieldInfo(x, z)
     box:setTitle(g_i18n:getText("rw_ui_moisture"))
 
     local isBeingIrrigated, pendingIrrigationCost = moistureSystem:getIsFieldBeingIrrigated(self.fieldInfo.farmlandId)
-    local irrigationFactor = isBeingIrrigated and (MoistureSystem.IRRIGATION_FACTOR * (x <= 0 and moistureSystem.timeSinceLastUpdateLower or moistureSystem.timeSinceLastUpdateUpper)) or 0
+    local updater = moistureSystem:getUpdaterAtX(x)
+    local irrigationFactor = isBeingIrrigated and (MoistureSystem.IRRIGATION_FACTOR * updater.timeSinceLastUpdate) or 0
 
     if self.fieldInfo.groundType ~= FieldGroundType.NONE then
 

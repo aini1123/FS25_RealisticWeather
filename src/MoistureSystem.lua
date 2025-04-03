@@ -1,6 +1,6 @@
 MoistureSystem = {}
 
-MoistureSystem.VERSION = "1.1.2.0"
+MoistureSystem.VERSION = "1.1.2.1"
 
 table.insert(FinanceStats.statNames, "irrigationUpkeep")
 FinanceStats.statNameToIndex["irrigationUpkeep"] = #FinanceStats.statNames
@@ -252,6 +252,7 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
         local width, height = getXMLInt(xmlFile, "map#width"), getXMLInt(xmlFile, "map#height")
 
         self.mapWidth, self.mapHeight = width, height
+        self.cellWidth, self.cellHeight = self.cellWidth * (self.mapWidth / 2048), self.cellHeight * (self.mapHeight / 2048)
     
     else
 
@@ -358,65 +359,81 @@ function MoistureSystem:getValuesAtCoords(x, z, values)
     if values == nil or #values == 0 or self.isSaving then return nil end
 
     local rX, rZ = math.round(x), math.round(z)
-    local row
+    local row = self.rows[rX]
 
-    for i = -self.cellWidth + 1, self.cellWidth - 1 do
-        if self.rows[rX + i] ~= nil then
-            row = self.rows[rX + i]
-            break
+    if row == nil then
+
+        for i = -self.cellWidth + 1, self.cellWidth - 1 do
+            if self.rows[rX + i] ~= nil then
+                row = self.rows[rX + i]
+                break
+            end
         end
+
     end
 
     if row == nil or row.columns == nil then return nil end
 
-    for i = -self.cellHeight + 1, self.cellHeight - 1 do
-        if row.columns[rZ + i] ~= nil then
-            local column = row.columns[rZ + i]
-            local returnValues = {}
+    local column = row.columns[rZ]
 
-            for _, value in pairs(values) do
+    if column == nil then
 
-                returnValues[value] = value == "retention" and column[value] or math.clamp(column[value] or 0, 0, 1)
-                if value == "moisture" then
+        for i = -self.cellHeight + 1, self.cellHeight - 1 do
+            if row.columns[rZ + i] ~= nil then
+                column = row.columns[rZ + i]
+                break
+            end
+        end
+
+    end
+
+    if column ~= nil then
+
+        local returnValues = {}
+
+        for _, value in pairs(values) do
+
+            returnValues[value] = value == "retention" and column[value] or math.clamp(column[value] or 0, 0, 1)
+            if value == "moisture" then
                     
-                    local updaterWidth = self.mapWidth / #self.updateIterations
-                    local delta
+                local updaterWidth = self.mapWidth / #self.updateIterations
+                local delta
 
-                    for boundary = 1, #self.updateIterations do
-                        local lowerBound, upperBound = -self.mapWidth / 2 + ((boundary - 1) * updaterWidth), -self.mapWidth / 2 + (boundary * updaterWidth)
-                        if row.x >= lowerBound and row.x < upperBound then
-                            delta = self.updateIterations[boundary].moistureDelta
-                        end
-                    end
-
-
-                    -- updateIterations 4
-                    -- mapWidth 2048
-                    -- boundaries = 0, 512, 1024, 1536
-                    -- boundaries = -1024 - -512, -512 - 0, 0 - 512, 512 - 1024
-
-                    local safeZoneFactor = 1
-
-                    if column.moisture < 0.06 and delta < 0 then
-                        safeZoneFactor = (2 - column.retention) * column.moisture * 20
-                    end
-
-                    if column.moisture > 0.275 and delta > 0 then
-                        safeZoneFactor = (column.retention / column.moisture) * 0.05
-                    end
-
-                    if delta >= 0 then
-                        returnValues[value] = returnValues[value] + delta * column.retention * safeZoneFactor
-                    else
-                        returnValues[value] = returnValues[value] + delta * (2 - column.retention) * safeZoneFactor
+                for boundary = 1, #self.updateIterations do
+                    local lowerBound, upperBound = -self.mapWidth / 2 + ((boundary - 1) * updaterWidth), -self.mapWidth / 2 + (boundary * updaterWidth)
+                    if row.x >= lowerBound and row.x < upperBound then
+                        delta = self.updateIterations[boundary].moistureDelta
                     end
                 end
 
-                if not self.witheringEnabled and value == "witherChance" then returnValues[value] = 0 end
+
+                -- updateIterations 4
+                -- mapWidth 2048
+                -- boundaries = 0, 512, 1024, 1536
+                -- boundaries = -1024 - -512, -512 - 0, 0 - 512, 512 - 1024
+
+                local safeZoneFactor = 1
+
+                if column.moisture < 0.06 and delta < 0 then
+                    safeZoneFactor = (2 - column.retention) * column.moisture * 20
+                end
+
+                if column.moisture > 0.275 and delta > 0 then
+                    safeZoneFactor = (column.retention / column.moisture) * 0.05
+                end
+
+                if delta >= 0 then
+                    returnValues[value] = returnValues[value] + delta * column.retention * safeZoneFactor
+                else
+                    returnValues[value] = returnValues[value] + delta * (2 - column.retention) * safeZoneFactor
+                end
             end
 
-            return returnValues
+            if not self.witheringEnabled and value == "witherChance" then returnValues[value] = 0 end
         end
+
+        return returnValues
+
     end
 
     return nil
@@ -883,16 +900,21 @@ function MoistureSystem:getCellsInsidePolygon(polygon)
 
                 if column == nil then break end
 
-                local cell = {
-                    ["x"] = row.x,
-                    ["z"] = column.z,
-                    ["moisture"] = column.moisture,
-                    ["retention"] = column.retention,
-                    ["trend"] = column.trend,
-                    ["witherChance"] = self.witheringEnabled and column.witherChance or 0
-                }
+                local cell = self:getValuesAtCoords(row.x, column.z, { "moisture", "retention", "trend", "witherChance" })
 
-                if not table.hasElement(cells, cell) then table.insert(cells, cell) end
+                --local cell = {
+                    --["x"] = row.x,
+                    --["z"] = column.z,
+                    --["moisture"] = column.moisture,
+                    --["retention"] = column.retention,
+                    --["trend"] = column.trend,
+                    --["witherChance"] = self.witheringEnabled and column.witherChance or 0
+                --}
+
+                cell.x = row.x
+                cell.z = column.z
+
+                table.insert(cells, cell)
 
 			end
 
@@ -918,7 +940,7 @@ function MoistureSystem.onSettingChanged(name, state)
         moistureSystem.currentUpdateIteration = 1
         moistureSystem.updateIterations = {}
 
-        for i = 1, state do
+        for i = 1, state * state do
             table.insert(moistureSystem.updateIterations, {
                 ["moistureDelta"] = 0,
                 ["timeSinceLastUpdate"] = 0
@@ -933,5 +955,19 @@ end
 function MoistureSystem.onClickRebuildMoistureMap()
     
     MoistureArgumentsDialog.show()
+
+end
+
+
+function MoistureSystem:getUpdaterAtX(x)
+
+    local updaterWidth = self.mapWidth / #self.updateIterations
+
+    for boundary = 1, #self.updateIterations do
+        local lowerBound, upperBound = -self.mapWidth / 2 + ((boundary - 1) * updaterWidth), -self.mapWidth / 2 + (boundary * updaterWidth)
+        if x >= lowerBound and x < upperBound then return self.updateIterations[boundary] end
+    end
+
+    return self.updateIterations[1]
 
 end

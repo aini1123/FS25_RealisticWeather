@@ -19,19 +19,19 @@
 		<text name="rw_ui_drought_coming" text="Sequía próxima"/>
 		<text name="rw_ui_drought_now" text="Sequía en curso"/>
 		<text name="rw_ui_snowExpected" text="%scm - %scm esperados" tag="format"/>
-		
+
 		<text name="rw_ui_amount" text="Cantidad"/>
 		<text name="rw_ui_requiredMoisture" text="Humedad requerida"/>
 		<text name="rw_ui_needsTedding" text="Necesita esparcido"/>
 		<text name="rw_ui_yes" text="Sí"/>
 		<text name="rw_ui_no" text="No"/>
 
-        <text name="input_Irrigation" text="Riego"/>
-        <text name="finance_irrigationUpkeep" text="Riego"/>
-        <text name="rw_ui_irrigation_start" text="Iniciar riego"/>
-        <text name="rw_ui_irrigation_stop" text="Detener riego"/>
-        <text name="rw_ui_pendingIrrigationCost" text="Costo de riego pendiente"/>
-        <text name="rw_ui_irrigationUpkeep" text="Mantenimiento de riego"/>
+		<text name="input_Irrigation" text="Riego"/>
+		<text name="finance_irrigationUpkeep" text="Riego"/>
+		<text name="rw_ui_irrigation_start" text="Iniciar riego"/>
+		<text name="rw_ui_irrigation_stop" text="Detener riego"/>
+		<text name="rw_ui_pendingIrrigationCost" text="Costo de riego pendiente"/>
+		<text name="rw_ui_irrigationUpkeep" text="Mantenimiento de riego"/>
 		<text name="rw_ui_inactive" text="Inactivo"/>
 		<text name="rw_ui_active" text="Activo"/>
 
@@ -40,19 +40,19 @@
 		<text name="rw_ui_cellHeight" text="Altura de celda"/>
 		<text name="rw_ui_ownedFields" text="Campos propios"/>
 		<text name="rw_ui_allFields" text="Todos los campos"/>
-		
 
-		
+
+
 		<!--  CONFIGURACIONES  -->
 
 		<text name="rw_settings" text="Clima realista"/>
-		
+
 		<text name="rw_settings_witheringEnabled_label" text="Marchitamiento de cultivos"/>
 		<text name="rw_settings_witheringEnabled_tooltip_1" text="Los cultivos no se marchitarán por baja humedad"/>
 		<text name="rw_settings_witheringEnabled_tooltip_2" text="Los cultivos se marchitarán por baja humedad"/>
 		<text name="rw_settings_witheringEnabled_texts_1" text="Desactivado"/>
 		<text name="rw_settings_witheringEnabled_texts_2" text="Activado"/>
-		
+
 		<text name="rw_settings_rebuildMoistureMap_label" text="Reconstruir mapa de humedad"/>
 		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Eliminar y reconstruir el mapa de humedad con argumentos personalizados"/>
 		<text name="rw_settings_rebuildMoistureMap_text" text="Reconstruir mapa de humedad"/>
@@ -82,6 +82,6 @@
 		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="La pantalla de humedad en el menú principal mostrará los valores promedio de cada campo (mejor para el rendimiento)"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detallado"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limitado"/>
-		
+
 	</texts>
 </l10n>
