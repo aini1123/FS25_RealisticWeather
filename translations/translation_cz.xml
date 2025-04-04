@@ -26,12 +26,12 @@
 		<text name="rw_ui_yes" text="Ano"/>
 		<text name="rw_ui_no" text="Ne"/>
 
-        <text name="input_Irrigation" text="Zavlažování"/>
-        <text name="finance_irrigationUpkeep" text="Zavlažování"/>
-        <text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
-        <text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
-        <text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
-        <text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
+       		<text name="input_Irrigation" text="Zavlažování"/>
+        	<text name="finance_irrigationUpkeep" text="Zavlažování"/>
+        	<text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
+        	<text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
+        	<text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
+        	<text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
 		<text name="rw_ui_inactive" text="Neaktivní"/>
 		<text name="rw_ui_active" text="Aktivní"/>
 
@@ -46,43 +46,43 @@
 		<!--  SETTINGS  -->
 
 
-		<text name="rw_settings" text="Realistic Weather"/>
+		<text name="rw_settings" text="Realistické počasí"/>
 
-		<text name="rw_settings_witheringEnabled_label" text="Crop Withering"/>
-		<text name="rw_settings_witheringEnabled_tooltip_1" text="Crops will not wither from low moisture"/>
-		<text name="rw_settings_witheringEnabled_tooltip_2" text="Crops will wither from low moisture"/>
-		<text name="rw_settings_witheringEnabled_texts_1" text="Off"/>
-		<text name="rw_settings_witheringEnabled_texts_2" text="On"/>
+		<text name="rw_settings_witheringEnabled_label" text="Usychání plodin"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="Plodiny neuusychají kvůli nízké vlhkosti"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="Plodiny usychají kvůli nízké vlhkosti"/>
+		<text name="rw_settings_witheringEnabled_texts_1" text="Vypnuto"/>
+		<text name="rw_settings_witheringEnabled_texts_2" text="Zapnuto"/>
 
-		<text name="rw_settings_rebuildMoistureMap_label" text="Rebuild Moisture Map"/>
-		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Delete and rebuild the moisture map with custom arguments"/>
-		<text name="rw_settings_rebuildMoistureMap_text" text="Rebuild Moisture Map"/>
+		<text name="rw_settings_rebuildMoistureMap_label" text="Obnovit mapu vlhkosti"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Odstranění a obnovení mapy vlhkosti s vlastními argumenty"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="Obnovení mapy vlhkosti"/>
 
-		<text name="rw_settings_performanceIndex_label" text="Performance Index"/>
-		<text name="rw_settings_performanceIndex_tooltip" text="Increase this value to improve performance"/>
+		<text name="rw_settings_performanceIndex_label" text="Index účinnosti"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="Zvýšením této hodnoty se zlepší účinnost"/>
 
-		<text name="rw_settings_witheringChance_label" text="Withering Chance"/>
-		<text name="rw_settings_witheringChance_tooltip" text="Change the likelihood of crops withering due to low moisture"/>
+		<text name="rw_settings_witheringChance_label" text="Šance na uvadnutí"/>
+		<text name="rw_settings_witheringChance_tooltip" text="Změna pravděpodobnosti usychání plodin v důsledku nízké vlhkosti."/>
 
-		<text name="rw_settings_moistureGainModifier_label" text="Moisture Gain Modifier"/>
-		<text name="rw_settings_moistureGainModifier_tooltip" text="Change the amount of moisture gained"/>
+		<text name="rw_settings_moistureGainModifier_label" text="Modifikátor nárůstu vlhkosti"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="Změna množství získané vlhkosti"/>
 
-		<text name="rw_settings_moistureLossModifier_label" text="Moisture Loss Modifier"/>
-		<text name="rw_settings_moistureLossModifier_tooltip" text="Change the amount of moisture lost"/>
+		<text name="rw_settings_moistureLossModifier_label" text="Modifikátor ztráty vlhkosti"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="Změna množství ztracené vlhkosti"/>
 
-		<text name="rw_settings_moistureOverlayBehaviour_label" text="Moisture Overlay"/>
-		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="The moisture overlay will never be shown"/>
-		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="The moisture overlay will only be shown when in a field"/>
-		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="The moisture overlay will always be shown"/>
-		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Off"/>
-		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Limited"/>
-		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="On"/>
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="Překrytí vlhkosti"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="Překrytí vlhkosti se nikdy nezobrazí"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="Překrytí vlhkosti se zobrazí pouze na poli."/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="Překrytí vlhkosti se zobrazí vždy"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Vypnuto"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Omezený"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="Zapnuto"/>
 
-		<text name="rw_settings_moistureFrameBehaviour_label" text="Moisture Screen"/>
-		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="The moisture screen in the main menu will show all cells in the selected field"/>
-		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="The moisture screen in the main menu will show the average values of each field (better for performance)"/>
-		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detailed"/>
-		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limited"/>
+		<text name="rw_settings_moistureFrameBehaviour_label" text="Vlhkostní clona"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="Na obrazovce vlhkosti v hlavní nabídce se zobrazí všechny buňky ve vybraném poli."/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="Na obrazovce vlhkosti v hlavní nabídce se zobrazí průměrné hodnoty jednotlivých polí (lepší pro účinnost)."/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Podrobné informace"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Omezený"/>
 		
 	</texts>
 </l10n>
