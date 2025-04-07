@@ -18,6 +18,8 @@ New:
   - Ability to rebuild the moisture map with custom arguments
   - Moisture overlay behaviour
   - Moisture screen behaviour
+  - Enable/disable blizzards
+  - Enable/disable droughts
  ![fsScreen_2025_04_02_16_16_51](https://github.com/user-attachments/assets/3c7a0d75-1ede-4e61-931e-ec718c85c262)
 
 - Fixed empty bales remaining after rotting
