@@ -1,8 +1,8 @@
-Current development branch of Realistic Weather (v1.1.2.1), not yet available on ModHub.
+Current development branch of Realistic Weather (v1.1.2.2), not yet available on ModHub.
 
 Current ModHub version is v1.1.0.2
 
-Be warned that I have not yet tested this on multiplayer and the settings may not work as intended on multiplayer servers.
+"Rebuild Moisture Map" setting is currently not yet synced on MP.
 
 New:
 - Added menu screen to view moisture system variables of cells across owned fields:
