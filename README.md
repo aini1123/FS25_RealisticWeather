@@ -25,6 +25,9 @@ New:
 - Fixed empty bales remaining after rotting
 
 
+In Progress:
+- Visual flooding of fields at high moisture
+
+
 Planned:
 - Slurry spreader compatiblity with irrigation
-- Visual flooding of fields at high moisture
