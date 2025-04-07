@@ -1,0 +1,92 @@
+<l10n>
+	<texts>
+		<text name="rw_ui_fog" text="Густой туман"/>
+		<text name="rw_ui_hour" text="в течение часа %s" tag="format"/>
+		<text name="rw_ui_hours" text="в течение %s часов" tag="format"/>
+		<text name="rw_ui_minute" text="в течение минуты %s" tag="format"/>
+		<text name="rw_ui_minutes" text="в течение %s минут" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Поле %s вот-вот засохнет" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Поле %s засохло" tag="format"/>
+		<text name="rw_ui_currentYield" text="Текущая урожайность"/>
+		<text name="rw_ui_moisture" text="Влажность"/>
+		<text name="rw_ui_witherChance" text="Шанс засохнуть"/>
+		<text name="rw_ui_retention" text="Удержание влаги"/>
+		<text name="rw_ui_idealMoisture" text="Идеальная влажность"/>
+		<text name="rw_ui_perfectMoisture" text="Совершенная влажность"/>
+		<text name="rw_ui_blizzard_coming" text="Надвигается снежная буря"/>
+		<text name="rw_ui_blizzard_now" text="Снежная буря продолжается"/>
+		<text name="rw_ui_drought_coming" text="Надвигается засуха"/>
+		<text name="rw_ui_drought_now" text="Засуха продолжающаяся"/>
+		<text name="rw_ui_snowExpected" text="%scm - ожидаемый %scm" tag="format"/>
+
+		<text name="rw_ui_amount" text="Сумма"/>
+		<text name="rw_ui_requiredMoisture" text="Требуемая влажность"/>
+		<text name="rw_ui_needsTedding" text="Нуждается в ворошении"/>
+		<text name="rw_ui_yes" text="Да"/>
+		<text name="rw_ui_no" text="Нет"/>
+
+		<text name="input_Irrigation" text="Орошение"/>
+		<text name="finance_irrigationUpkeep" text="Орошение"/>
+		<text name="rw_ui_irrigation_start" text="Начать орошение"/>
+		<text name="rw_ui_irrigation_stop" text="Прекратить орошение"/>
+		<text name="rw_ui_pendingIrrigationCost" text="Ожидаемые затраты на орошение"/>
+		<text name="rw_ui_irrigationUpkeep" text="Стоимость орошения"/>
+		<text name="rw_ui_inactive" text="Неактивный"/>
+		<text name="rw_ui_active" text="Активный"/>
+
+		<text name="rw_ui_today" text="Сегодня"/>
+		<text name="rw_ui_cellWidth" text="Ширина ячейки"/>
+		<text name="rw_ui_cellHeight" text="Высота ячейки"/>
+		<text name="rw_ui_ownedFields" text="Вледелец поля"/>
+		<text name="rw_ui_allFields" text="Все поля"/>
+
+		<!--  SETTINGS	-->
+
+		<text name="rw_settings" text="Реалистичная погода"/>
+
+		<text name="rw_settings_off" text="Выкл"/>
+		<text name="rw_settings_on" text="Вкл"/>
+
+		<text name="rw_settings_witheringEnabled_label" text="Увядание урожая"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="Посевы не увядают от недостатка влаги"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="Посевы увядают от недостатка влаги"/>
+
+		<text name="rw_settings_rebuildMoistureMap_label" text="Перестроить карту влажности"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Удаляет и перестраивает карту влажности заново с помощью пользовательских аргументов"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="Перестроить карту влажности"/>
+
+		<text name="rw_settings_performanceIndex_label" text="Показатель производительности"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="Увеличьте это значение для повышения производительности"/>
+
+		<text name="rw_settings_witheringChance_label" text="Шанс увядания"/>
+		<text name="rw_settings_witheringChance_tooltip" text="Изменение вероятности увядания сельскохозяйственных культур из-за низкой влажности"/>
+
+		<text name="rw_settings_moistureGainModifier_label" text="Модификатор увеличения влажности"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="Изменят количество получаемой влаги"/>
+
+		<text name="rw_settings_moistureLossModifier_label" text="Модификатор потери влаги"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="Изменят количество теряемой влаги"/>
+
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="Слой влаги"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="Слой влаги никогда не будет показан"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="Влажность будет отображаться только на полях"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="Влажность будет отображаться всегда"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Выкл"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Ограниченный"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="Вкл"/>
+
+		<text name="rw_settings_moistureFrameBehaviour_label" text="Экран влажности"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="На экране влажности в главном меню будут показаны все ячейки в выбранном поле"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="На экране влажности в главном меню будут отображаться средние значения для каждого поля (лучше для повышения производительности)"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Подробный"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Ограниченный"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="Blizzards"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Blizzards are disabled"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Blizzards are enabled"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="Droughts"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Droughts are disabled"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Droughts are enabled"/>
+	</texts>
+</l10n>

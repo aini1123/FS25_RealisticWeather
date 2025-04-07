@@ -1,6 +1,6 @@
 <modDesc descVersion="96">
     <author>Arrow</author>
-    <version>1.1.2.1</version>
+    <version>1.1.2.2</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -56,7 +56,22 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 Changelog:
 
+1.1.2.2
+- Added multiplayer support for settings menu (except rebuilding moisture map)
+- Performance improvements
+- Reduced chance of blizzards and droughts
+- Added irrigation activity and cost columns to the moisture menu for "Limited" mode
+- Added the following settings options:
+--- Enable/disable blizzards
+--- Enable/disable droughts
+- Added Brazilian Portuguese translation
+- Added Russian translation
+- Fixed error: attempt to index nil with 'isActive'
+- Fixed error: attempt to perform arithmetic (add) on nil and number
+- Fixed an issue causing the moisture to show higher than it is while irrigating
+
 1.1.2.1
+
 - Fixed an error when opening the moisture menu possibly related to custom fields
 - Fixed the moisture menu not being in the right position in the tab
 - Fixed heavy lag upon opening/refreshing the moisture menu

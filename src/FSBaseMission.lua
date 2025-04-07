@@ -192,8 +192,6 @@ end
 
 function RW_FSBaseMission:onStartMission()
 
-    removeModEventListener(GrassMoistureSystem)
-
 	RWSettings.applyDefaultSettings()
 
     g_overlayManager:addTextureConfigFile(modDirectory .. "gui/icons.xml", "realistic_weather")
@@ -212,18 +210,27 @@ function RW_FSBaseMission:onStartMission()
 
     
 
+    for i = 1, 5 do
 
-    --local path = modDirectory .. "i3d/water.i3d"
-    --local waterPlane = g_i3DManager:loadI3DFile(path, true, true)
+        --local path = modDirectory .. "i3d/waterPlane" .. i .. ".i3d"
+        --local waterPlane = g_i3DManager:loadI3DFile(path, true, true)
 
-    --link(getRootNode(), waterPlane)
+        --link(getRootNode(), waterPlane)
 
-    --local x, z = -770.4586181640625, 232.4373016357422
+        --local x, z = -770.4586181640625, 232.4373016357422
 
-    --local terrainHeight = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
+        --local terrainHeight = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
+
+        --local lower = math.random() > 0.5
     
-    --setWorldTranslation(waterPlane, x, terrainHeight + 0.1, z)
-    --setWorldTranslation(waterPlane, -770.4586181640625, 49.00000228881836, 232.4373016357422)
+        --if lower then
+        --    setWorldTranslation(waterPlane, x - math.random(1, 30), terrainHeight + 0.05, z - math.random(1, 30))
+        --else
+        --    setWorldTranslation(waterPlane, x + math.random(1, 30), terrainHeight + 0.05, z + math.random(1, 30))
+        --end
+        --setScale(waterPlane, math.random(3, 10), 1, math.random(3, 10))
+
+    end
 
 
 
@@ -234,8 +241,8 @@ FSBaseMission.onStartMission = Utils.prependedFunction(FSBaseMission.onStartMiss
 
 function RW_FSBaseMission:sendInitialClientState(connection, _, _)
 
-    print("sendInitialClientState")
+    connection:sendEvent(RW_BroadcastSettingsEvent.new())
 
 end
 
---FSBaseMission.sendInitialClientState = Utils.prependedFunction(FSBaseMission.sendInitialClientState, RW_FSBaseMission.sendInitialClientState)
+FSBaseMission.sendInitialClientState = Utils.prependedFunction(FSBaseMission.sendInitialClientState, RW_FSBaseMission.sendInitialClientState)

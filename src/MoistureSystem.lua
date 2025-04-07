@@ -1,6 +1,6 @@
 MoistureSystem = {}
 
-MoistureSystem.VERSION = "1.1.2.1"
+MoistureSystem.VERSION = "1.1.2.2"
 
 table.insert(FinanceStats.statNames, "irrigationUpkeep")
 FinanceStats.statNameToIndex["irrigationUpkeep"] = #FinanceStats.statNames
@@ -25,7 +25,7 @@ MoistureSystem.CELL_HEIGHT = {
 
 MoistureSystem.MAP_WIDTH = 2048
 MoistureSystem.MAP_HEIGHT = 2048
-MoistureSystem.TICKS_PER_UPDATE = 150
+MoistureSystem.TICKS_PER_UPDATE = 50
 MoistureSystem.IRRIGATION_FACTOR = 0.000001
 MoistureSystem.SPRAY_FACTOR = 0.00002
 MoistureSystem.IRRIGATION_BASE_COST = 0.00000025
@@ -268,7 +268,7 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
 
         self.currentUpdateIteration = 1
 
-        for _, irrigatingFields in pairs(self.irrigatingFields) do irrigatingField.isActive = false end
+        for _, irrigatingField in pairs(self.irrigatingFields) do irrigatingField.isActive = false end
 
     end
 
@@ -396,16 +396,7 @@ function MoistureSystem:getValuesAtCoords(x, z, values)
             returnValues[value] = value == "retention" and column[value] or math.clamp(column[value] or 0, 0, 1)
             if value == "moisture" then
                     
-                local updaterWidth = self.mapWidth / #self.updateIterations
-                local delta
-
-                for boundary = 1, #self.updateIterations do
-                    local lowerBound, upperBound = -self.mapWidth / 2 + ((boundary - 1) * updaterWidth), -self.mapWidth / 2 + (boundary * updaterWidth)
-                    if row.x >= lowerBound and row.x < upperBound then
-                        delta = self.updateIterations[boundary].moistureDelta
-                    end
-                end
-
+                local delta = self:getUpdaterAtX(row.x).moistureDelta
 
                 -- updateIterations 4
                 -- mapWidth 2048
@@ -576,7 +567,7 @@ function MoistureSystem:update(delta, timescale)
         self.lastMoistureDelta = self.updateIterations[self.currentUpdateIteration].moistureDelta * 1
 
         self.updateIterations[self.currentUpdateIteration].moistureDelta = 0
-        self.updateIterations[self.currentUpdateIteration].ticksSinceLastUpdate = 0
+        self.updateIterations[self.currentUpdateIteration].timeSinceLastUpdate = 0
 
         self.moistureDelta = 0
         self.ticksSinceLastUpdate = 0
@@ -961,13 +952,8 @@ end
 
 function MoistureSystem:getUpdaterAtX(x)
 
-    local updaterWidth = self.mapWidth / #self.updateIterations
+    local updater = math.floor((x + self.mapWidth / 2) / (self.mapWidth / #self.updateIterations) + 1)
 
-    for boundary = 1, #self.updateIterations do
-        local lowerBound, upperBound = -self.mapWidth / 2 + ((boundary - 1) * updaterWidth), -self.mapWidth / 2 + (boundary * updaterWidth)
-        if x >= lowerBound and x < upperBound then return self.updateIterations[boundary] end
-    end
-
-    return self.updateIterations[1]
+    return self.updateIterations[updater or 1] or self.updateIterations[1]
 
 end

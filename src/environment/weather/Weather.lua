@@ -7,12 +7,15 @@ RW_Weather.FACTOR =
 }
 
 RW_Weather.isRealisticLivestockLoaded = false
+Weather.blizzardsEnabled = true
+Weather.droughtsEnabled = true
 
 SnowSystem.MAX_HEIGHT = RW_Weather.FACTOR.SNOW_HEIGHT
 local animalStepCount = 0
 local animalsToSink = 10
 local animalIdToPos = {}
 local profile = Utils.getPerformanceClassId()
+
 
 function RW_Weather:update(_, dT)
 
@@ -93,9 +96,9 @@ function RW_Weather:update(_, dT)
 
     if g_currentMission.missionInfo.isSnowEnabled then
 
-        local blizzardFactor = currentWeather ~= nil and currentWeather.isBlizzard and 10 or 1
+        local blizzardFactor = currentWeather ~= nil and currentWeather.isBlizzard and self.blizzardsEnabled and 10 or 1
 
-        self.isBlizzard = currentWeather ~= nil and currentWeather.isBlizzard
+        self.isBlizzard = currentWeather ~= nil and currentWeather.isBlizzard and self.blizzardsEnabled
 
         if self:getIsSnowing() and temperature < 10 then
             local scale = 1 - temperature * 0.1
@@ -186,7 +189,7 @@ function RW_Weather:update(_, dT)
     end
 
 
-    local draughtFactor = currentWeather ~= nil and currentWeather.isDraught and 1.33 or 1
+    local draughtFactor = currentWeather ~= nil and currentWeather.isDraught and self.droughtsEnabled and 1.33 or 1
     local temp = self.temperatureUpdater:getTemperatureAtTime(self.owner.dayTime)
     local hour = math.floor(self.owner:getMinuteOfDay() / 60)
     local daylightStart, dayLightEnd, _, _ = self.owner.daylight:getDaylightTimes()
@@ -353,7 +356,7 @@ function RW_Weather:fillWeatherForecast(_, isInitialSync)
 
         local object = self:getWeatherObjectByIndex(newObject.season, newObject.objectIndex)
 
-        if g_currentMission.missionInfo.isSnowEnabled and object.weatherType == WeatherType.SNOW and math.random() >= 0.95 then
+        if g_currentMission.missionInfo.isSnowEnabled and self.blizzardsEnabled and object.weatherType == WeatherType.SNOW and math.random() >= 0.985 then
 
             newObject.isBlizzard = true
             local minTemp = math.random(-15, -8)
@@ -362,7 +365,7 @@ function RW_Weather:fillWeatherForecast(_, isInitialSync)
 
         end
 
-        if object.weatherType == WeatherType.SUN and object.season == 2 and math.random() >= 0.95 then
+        if object.weatherType == WeatherType.SUN and self.droughtsEnabled and object.season == 2 and math.random() >= 0.985 then
 
             newObject.isDraught = true
             local minTemp = math.random(30, 35)
@@ -426,7 +429,7 @@ function RW_Weather:sendInitialState(_, connection)
 
     local moistureSystem = g_currentMission.moistureSystem
 
-    connection:sendEvent(WeatherStateEvent.new(self.snowHeight, self.timeSinceLastRain, moistureSystem.cellWidth, moistureSystem.cellHeight, moistureSystem.mapWidth, moistureSystem.mapHeight, moistureSystem.moistureDeltaLower, moistureSystem.moistureDeltaUpper, moistureSystem.lastMoistureDelta, moistureSystem.currentHourlyUpdateQuarter, moistureSystem.numRows, moistureSystem.numColumns, moistureSystem.rows, moistureSystem.irrigatingFields))
+    connection:sendEvent(WeatherStateEvent.new(self.snowHeight, self.timeSinceLastRain, moistureSystem.cellWidth, moistureSystem.cellHeight, moistureSystem.mapWidth, moistureSystem.mapHeight, moistureSystem.currentHourlyUpdateQuarter, moistureSystem.numRows, moistureSystem.numColumns, moistureSystem.rows, moistureSystem.irrigatingFields))
     connection:sendEvent(WeatherAddObjectEvent.new(self.forecastItems, true, true))
 
     --if g_currentMission.moistureSystem ~= nil then g_currentMission.moistureSystem:sendInitialState(connection) end
@@ -474,3 +477,8 @@ function RW_Weather:loadFromXMLFile(handle, key)
 end
 
 --Weather.loadFromXMLFile = Utils.prependedFunction(Weather.loadFromXMLFile, RW_Weather.loadFromXMLFile)
+
+
+function RW_Weather.onSettingChanged(name, state)
+    Weather[name] = state
+end

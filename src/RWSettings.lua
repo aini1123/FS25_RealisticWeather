@@ -10,6 +10,7 @@ RWSettings.SETTINGS = {
 		["type"] = "BinaryOption",
 		["dynamicTooltip"] = true,
 		["default"] = 2,
+		["binaryType"] = "offOn",
 		["values"] = { false, true },
 		["callback"] = MoistureSystem.onSettingChanged
 	},
@@ -77,6 +78,26 @@ RWSettings.SETTINGS = {
 		["default"] = 2,
 		["values"] = { 1, 2 },
 		["callback"] = MoistureSystem.onSettingChanged
+	},
+
+	["blizzardsEnabled"] = {
+		["index"] = 9,
+		["type"] = "BinaryOption",
+		["dynamicTooltip"] = true,
+		["default"] = 2,
+		["binaryType"] = "offOn",
+		["values"] = { false, true },
+		["callback"] = RW_Weather.onSettingChanged
+	},
+
+	["droughtsEnabled"] = {
+		["index"] = 10,
+		["type"] = "BinaryOption",
+		["dynamicTooltip"] = true,
+		["default"] = 2,
+		["binaryType"] = "offOn",
+		["values"] = { false, true },
+		["callback"] = RW_Weather.onSettingChanged
 	}
 
 }
@@ -226,16 +247,23 @@ function RWSettings.initialize()
 					else
 
 						local texts = {}
-					
-						for i, value in pairs(setting.values) do
 
-							if setting.valueType == "int" then
-								texts[i] = tostring(value)
-							elseif setting.valueType == "float" then
-								texts[i] = string.format("%.0f%%", value * 100)
-							else
-								texts[i] = g_i18n:getText(settingsPrefix .. "texts_" .. i)
+						if setting.binaryType == "offOn" then
+							texts[1] = g_i18n:getText("rw_settings_off")
+							texts[2] = g_i18n:getText("rw_settings_on")
+						else
+
+							for i, value in pairs(setting.values) do
+
+								if setting.valueType == "int" then
+									texts[i] = tostring(value)
+								elseif setting.valueType == "float" then
+									texts[i] = string.format("%.0f%%", value * 100)
+								else
+									texts[i] = g_i18n:getText(settingsPrefix .. "texts_" .. i)
+								end
 							end
+
 						end
 
 						element:setTexts(texts)
@@ -317,7 +345,7 @@ function RWSettings.applyDefaultSettings()
 
 	if g_server == nil then
 
-		RW_BroadcastSettingsEvent.sendEvent()
+		--RW_BroadcastSettingsEvent.sendEvent()
 
 	else
 
@@ -328,6 +356,12 @@ function RWSettings.applyDefaultSettings()
 			if setting.callback ~= nil then setting.callback(name, setting.values[setting.state]) end
 
 			if setting.dynamicTooltip and setting.element ~= nil then setting.element.elements[1]:setText(g_i18n:getText("rw_settings_" .. name .. "_tooltip_" .. setting.state)) end
+
+			for _, s in pairs(RWSettings.SETTINGS) do
+				if s.dependancy and s.dependancy.name == name and s.element ~= nil then
+					s.element:setDisabled(s.dependancy.state ~= state)
+				end
+			end
 		end
 
 	end

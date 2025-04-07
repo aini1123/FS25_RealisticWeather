@@ -48,11 +48,12 @@
 
 		<text name="rw_settings" text="Realistic Weather"/>
 
+		<text name="rw_settings_off" text="Off"/>
+		<text name="rw_settings_on" text="On"/>
+
 		<text name="rw_settings_witheringEnabled_label" text="Crop Withering"/>
 		<text name="rw_settings_witheringEnabled_tooltip_1" text="Crops will not wither from low moisture"/>
 		<text name="rw_settings_witheringEnabled_tooltip_2" text="Crops will wither from low moisture"/>
-		<text name="rw_settings_witheringEnabled_texts_1" text="Off"/>
-		<text name="rw_settings_witheringEnabled_texts_2" text="On"/>
 
 		<text name="rw_settings_rebuildMoistureMap_label" text="Rebuild Moisture Map"/>
 		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Delete and rebuild the moisture map with custom arguments"/>
@@ -83,6 +84,14 @@
 		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="The moisture screen in the main menu will show the average values of each field (better for performance)"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detailed"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limited"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="Blizzards"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Blizzards are disabled"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Blizzards are enabled"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="Droughts"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Droughts are disabled"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Droughts are enabled"/>
 
 	</texts>
 </l10n>

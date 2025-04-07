@@ -28,6 +28,8 @@
 			<Button profile="rw_headerButton" position="520px 0px" width="220px" text="$l10n_rw_ui_witherChance" onClick="onClickSortButton" id="witherChanceButton"/>
 			<Button profile="rw_headerButton" position="740px 0px" width="80px" text="X" onClick="onClickSortButton" id="xButton"/>
 			<Button profile="rw_headerButton" position="820px 0px" width="80px" text="Z" onClick="onClickSortButton" id="zButton"/>
+			<Button profile="rw_headerButton" position="900px 0px" width="120px" text="$l10n_input_Irrigation" onClick="onClickSortButton" id="irrigationActiveButton"/>
+			<Button profile="rw_headerButton" position="1020px 0px" width="220px" text="$l10n_rw_ui_irrigationUpkeep" onClick="onClickSortButton" id="irrigationCostButton"/>
 			<Bitmap profile="fs25_vehiclesHeaderIconSortAscending" position="10px 0px" id="sortingIcon_false"/>
 			<Bitmap profile="fs25_vehiclesHeaderIconSortDescending" position="10px 0px" id="sortingIcon_true"/>
 			<ThreePartBitmap profile="fs25_lineSeparatorBottom" position="0px -2dp"/>
@@ -44,6 +46,8 @@
 				<Text profile="rw_moistureListText" position="520px 0px" name="witherChance"/>
 				<Text profile="rw_moistureListText" position="740px 0px" name="x"/>
 				<Text profile="rw_moistureListText" position="820px 0px" name="z"/>
+				<Text profile="rw_moistureListText" position="900px 0px" visible="false" name="irrigationActive"/>
+				<Text profile="rw_moistureListText" position="1020px 0px" visible="false" name="irrigationCost"/>
 			</ListItem>
 		</SmoothList>
 		

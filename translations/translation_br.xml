@@ -40,19 +40,20 @@
 		<text name="rw_ui_cellHeight" text="Altura da Célula"/>
 		<text name="rw_ui_ownedFields" text="Campos Próprios"/>
 		<text name="rw_ui_allFields" text="Todos os Campos"/>
-		
-		
-		
+
+
+
 		<!--  SETTINGS  -->
 
 
 		<text name="rw_settings" text="Clima Realista"/>
 
+		<text name="rw_settings_off" text="Desligado"/>
+		<text name="rw_settings_on" text="Ligado"/>
+
 		<text name="rw_settings_witheringEnabled_label" text="Murcha de Culturas"/>
 		<text name="rw_settings_witheringEnabled_tooltip_1" text="As culturas não murcharão por falta de umidade"/>
 		<text name="rw_settings_witheringEnabled_tooltip_2" text="As culturas murcharão por falta de umidade"/>
-		<text name="rw_settings_witheringEnabled_texts_1" text="Desligado"/>
-		<text name="rw_settings_witheringEnabled_texts_2" text="Ligado"/>
 
 		<text name="rw_settings_rebuildMoistureMap_label" text="Reconstruir Mapa de Umidade"/>
 		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Excluir e reconstruir o mapa de umidade com argumentos personalizados"/>
@@ -83,6 +84,14 @@
 		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="A tela de umidade no menu principal mostrará os valores médios de cada campo (melhor para o desempenho)"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detalhado"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limitado"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="Blizzards"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Blizzards are disabled"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Blizzards are enabled"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="Droughts"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Droughts are disabled"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Droughts are enabled"/>
 
 	</texts>
 </l10n>

@@ -47,11 +47,12 @@
 
 		<text name="rw_settings" text="Clima realista"/>
 
+		<text name="rw_settings_off" text="Desactivado"/>
+		<text name="rw_settings_on" text="Activado"/>
+
 		<text name="rw_settings_witheringEnabled_label" text="Marchitamiento de cultivos"/>
 		<text name="rw_settings_witheringEnabled_tooltip_1" text="Los cultivos no se marchitarán por baja humedad"/>
 		<text name="rw_settings_witheringEnabled_tooltip_2" text="Los cultivos se marchitarán por baja humedad"/>
-		<text name="rw_settings_witheringEnabled_texts_1" text="Desactivado"/>
-		<text name="rw_settings_witheringEnabled_texts_2" text="Activado"/>
 
 		<text name="rw_settings_rebuildMoistureMap_label" text="Reconstruir mapa de humedad"/>
 		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Eliminar y reconstruir el mapa de humedad con argumentos personalizados"/>
@@ -82,6 +83,14 @@
 		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="La pantalla de humedad en el menú principal mostrará los valores promedio de cada campo (mejor para el rendimiento)"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detallado"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limitado"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="Blizzards"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Blizzards are disabled"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Blizzards are enabled"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="Droughts"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Droughts are disabled"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Droughts are enabled"/>
 
 	</texts>
 </l10n>

@@ -26,12 +26,12 @@
 		<text name="rw_ui_yes" text="Ano"/>
 		<text name="rw_ui_no" text="Ne"/>
 
-       		<text name="input_Irrigation" text="Zavlažování"/>
-        	<text name="finance_irrigationUpkeep" text="Zavlažování"/>
-        	<text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
-        	<text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
-        	<text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
-        	<text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
+        <text name="input_Irrigation" text="Zavlažování"/>
+        <text name="finance_irrigationUpkeep" text="Zavlažování"/>
+        <text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
+        <text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
+        <text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
+        <text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
 		<text name="rw_ui_inactive" text="Neaktivní"/>
 		<text name="rw_ui_active" text="Aktivní"/>
 
@@ -48,11 +48,12 @@
 
 		<text name="rw_settings" text="Realistické počasí"/>
 
+		<text name="rw_settings_off" text="Vypnuto"/>
+		<text name="rw_settings_on" text="Zapnuto"/>
+
 		<text name="rw_settings_witheringEnabled_label" text="Usychání plodin"/>
 		<text name="rw_settings_witheringEnabled_tooltip_1" text="Plodiny neuusychají kvůli nízké vlhkosti"/>
 		<text name="rw_settings_witheringEnabled_tooltip_2" text="Plodiny usychají kvůli nízké vlhkosti"/>
-		<text name="rw_settings_witheringEnabled_texts_1" text="Vypnuto"/>
-		<text name="rw_settings_witheringEnabled_texts_2" text="Zapnuto"/>
 
 		<text name="rw_settings_rebuildMoistureMap_label" text="Obnovit mapu vlhkosti"/>
 		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Odstranění a obnovení mapy vlhkosti s vlastními argumenty"/>
@@ -83,6 +84,14 @@
 		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="Na obrazovce vlhkosti v hlavní nabídce se zobrazí průměrné hodnoty jednotlivých polí (lepší pro účinnost)."/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Podrobné informace"/>
 		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Omezený"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="Blizzards"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Blizzards are disabled"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Blizzards are enabled"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="Droughts"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Droughts are disabled"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Droughts are enabled"/>
 		
 	</texts>
 </l10n>

@@ -44,7 +44,7 @@ function RW_BroadcastSettingsEvent:readStream(streamId, connection)
         local state = streamReadUInt8(streamId)
 
         RWSettings.SETTINGS[name].state = state
-        self.setting = RWSettings.SETTINGS[name]
+        self.setting = name
 
     end
 
@@ -54,10 +54,10 @@ end
 
 
 function RW_BroadcastSettingsEvent:writeStream(streamId, connection)
+        
+    streamWriteBool(streamId, self.setting == nil)
 
     if self.setting == nil then
-        
-        streamWriteBool(streamId, true)
 
         for name, setting in pairs(RWSettings.SETTINGS) do
             if setting.ignore then continue end
@@ -66,8 +66,6 @@ function RW_BroadcastSettingsEvent:writeStream(streamId, connection)
         end
 
     else
-        
-        streamWriteBool(streamId, false)
 
         local setting = RWSettings.SETTINGS[self.setting]
         streamWriteString(streamId, self.setting)
@@ -80,23 +78,29 @@ end
 
 function RW_BroadcastSettingsEvent:run(connection)
 
-    if g_client ~= nil then
+    if self.setting == nil then
 
-        if self.setting == nil then
-
-            for name, setting in pairs(RWSettings.SETTINGS) do
-                if setting.ignore then continue end
-                setting.element:setState(setting.state)
-                if setting.callback ~= nil then setting.callback(name, setting.values[setting.state]) end 
-            end
-
-        else
-            
-            local setting = self.setting
+        for name, setting in pairs(RWSettings.SETTINGS) do
+            if setting.ignore then continue end
             setting.element:setState(setting.state)
             if setting.callback ~= nil then setting.callback(name, setting.values[setting.state]) end 
-
         end
+
+    else
+            
+        local setting = RWSettings.SETTINGS[self.setting]
+        if setting.element ~= nil then setting.element:setState(setting.state) end
+        if setting.callback ~= nil then setting.callback(self.setting, setting.values[setting.state]) end
+
+        if setting.dynamicTooltip and setting.element ~= nil then setting.element.elements[1]:setText(g_i18n:getText("rw_settings_" .. self.setting .. "_tooltip_" .. setting.state)) end
+
+		for _, s in pairs(RWSettings.SETTINGS) do
+			if s.dependancy and s.dependancy.name == self.setting and s.element ~= nil then
+				s.element:setDisabled(s.dependancy.state ~= state)
+			end
+		end
+
+        if g_server ~= nil then RWSettings.saveToXMLFile() end
 
     end
 

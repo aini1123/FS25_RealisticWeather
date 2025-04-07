@@ -107,9 +107,9 @@ function RW_GameInfoDisplay:draw()
 
         if currentWeather ~= nil then
 
-            if currentWeather.isBlizzard and g_currentMission.missionInfo.isSnowEnabled then
+            if currentWeather.isBlizzard and g_currentMission.missionInfo.isSnowEnabled and Weather.blizzardsEnabled then
                 self.currentDisaster = 1
-            elseif currentWeather.isDraught then
+            elseif currentWeather.isDraught and Weather.droughtsEnabled then
                 self.currentDisaster = 2
             else
                 self.currentDisaster = 0
@@ -124,9 +124,9 @@ function RW_GameInfoDisplay:draw()
             local _, nextWeather = environment.weather.forecast:dataForTime(currentWeatherEndDay, currentWeatherEndTime + 1)
 
             if nextWeather ~= nil then
-                if nextWeather.isBlizzard and g_currentMission.missionInfo.isSnowEnabled then
+                if nextWeather.isBlizzard and g_currentMission.missionInfo.isSnowEnabled and Weather.blizzardsEnabled then
                     self.nextDisaster = 1
-                elseif nextWeather.isDraught then
+                elseif nextWeather.isDraught and Weather.droughtsEnabled then
                     self.nextDisaster = 2
                 else
                     self.nextDisaster = 0
@@ -162,7 +162,7 @@ function RW_GameInfoDisplay:draw()
                     local averageTemp = 1 - ((endTemp + temperature + midTemp) / 3) * 0.1
                     local snowScale = variation.rain.snowfallScale
 
-                    currentWeather.snowForecast = math.clamp(RW_Weather.FACTOR.SNOW_FACTOR * snowScale * averageTemp * 0.7 * (currentWeather.isBlizzard and 20 or 1), 0, RW_Weather.FACTOR.SNOW_HEIGHT)
+                    currentWeather.snowForecast = math.clamp(RW_Weather.FACTOR.SNOW_FACTOR * snowScale * averageTemp * 0.7 * (currentWeather.isBlizzard and Weather.blizzardsEnabled and 10 or 1), 0, RW_Weather.FACTOR.SNOW_HEIGHT)
 
                 end
 
@@ -200,7 +200,7 @@ function RW_GameInfoDisplay:draw()
                         local averageTemp = 1 - ((endForecast.temperature + startForecast.temperature + midForecast.temperature) / 3) * 0.1
                         local snowScale = variation.rain.snowfallScale
 
-                        nextWeather.snowForecast = math.clamp(RW_Weather.FACTOR.SNOW_FACTOR * snowScale * averageTemp * ((nextWeather.duration / 1000) / 60) * 0.7 * (nextWeather.isBlizzard and 20 or 1), 0, RW_Weather.FACTOR.SNOW_HEIGHT)
+                        nextWeather.snowForecast = math.clamp(RW_Weather.FACTOR.SNOW_FACTOR * snowScale * averageTemp * ((nextWeather.duration / 1000) / 60) * 0.7 * (nextWeather.isBlizzard and Weather.blizzardsEnabled and 10 or 1), 0, RW_Weather.FACTOR.SNOW_HEIGHT)
 
                     end
 

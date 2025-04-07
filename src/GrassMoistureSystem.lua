@@ -16,8 +16,6 @@ function GrassMoistureSystem.loadMap()
     end
 end
 
-addModEventListener(GrassMoistureSystem)
-
 
 function GrassMoistureSystem.new()
 

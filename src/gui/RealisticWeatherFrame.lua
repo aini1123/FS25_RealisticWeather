@@ -192,7 +192,9 @@ function RealisticWeatherFrame:resetButtonStates()
 		[self.retentionButton] = { ["sorter"] = false, ["target"] = "retention", ["pos"] = "12px" },
 		[self.witherChanceButton] = { ["sorter"] = false, ["target"] = "witherChance", ["pos"] = "22px" },
 		[self.xButton] = { ["sorter"] = false, ["target"] = "x", ["pos"] = "36px" },
-		[self.zButton] = { ["sorter"] = false, ["target"] = "z", ["pos"] = "36px" }
+		[self.zButton] = { ["sorter"] = false, ["target"] = "z", ["pos"] = "36px" },
+		[self.irrigationActiveButton] = { ["sorter"] = false, ["target"] = "irrigationActive", ["pos"] = "10px" },
+		[self.irrigationCostButton] = { ["sorter"] = false, ["target"] = "irrigationCost", ["pos"] = "20px" }
 	}
 
 	self.sortingIcon_true:setVisible(false)
@@ -314,6 +316,8 @@ function RealisticWeatherFrame:updateFieldInfo()
 	self.allFieldData = allFieldData
 
 	self.fieldButton:setVisible(not self.showAll)
+	self.irrigationActiveButton:setVisible(not self.showAll)
+	self.irrigationCostButton:setVisible(not self.showAll)
 
 	self.moistureList:reloadData()
 	self:updateMenuButtons()
@@ -374,6 +378,26 @@ function RealisticWeatherFrame:populateCellForItemInSection(list, section, index
 		cell.setSelected = Utils.appendedFunction(cell.setSelected, function(cell, selected)
 			if selected then self:onClickListItem(cell) end
 		end)
+
+		local irrigationActiveCell = cell:getAttribute("irrigationActive")
+		local irrigationCostCell = cell:getAttribute("irrigationCost")
+		
+		irrigationActiveCell:setVisible(true)
+		irrigationCostCell:setVisible(true)
+
+		local moistureSystem = g_currentMission.moistureSystem
+		local active, cost = item.irrigationActive, item.irrigationCost
+		
+		if active == nil or cost == nil then
+			active, cost = moistureSystem:getIsFieldBeingIrrigated(item.field)
+			active = active and 2 or 1
+		end
+
+		irrigationActiveCell:setText(g_i18n:getText(active == 2 and "rw_ui_active" or "rw_ui_inactive"))
+		irrigationCostCell:setText(g_i18n:formatMoney(cost, 2, true, true))
+
+		item.irrigationActive = nil
+		item.irrigationCost = nil
 	end
 
 end
@@ -391,6 +415,19 @@ function RealisticWeatherFrame:onClickSortButton(button)
 	
 	local sorter = buttonState.sorter
 	local target = buttonState.target
+
+	if not self.showAll and (target == "irrigationActive" or target == "irrigationCost") then
+		
+		local data = self.selectedField == 1 and self.ownedFieldData or self.allFieldData
+		local moistureSystem = g_currentMission.moistureSystem
+		
+		for _, item in pairs(data) do
+			local active, cost = moistureSystem:getIsFieldBeingIrrigated(item.field)
+			item.irrigationActive = active and 2 or 1
+			item.irrigationCost = cost
+		end
+
+	end
 
 	table.sort(self.showAll and self.fieldData[self.selectedField] or (self.selectedField == 1 and self.ownedFieldData or self.allFieldData), function(a, b)
 		if sorter then return a[target] > b[target] end
@@ -411,6 +448,8 @@ function RealisticWeatherFrame:onClickIrrigation()
 
 	moistureSystem:setFieldIrrigationState(self.showAll and self.ownedFields[self.selectedField] or self.selectedFieldId)
 	self:updateMenuButtons()
+
+	if not self.showAll then self.moistureList:reloadData() end
 
 end
 
