@@ -26,6 +26,8 @@ function GrassMoistureSystem.new()
     self.moistureDelta = 0
     self.ticksSinceLastUpdate = GrassMoistureSystem.TICKS_PER_UPDATE + 1
     self.isServer = self.mission:getIsServer()
+    self.grassMoistureGainModifier = 1
+    self.grassMoistureLossModifier = 1
 
     return self
 
@@ -41,7 +43,7 @@ function GrassMoistureSystem:update(delta)
 
     local linesToRemove = {}
 
-    delta = delta * (delta > 0 and 0.5 or 1.5)
+    delta = delta * (delta > 0 and (0.5 * self.grassMoistureGainModifier) or (1.5 * self.grassMoistureLossModifier))
     self.moistureDelta = self.moistureDelta + delta
 
     if self.ticksSinceLastUpdate >= GrassMoistureSystem.TICKS_PER_UPDATE then
@@ -181,5 +183,16 @@ function GrassMoistureSystem:addArea(sx, sz, wx, wz, hx, hz)
     }
 
     table.insert(self.areaToGrass, newAreaToGrass)
+
+end
+
+
+function GrassMoistureSystem.onSettingChanged(name, state)
+
+    local grassMoistureSystem = g_currentMission.grassMoistureSystem
+
+    if grassMoistureSystem == nil then return end
+
+    grassMoistureSystem[name] = state
 
 end

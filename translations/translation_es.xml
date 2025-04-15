@@ -40,6 +40,7 @@
 		<text name="rw_ui_cellHeight" text="Altura de celda"/>
 		<text name="rw_ui_ownedFields" text="Campos propios"/>
 		<text name="rw_ui_allFields" text="Todos los campos"/>
+		<text name="rw_ui_teleport" text="Teleport"/>
 
 
 
@@ -91,6 +92,16 @@
 		<text name="rw_settings_droughtsEnabled_label" text="Sequías"/>
 		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Las sequías están deshabilitadas"/>
 		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Las sequías están habilitadas"/>
+
+		<text name="rw_settings_grassMoistureGainModifier_label" text="Grass Moisture Gain Modifier"/>
+		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="Change the amount of moisture gained for cut grass"/>
+
+		<text name="rw_settings_grassMoistureLossModifier_label" text="Grass Moisture Loss Modifier"/>
+		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="Change the amount of moisture lost for cut grass"/>
+
+		<text name="rw_settings_puddlesEnabled_label" text="Puddles"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Puddles are disabled"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Puddles are enabled"/>
 
 	</texts>
 </l10n>

@@ -64,6 +64,15 @@ function RealisticWeatherFrame:initialize()
 		end,
 		["profile"] = "buttonMenuSwitch"
 	}
+
+	self.teleportButtonInfo = {
+		["inputAction"] = InputAction.MENU_ACCEPT,
+		["text"] = g_i18n:getText("rw_ui_teleport"),
+		["callback"] = function()
+			self:onClickTeleport()
+		end,
+		["profile"] = "buttonOK"
+	}
 	
 end
 
@@ -74,7 +83,7 @@ end
 
 
 function RealisticWeatherFrame:onFrameOpen()
-	RealisticWeatherFrame:superClass().onFrameOpen(self)   
+	RealisticWeatherFrame:superClass().onFrameOpen(self)
     if not self.hasContent or (g_currentMission.moistureSystem ~= nil and g_currentMission.moistureSystem.moistureFrameBehaviour ~= self.cachedBehaviour) then
 		self:updateContent()
 	else
@@ -86,7 +95,7 @@ end
 
 
 function RealisticWeatherFrame:onFrameClose()
-	RealisticWeatherFrame:superClass().onFrameClose(self)   
+	RealisticWeatherFrame:superClass().onFrameClose(self)
 end
 
 
@@ -151,7 +160,7 @@ function RealisticWeatherFrame:updateMenuButtons()
 
 	if moistureSystem == nil then return end
 
-	self.menuButtonInfo = { self.backButtonInfo, self.nextPageButtonInfo, self.prevPageButtonInfo, self.refreshButtonInfo }
+	self.menuButtonInfo = { self.backButtonInfo, self.nextPageButtonInfo, self.prevPageButtonInfo, self.refreshButtonInfo, self.teleportButtonInfo }
 
 	if (self.showAll and self.ownedFields ~= nil and self.ownedFields[self.selectedField] ~= nil) or (not self.showAll and self.selectedFieldId ~= nil) then
 
@@ -250,7 +259,7 @@ function RealisticWeatherFrame:updateFieldInfo()
 
 			end
 
-			if #data ~= 0 then 
+			if #data ~= 0 then
 				for key, value in pairs(averageData) do averageData[key] = value / #data end
 			end
 
@@ -299,7 +308,7 @@ function RealisticWeatherFrame:updateFieldInfo()
 
 			end
 
-			if #data ~= 0 then 
+			if #data ~= 0 then
 				for key, value in pairs(averageData) do averageData[key] = value / #data end
 			end
 
@@ -374,7 +383,7 @@ function RealisticWeatherFrame:populateCellForItemInSection(list, section, index
 	cell:getAttribute("x"):setText(math.round(item.x + self.mapWidth / 2))
 	cell:getAttribute("z"):setText(math.round(item.z + self.mapHeight / 2))
 	
-	if not self.showAll then 
+	if not self.showAll then
 		cell.setSelected = Utils.appendedFunction(cell.setSelected, function(cell, selected)
 			if selected then self:onClickListItem(cell) end
 		end)
@@ -398,6 +407,9 @@ function RealisticWeatherFrame:populateCellForItemInSection(list, section, index
 
 		item.irrigationActive = nil
 		item.irrigationCost = nil
+	else
+		cell:getAttribute("irrigationActive"):setText("")
+		cell:getAttribute("irrigationCost"):setText("")
 	end
 
 end
@@ -432,7 +444,7 @@ function RealisticWeatherFrame:onClickSortButton(button)
 	table.sort(self.showAll and self.fieldData[self.selectedField] or (self.selectedField == 1 and self.ownedFieldData or self.allFieldData), function(a, b)
 		if sorter then return a[target] > b[target] end
 
-		return a[target] < b[target] 
+		return a[target] < b[target]
 	end)
 
 	self.moistureList:reloadData()
@@ -456,6 +468,29 @@ end
 
 function RealisticWeatherFrame:onClickRefresh()
 	self:updateContent()
+end
+
+
+function RealisticWeatherFrame:onClickTeleport()
+
+	if g_localPlayer == nil then return end
+
+	local item
+
+	if self.showAll and self.fieldData ~= nil and self.fieldData[self.selectedField] ~= nil and self.moistureList.selectedIndex ~= 0 then
+		item = self.fieldData[self.selectedField][self.moistureList.selectedIndex]
+	elseif not self.showAll and self.moistureList.selectedIndex ~= 0 then
+		if self.selectedField == 1 then
+			item = self.ownedFieldData[self.moistureList.selectedIndex]
+		else
+			item = self.allFieldData[self.moistureList.selectedIndex]
+		end
+	end
+
+	if item == nil then return end
+
+	g_localPlayer:teleportTo(item.x, getTerrainHeightAtWorldPos(g_terrainNode, item.x, 0, item.z), item.z, false, true)
+
 end
 
 

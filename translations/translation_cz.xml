@@ -26,12 +26,12 @@
 		<text name="rw_ui_yes" text="Ano"/>
 		<text name="rw_ui_no" text="Ne"/>
 
-       		<text name="input_Irrigation" text="Zavlažování"/>
-        	<text name="finance_irrigationUpkeep" text="Zavlažování"/>
-        	<text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
-        	<text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
-        	<text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
-        	<text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
+        <text name="input_Irrigation" text="Zavlažování"/>
+        <text name="finance_irrigationUpkeep" text="Zavlažování"/>
+        <text name="rw_ui_irrigation_start" text="Zahájit zavlažování"/>
+        <text name="rw_ui_irrigation_stop" text="Zastavit zavlažování"/>
+        <text name="rw_ui_pendingIrrigationCost" text="Náklady na zavlažování"/>
+        <text name="rw_ui_irrigationUpkeep" text="Údržba zavlažování"/>
 		<text name="rw_ui_inactive" text="Neaktivní"/>
 		<text name="rw_ui_active" text="Aktivní"/>
 
@@ -40,6 +40,7 @@
 		<text name="rw_ui_cellHeight" text="Výška buňky"/>
 		<text name="rw_ui_ownedFields" text="Vlastněná pole"/>
 		<text name="rw_ui_allFields" text="Všechna pole"/>
+		<text name="rw_ui_teleport" text="Teleport"/>
 
 
 
@@ -92,6 +93,16 @@
 		<text name="rw_settings_droughtsEnabled_label" text="Sucha"/>
 		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Sucha jsou vypnuta"/>
 		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Sucha jsou zapnuta"/>
+
+		<text name="rw_settings_grassMoistureGainModifier_label" text="Grass Moisture Gain Modifier"/>
+		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="Change the amount of moisture gained for cut grass"/>
+
+		<text name="rw_settings_grassMoistureLossModifier_label" text="Grass Moisture Loss Modifier"/>
+		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="Change the amount of moisture lost for cut grass"/>
+
+		<text name="rw_settings_puddlesEnabled_label" text="Puddles"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Puddles are disabled"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Puddles are enabled"/>
 		
 	</texts>
 </l10n>

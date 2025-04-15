@@ -255,6 +255,7 @@ function RW_PlayerHUDUpdater:showFillTypeInfo()
     else
         box:addLine(g_i18n:getText("rw_ui_needsTedding"), g_i18n:getText("rw_ui_yes"))
     end
+
     box:showNextFrame()
 
 end

@@ -1,6 +1,6 @@
-<modDesc descVersion="96">
+<modDesc descVersion="97">
     <author>Arrow</author>
-    <version>1.1.2.2</version>
+    <version>1.1.2.3</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -56,6 +56,17 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 Changelog:
 
+1.1.2.3
+- Added dynamic puddles which form at high moisture and grow/shrink based on soil moisture, and gradually flow downhill
+- Withered crops are now shown as withered instead of creating empty spaces
+- Added the following settings options:
+--- Enable/disable puddles
+--- Grass moisture gain modifier
+--- Grass moisture loss modifier
+- Added teleport button to the moisture screen
+- Fixed irrigation info being shown on certain cells in the moisture screen after switching from limited to detailed
+- Added Ukrainian translation
+
 1.1.2.2
 - Added multiplayer support for settings menu (except rebuilding moisture map)
 - Performance improvements
@@ -71,7 +82,6 @@ Changelog:
 - Fixed an issue causing the moisture to show higher than it is while irrigating
 
 1.1.2.1
-
 - Fixed an error when opening the moisture menu possibly related to custom fields
 - Fixed the moisture menu not being in the right position in the tab
 - Fixed heavy lag upon opening/refreshing the moisture menu
@@ -333,7 +343,12 @@ Journal des modifications :
         <sourceFile filename="src/I18N.lua"/>
         <sourceFile filename="src/MoistureSyncEvent.lua"/>
         <sourceFile filename="src/MoistureSystem.lua"/>
+        <sourceFile filename="src/NewPuddleEvent.lua"/>
+        <sourceFile filename="src/Puddle.lua"/>
+        <sourceFile filename="src/PuddleSystem.lua"/>
+        <sourceFile filename="src/PuddleSystemStateEvent.lua"/>
         <sourceFile filename="src/RWSettings.lua"/>
+        <sourceFile filename="src/RWUtils.lua"/>
 		<sourceFile filename="src/RW_BroadcastSettingsEvent.lua"/>
     </extraSourceFiles>
     <l10n filenamePrefix="translations/translation"/>

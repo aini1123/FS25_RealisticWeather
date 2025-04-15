@@ -62,8 +62,26 @@ RWSettings.SETTINGS = {
 		["callback"] = MoistureSystem.onSettingChanged
 	},
 
-	["moistureOverlayBehaviour"] = {
+	["grassMoistureGainModifier"] = {
 		["index"] = 7,
+		["type"] = "MultiTextOption",
+		["default"] = 10,
+		["valueType"] = "float",
+		["values"] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 },
+		["callback"] = GrassMoistureSystem.onSettingChanged
+	},
+
+	["grassMoistureLossModifier"] = {
+		["index"] = 8,
+		["type"] = "MultiTextOption",
+		["default"] = 10,
+		["valueType"] = "float",
+		["values"] = { 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 },
+		["callback"] = GrassMoistureSystem.onSettingChanged
+	},
+
+	["moistureOverlayBehaviour"] = {
+		["index"] = 9,
 		["type"] = "MultiTextOption",
 		["dynamicTooltip"] = true,
 		["default"] = 3,
@@ -72,7 +90,7 @@ RWSettings.SETTINGS = {
 	},
 
 	["moistureFrameBehaviour"] = {
-		["index"] = 8,
+		["index"] = 10,
 		["type"] = "BinaryOption",
 		["dynamicTooltip"] = true,
 		["default"] = 2,
@@ -81,7 +99,7 @@ RWSettings.SETTINGS = {
 	},
 
 	["blizzardsEnabled"] = {
-		["index"] = 9,
+		["index"] = 11,
 		["type"] = "BinaryOption",
 		["dynamicTooltip"] = true,
 		["default"] = 2,
@@ -91,13 +109,23 @@ RWSettings.SETTINGS = {
 	},
 
 	["droughtsEnabled"] = {
-		["index"] = 10,
+		["index"] = 12,
 		["type"] = "BinaryOption",
 		["dynamicTooltip"] = true,
 		["default"] = 2,
 		["binaryType"] = "offOn",
 		["values"] = { false, true },
 		["callback"] = RW_Weather.onSettingChanged
+	},
+
+	["puddlesEnabled"] = {
+		["index"] = 13,
+		["type"] = "BinaryOption",
+		["dynamicTooltip"] = true,
+		["default"] = 2,
+		["binaryType"] = "offOn",
+		["values"] = { false, true },
+		["callback"] = PuddleSystem.onSettingChanged
 	}
 
 }

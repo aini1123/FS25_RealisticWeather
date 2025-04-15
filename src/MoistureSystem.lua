@@ -211,6 +211,8 @@ function MoistureSystem:loadFromXMLFile(mapXmlFile)
         self.numRows = numRows
         self.numColumns = numColumns
 
+        xmlFile:delete()
+
     end
 
     table.sort(self.rows)
@@ -476,9 +478,13 @@ function MoistureSystem:update(delta, timescale)
         updateIteration.timeSinceLastUpdate = updateIteration.timeSinceLastUpdate + timescale / (MoistureSystem.TICKS_PER_UPDATE)
     end
 
+    local puddleSystem = g_currentMission.puddleSystem
+
     if self.ticksSinceLastUpdate >= MoistureSystem.TICKS_PER_UPDATE and not self.isSaving then
 
+        local canCreatePuddle = puddleSystem:getCanCreatePuddle()
         local isIrrigatingFields = false
+        local fieldGroundSystem = g_currentMission.fieldGroundSystem
 
         for _, field in pairs(self.irrigatingFields) do
             if field.isActive then
@@ -524,6 +530,7 @@ function MoistureSystem:update(delta, timescale)
                 for z, column in pairs(row.columns) do
 
                     local irrigationFactor = 0
+                    local fieldId
 
                     if isIrrigatingFields then
 
@@ -537,6 +544,7 @@ function MoistureSystem:update(delta, timescale)
                         end
 
                     end
+
 
                     -- "safeZoneFactor" to reduce the chances of moisture going to extreme highs/lows based on retention
 
@@ -555,6 +563,44 @@ function MoistureSystem:update(delta, timescale)
                     else
                         column.moisture = column.moisture + irrigationFactor * column.retention + moistureDelta * (2 - column.retention) * safeZoneFactor
                     end
+
+
+                    if column.moisture >= 0.3 and canCreatePuddle then
+                        
+                        local groundTypeValue = fieldGroundSystem:getValueAtWorldPos(FieldDensityMap.GROUND_TYPE, x, 0, z)
+                        local groundType = FieldGroundType.getTypeByValue(groundTypeValue)
+
+                        if groundType ~= FieldGroundType.NONE then
+
+                            local closestPuddle = puddleSystem:getClosestPuddleToPoint(x, z)
+
+                            if closestPuddle.puddle == nil or closestPuddle.distance > 100 then
+
+                                canCreatePuddle = false
+
+                                local terrainHeight = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
+
+                                local variation = puddleSystem:getRandomVariation()
+
+                                local puddle = Puddle.new(variation.id, terrainHeight)
+
+                                puddleSystem:addPuddle(puddle)
+
+                                puddle:setMoisture(column.moisture)
+                                puddle:setPosition(x, terrainHeight + math.clamp((column.moisture - 0.3) * 0.25, 0, 0.2), z)
+                                puddle:setScale(column.moisture - 0.3, column.moisture - 0.3)
+                                puddle:setRotation(0, math.random(-180, 180) * 0.01, 0)
+                                puddle:initialize()
+
+                                NewPuddleEvent.sendEvent(puddle)
+
+                            end
+
+                        end
+
+                    end
+
+
                 end
 
                 i = i + 1
@@ -576,6 +622,10 @@ function MoistureSystem:update(delta, timescale)
 
         if self.currentUpdateIteration > #self.updateIterations then self.currentUpdateIteration = 1 end
 
+        puddleSystem:update(timescale, self)
+
+    else
+        puddleSystem.timeSinceLastUpdate = puddleSystem.timeSinceLastUpdate + timescale
     end
 
     self.ticksSinceLastUpdate = self.ticksSinceLastUpdate + 1
@@ -716,7 +766,8 @@ function MoistureSystem:onHourChanged()
                         local offsetX = x + self.cellWidth * math.random()
                         local offsetZ = z + self.cellHeight * math.random()
 
-                        FSDensityMapUtil.updateWheelDestructionArea(offsetX, offsetZ, math.clamp(offsetX + width, offsetX, x + self.cellWidth), offsetZ, offsetX, math.clamp(offsetZ + height, offsetZ, z + self.cellHeight))
+                        RWUtils.witherArea(offsetX, offsetZ, math.clamp(offsetX + width, offsetX, x + self.cellWidth), offsetZ, offsetX, math.clamp(offsetZ + height, offsetZ, z + self.cellHeight))
+                        --FSDensityMapUtil.updateWheelDestructionArea(offsetX, offsetZ, math.clamp(offsetX + width, offsetX, x + self.cellWidth), offsetZ, offsetX, math.clamp(offsetZ + height, offsetZ, z + self.cellHeight))
                         maxWithers = maxWithers - 1
 
                     end

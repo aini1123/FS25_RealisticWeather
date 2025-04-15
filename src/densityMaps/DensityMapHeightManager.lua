@@ -7,6 +7,7 @@ function RW_DensityMapHeightManager:loadMapData(superFunc, xmlFile, missionInfo,
 
     g_currentMission.moistureSystem = MoistureSystem.new()
     g_currentMission.grassMoistureSystem = GrassMoistureSystem.new()
+    g_currentMission.puddleSystem = PuddleSystem.new()
 
     if g_currentMission:getIsServer() then
         g_currentMission.moistureSystem:loadFromXMLFile(xmlFile)
@@ -14,6 +15,8 @@ function RW_DensityMapHeightManager:loadMapData(superFunc, xmlFile, missionInfo,
         PlayerInputComponent.update = Utils.appendedFunction(PlayerInputComponent.update, RW_PlayerInputComponent.update)
         PlayerHUDUpdater.update = Utils.appendedFunction(PlayerHUDUpdater.update, RW_PlayerHUDUpdater.update)
     end
+
+    g_currentMission.puddleSystem:loadVariations()
 
     return returnValue
 

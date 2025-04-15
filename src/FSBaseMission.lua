@@ -208,32 +208,6 @@ function RW_FSBaseMission:onStartMission()
 
     MoistureArgumentsDialog.register()
 
-    
-
-    for i = 1, 5 do
-
-        --local path = modDirectory .. "i3d/waterPlane" .. i .. ".i3d"
-        --local waterPlane = g_i3DManager:loadI3DFile(path, true, true)
-
-        --link(getRootNode(), waterPlane)
-
-        --local x, z = -770.4586181640625, 232.4373016357422
-
-        --local terrainHeight = getTerrainHeightAtWorldPos(g_terrainNode, x, 0, z)
-
-        --local lower = math.random() > 0.5
-    
-        --if lower then
-        --    setWorldTranslation(waterPlane, x - math.random(1, 30), terrainHeight + 0.05, z - math.random(1, 30))
-        --else
-        --    setWorldTranslation(waterPlane, x + math.random(1, 30), terrainHeight + 0.05, z + math.random(1, 30))
-        --end
-        --setScale(waterPlane, math.random(3, 10), 1, math.random(3, 10))
-
-    end
-
-
-
 end
 
 FSBaseMission.onStartMission = Utils.prependedFunction(FSBaseMission.onStartMission, RW_FSBaseMission.onStartMission)
@@ -241,8 +215,20 @@ FSBaseMission.onStartMission = Utils.prependedFunction(FSBaseMission.onStartMiss
 
 function RW_FSBaseMission:sendInitialClientState(connection, _, _)
 
+    local puddleSystem = g_currentMission.puddleSystem
+
     connection:sendEvent(RW_BroadcastSettingsEvent.new())
+    connection:sendEvent(PuddleSystemStateEvent.new(puddleSystem.updateIteration, puddleSystem.timeSinceLastUpdate, puddleSystem.puddles))
 
 end
 
 FSBaseMission.sendInitialClientState = Utils.prependedFunction(FSBaseMission.sendInitialClientState, RW_FSBaseMission.sendInitialClientState)
+
+
+function RW_FSBaseMission:initTerrain(_, _)
+
+    g_currentMission.puddleSystem:initialize()
+
+end
+
+FSBaseMission.initTerrain = Utils.appendedFunction(FSBaseMission.initTerrain, RW_FSBaseMission.initTerrain)

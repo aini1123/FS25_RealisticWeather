@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="waterPlane1.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.3"/>
+  </Asset>
+
+  <Files>
+    <File fileId="2" filename="$data/maps/textures/shared/water_normal.dds"/>
+    <File fileId="3" filename="$data/shaders/oceanShader.xml"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="waterSim_01_mat" materialId="5" diffuseColor="1 1 1 1" specularColor="1 1 1" customShaderId="3">
+      <Normalmap fileId="2"/>
+      <Refractionmap coeff="1" bumpScale="0.1" withSSRData="false"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="waterPlane1.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="left" scale="1 1.5 1" shapeId="1" kinematic="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" angularDamping="0.52" clipDistance="200" nodeId="9" castsShadows="false" receiveShadows="true" materialIds="5">
+      <TransformGroup name="leftFeelers" nodeId="10">
+        <TransformGroup name="leftFeeler" translation="-13.7595 -0.11432 -0.159436" nodeId="11"/>
+      </TransformGroup>
+      <TransformGroup name="leftInner" nodeId="12">
+        <TransformGroup name="leftInner1" translation="-2.42566e-09 0 -8.04518" nodeId="13"/>
+        <TransformGroup name="leftInner10" translation="-5.06587 0 5.58152" nodeId="14"/>
+        <TransformGroup name="leftInner11" translation="-3.24878 0 6.83833" nodeId="15"/>
+        <TransformGroup name="leftInner12" translation="-1.12906 0 7.75562" nodeId="16"/>
+        <TransformGroup name="leftInner13" translation="-5.0929e-09 0 8.04518" nodeId="17"/>
+        <TransformGroup name="leftInner2" translation="-2.31952 0 -6.71464" nodeId="18"/>
+        <TransformGroup name="leftInner3" translation="-4.30228 0 -5.31175" nodeId="19"/>
+        <TransformGroup name="leftInner4" translation="-6.13445 0 -3.81273" nodeId="20"/>
+        <TransformGroup name="leftInner5" translation="-7.49978 0 -2.19279" nodeId="21"/>
+        <TransformGroup name="leftInner6" translation="-8.13721 0 -0.0624624" nodeId="22"/>
+        <TransformGroup name="leftInner7" translation="-7.84366 0 1.73477" nodeId="23"/>
+        <TransformGroup name="leftInner8" translation="-7.21998 0 3.07432" nodeId="24"/>
+        <TransformGroup name="leftInner9" translation="-6.36359 0 4.28083" nodeId="25"/>
+      </TransformGroup>
+      <TransformGroup name="leftOuter" nodeId="26">
+        <TransformGroup name="leftOuter1" translation="-5.37496e-09 -0.180223 -11.7856" nodeId="27"/>
+        <TransformGroup name="leftOuter10" translation="-11.8288 -0.113788 -0.345575" nodeId="28"/>
+        <TransformGroup name="leftOuter11" translation="-11.3523 -0.121188 1.88928" nodeId="29"/>
+        <TransformGroup name="leftOuter12" translation="-10.2361 -0.130634 4.22147" nodeId="30"/>
+        <TransformGroup name="leftOuter13" translation="-9.40829 -0.136195 5.4479" nodeId="31"/>
+        <TransformGroup name="leftOuter14" translation="-8.39257 -0.142241 6.67759" nodeId="32"/>
+        <TransformGroup name="leftOuter15" translation="-7.44427 -0.147386 7.64066" nodeId="33"/>
+        <TransformGroup name="leftOuter16" translation="-6.09408 -0.154136 8.78662" nodeId="34"/>
+        <TransformGroup name="leftOuter17" translation="-4.57308 -0.161174 9.8307" nodeId="35"/>
+        <TransformGroup name="leftOuter18" translation="-3.24753 -0.166966 10.5654" nodeId="36"/>
+        <TransformGroup name="leftOuter19" translation="-1.84156 -0.172822 11.1891" nodeId="37"/>
+        <TransformGroup name="leftOuter2" translation="-1.30408 -0.165504 -10.6559" nodeId="38"/>
+        <TransformGroup name="leftOuter20" translation="-1.70062e-08 -0.180223 11.7856" nodeId="39"/>
+        <TransformGroup name="leftOuter3" translation="-2.53023 -0.154136 -9.61411" nodeId="40"/>
+        <TransformGroup name="leftOuter4" translation="-4.07492 -0.142241 -8.42477" nodeId="41"/>
+        <TransformGroup name="leftOuter5" translation="-5.52901 -0.132799 -7.42445" nodeId="42"/>
+        <TransformGroup name="leftOuter6" translation="-7.15361 -0.123764 -6.39528" nodeId="43"/>
+        <TransformGroup name="leftOuter7" translation="-9.11193 -0.114876 -5.13652" nodeId="44"/>
+        <TransformGroup name="leftOuter8" translation="-10.7374 -0.109904 -3.73176" nodeId="45"/>
+        <TransformGroup name="leftOuter9" translation="-11.4649 -0.109485 -2.59218" nodeId="46"/>
+      </TransformGroup>
+    </Shape>
+    <Shape name="right" rotation="0 -2.13443e-07 0" scale="1 1.5 1" shapeId="2" kinematic="true" collisionFilterGroup="0x80000000" collisionFilterMask="0x1" angularDamping="0.52" clipDistance="200" nodeId="47" castsShadows="false" receiveShadows="true" materialIds="5">
+      <TransformGroup name="rightFeelers" nodeId="48">
+        <TransformGroup name="downFeeler" translation="-8.0283e-09 -0.180223 14.1956" nodeId="49"/>
+        <TransformGroup name="rightFeeler" translation="15.8795 -0.249589 0.0965659" nodeId="50"/>
+        <TransformGroup name="upFeeler" translation="2.13772 -0.20905 -15.0759" nodeId="51"/>
+      </TransformGroup>
+      <TransformGroup name="rightInner" nodeId="52">
+        <TransformGroup name="rightInner1" translation="0.850871 0 -8.31288" nodeId="53"/>
+        <TransformGroup name="rightInner10" translation="7.79278 0 5.11737" nodeId="54"/>
+        <TransformGroup name="rightInner11" translation="6.41226 0 6.75817" nodeId="55"/>
+        <TransformGroup name="rightInner12" translation="4.63306 0 7.76111" nodeId="56"/>
+        <TransformGroup name="rightInner13" translation="2.95164 0 8.16741" nodeId="57"/>
+        <TransformGroup name="rightInner14" translation="1.37471 0 8.21977" nodeId="58"/>
+        <TransformGroup name="rightInner2" translation="2.39889 0 -8.21413" nodeId="59"/>
+        <TransformGroup name="rightInner3" translation="3.89391 0 -7.31362" nodeId="60"/>
+        <TransformGroup name="rightInner4" translation="5.1313 0 -6.06236" nodeId="61"/>
+        <TransformGroup name="rightInner5" translation="6.03567 0 -4.88513" nodeId="62"/>
+        <TransformGroup name="rightInner6" translation="6.99415 0 -3.3378" nodeId="63"/>
+        <TransformGroup name="rightInner7" translation="7.87749 0 -1.41213" nodeId="64"/>
+        <TransformGroup name="rightInner8" translation="8.39423 0 0.427553" nodeId="65"/>
+        <TransformGroup name="rightInner9" translation="8.47194 0 3.08001" nodeId="66"/>
+      </TransformGroup>
+      <TransformGroup name="rightOuter" nodeId="67">
+        <TransformGroup name="rightOuter1" translation="0.784924 -0.190596 -12.3589" nodeId="68"/>
+        <TransformGroup name="rightOuter10" translation="12.9806 -0.248519 1.0518" nodeId="69"/>
+        <TransformGroup name="rightOuter11" translation="13.3454 -0.244975 3.28728" nodeId="70"/>
+        <TransformGroup name="rightOuter12" translation="13.261 -0.240861 5.16237" nodeId="71"/>
+        <TransformGroup name="rightOuter13" translation="12.3811 -0.232917 7.77022" nodeId="72"/>
+        <TransformGroup name="rightOuter14" translation="10.6002 -0.223088 9.94085" nodeId="73"/>
+        <TransformGroup name="rightOuter15" translation="8.66225 -0.214374 11.1947" nodeId="74"/>
+        <TransformGroup name="rightOuter16" translation="6.69746 -0.206329 11.902" nodeId="75"/>
+        <TransformGroup name="rightOuter17" translation="4.53795 -0.197866 12.2383" nodeId="76"/>
+        <TransformGroup name="rightOuter18" translation="1.51324 -0.18617 12.0979" nodeId="77"/>
+        <TransformGroup name="rightOuter2" translation="2.24483 -0.210407 -12.6992" nodeId="78"/>
+        <TransformGroup name="rightOuter3" translation="3.68183 -0.225414 -11.9732" nodeId="79"/>
+        <TransformGroup name="rightOuter4" translation="5.35774 -0.236694 -10.483" nodeId="80"/>
+        <TransformGroup name="rightOuter5" translation="6.80648 -0.24305 -8.95915" nodeId="81"/>
+        <TransformGroup name="rightOuter6" translation="8.18326 -0.247185 -7.36499" nodeId="82"/>
+        <TransformGroup name="rightOuter7" translation="9.78132 -0.25014 -5.29006" nodeId="83"/>
+        <TransformGroup name="rightOuter8" translation="11.0892 -0.251103 -3.29134" nodeId="84"/>
+        <TransformGroup name="rightOuter9" translation="12.194 -0.250569 -1.16156" nodeId="85"/>
+      </TransformGroup>
+    </Shape>
+  </Scene>
+
+  <UserAttributes>
+    <UserAttribute nodeId="11">
+      <Attribute name="base" type="integer" value="7"/>
+      <Attribute name="connector" type="integer" value="10"/>
+    </UserAttribute>
+    <UserAttribute nodeId="49">
+      <Attribute name="base" type="integer" value="14"/>
+      <Attribute name="connector" type="integer" value="18"/>
+    </UserAttribute>
+    <UserAttribute nodeId="50">
+      <Attribute name="base" type="integer" value="8"/>
+      <Attribute name="connector" type="integer" value="10"/>
+    </UserAttribute>
+    <UserAttribute nodeId="51">
+      <Attribute name="base" type="integer" value="2"/>
+      <Attribute name="connector" type="integer" value="2"/>
+    </UserAttribute>
+  </UserAttributes>
+
+</i3D>
