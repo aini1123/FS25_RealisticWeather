@@ -20,14 +20,15 @@ New:
   - Moisture screen behaviour
   - Enable/disable blizzards
   - Enable/disable droughts
- ![fsScreen_2025_04_02_16_16_51](https://github.com/user-attachments/assets/3c7a0d75-1ede-4e61-931e-ec718c85c262)
+ ![fsScreen_2025_04_02_16_16_51](https://github.com/user-attachments/assets/3c7a0d75-1ede-4e61-931e-ec718c85c262):
+
+- Visual flooding of fields at high moisture
 
 - Fixed empty bales remaining after rotting
 
 
 In Progress:
-- Visual flooding of fields at high moisture
-
+- Crop fires
 
 Planned:
 - Slurry spreader compatiblity with irrigation
