@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<i3D name="fire.i3d" version="1.6" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://i3d.giants.ch/schema/i3d-1.6.xsd">
+  <Asset>
+    <Export program="GIANTS Editor 64bit" version="10.0.4"/>
+  </Asset>
+
+  <Files>
+    <File fileId="3" filename="$data/shaders/subUVShaderFix.xml"/>
+    <File fileId="1" filename="fire_diffuse.dds"/>
+  </Files>
+
+
+  <Materials>
+    <Material name="Material.001" materialId="5" specularColor="0.356863 1 0" customShaderId="3">
+      <Texture fileId="1"/>
+      <CustomParameter name="playScale" value="15 0 5 5"/>
+    </Material>
+  </Materials>
+
+
+  <Shapes externalShapesFile="fire.i3d.shapes">
+  </Shapes>
+
+  <Scene>
+    <Shape name="Plane" shapeId="1" clipDistance="300" nodeId="8" castsShadows="false" receiveShadows="false" doubleSided="true" materialIds="5"/>
+  </Scene>
+
+</i3D>

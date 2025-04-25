@@ -1,13 +1,13 @@
 RW_WeatherStateEvent = {}
 
 
-function RW_WeatherStateEvent.new(snowHeight, timeSinceLastRain, cellWidth, cellHeight, mapWidth, mapHeight, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields)
+function RW_WeatherStateEvent.new(snowHeight, timeSinceLastRain, cellWidth, cellHeight, mapWidth, mapHeight, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields, lastFogDay)
     local self = WeatherStateEvent.emptyNew()
     self.snowHeight = snowHeight
     self.timeSinceLastRain = timeSinceLastRain
     --self.moisture = moisture
 
-    self.cellWidth, self.cellHeight, self.mapWidth, self.mapHeight, self.currentHourlyUpdateQuarter, self.numRows, self.numColumns, self.rows, self.irrigatingFields = cellWidth, cellHeight, mapWidth, mapHeight, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields
+    self.cellWidth, self.cellHeight, self.mapWidth, self.mapHeight, self.currentHourlyUpdateQuarter, self.numRows, self.numColumns, self.rows, self.irrigatingFields, self.lastFogDay = cellWidth, cellHeight, mapWidth, mapHeight, currentHourlyUpdateQuarter, numRows, numColumns, rows, irrigatingFields, lastFogDay
     return self
 end
 
@@ -17,6 +17,9 @@ WeatherStateEvent.new = RW_WeatherStateEvent.new
 function RW_WeatherStateEvent:readStream(_, streamId, connection)
     self.snowHeight = streamReadFloat32(streamId)
     self.timeSinceLastRain = streamReadFloat32(streamId)
+    self.lastFogDay = streamReadUInt16(streamId)
+
+
     --self.moisture = streamReadFloat32(streamId)
 
     self.cellWidth = streamReadFloat32(streamId)
@@ -93,6 +96,9 @@ WeatherStateEvent.readStream = Utils.overwrittenFunction(WeatherStateEvent.readS
 function RW_WeatherStateEvent:writeStream(_, connection, _)
     streamWriteFloat32(connection, self.snowHeight)
     streamWriteFloat32(connection, self.timeSinceLastRain)
+    streamWriteUInt16(connection, self.lastFogDay)
+
+
     --streamWriteFloat32(connection, self.moisture)
 
     streamWriteFloat32(connection, self.cellWidth or 5)
@@ -155,7 +161,7 @@ WeatherStateEvent.writeStream = Utils.overwrittenFunction(WeatherStateEvent.writ
 
 
 function RW_WeatherStateEvent:run(_, _)
-    g_currentMission.environment.weather:setInitialState(self.snowHeight, self.timeSinceLastRain)
+    g_currentMission.environment.weather:setInitialState(self.snowHeight, self.timeSinceLastRain, self.lastFogDay)
     g_currentMission.moistureSystem:setInitialState(self.cellWidth, self.cellHeight, self.mapWidth, self.mapHeight, self.currentHourlyUpdateQuarter, self.numRows, self.numColumns, self.rows, self.irrigatingFields)
 end
 

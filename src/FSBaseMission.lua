@@ -216,9 +216,11 @@ FSBaseMission.onStartMission = Utils.prependedFunction(FSBaseMission.onStartMiss
 function RW_FSBaseMission:sendInitialClientState(connection, _, _)
 
     local puddleSystem = g_currentMission.puddleSystem
+    local fireSystem = g_currentMission.fireSystem
 
     connection:sendEvent(RW_BroadcastSettingsEvent.new())
     connection:sendEvent(PuddleSystemStateEvent.new(puddleSystem.updateIteration, puddleSystem.timeSinceLastUpdate, puddleSystem.puddles))
+    connection:sendEvent(FireEvent.new(fireSystem.updateIteration, fireSystem.timeSinceLastUpdate, fireSystem.fieldId, fireSystem.fires))
 
 end
 
@@ -228,6 +230,7 @@ FSBaseMission.sendInitialClientState = Utils.prependedFunction(FSBaseMission.sen
 function RW_FSBaseMission:initTerrain(_, _)
 
     g_currentMission.puddleSystem:initialize()
+    g_currentMission.fireSystem:initialize()
 
 end
 

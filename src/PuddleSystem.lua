@@ -160,6 +160,8 @@ function PuddleSystem:saveToXMLFile(path)
 
     xmlFile:save(false, true)
 
+    xmlFile:delete()
+
 end
 
 

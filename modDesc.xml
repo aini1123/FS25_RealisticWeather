@@ -1,6 +1,6 @@
 <modDesc descVersion="97">
     <author>Arrow</author>
-    <version>1.1.2.3</version>
+    <version>1.1.2.4</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -55,6 +55,15 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 
 Changelog:
+
+1.1.2.4
+- Added crop fires
+- Possible fix for memory leaks
+- Changed withering so younger crops will create an empty space instead of changing to the withered state
+- Added the following settings options:
+--- Enable/disable crop fires
+- Prevented fog from spawning 2 days in a row
+- Fixed a puddle sync issue when loading in mp
 
 1.1.2.3
 - Added dynamic puddles which form at high moisture and grow/shrink based on soil moisture, and gradually flow downhill
@@ -337,6 +346,9 @@ Journal des modifications :
         <sourceFile filename="src/vehicles/wheels/WheelDestruction.lua"/>
         <sourceFile filename="src/vehicles/WheelsUtil.lua"/>
         <sourceFile filename="src/FieldIrrigationChangeEvent.lua"/>
+        <sourceFile filename="src/Fire.lua"/>
+        <sourceFile filename="src/FireEvent.lua"/>
+        <sourceFile filename="src/FireSystem.lua"/>
         <sourceFile filename="src/FSBaseMission.lua"/>
         <sourceFile filename="src/FSCareerMissionInfo.lua"/>
         <sourceFile filename="src/GrassMoistureSystem.lua"/>

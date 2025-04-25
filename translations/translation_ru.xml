@@ -99,5 +99,9 @@
 		<text name="rw_settings_puddlesEnabled_label" text="Puddles"/>
 		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Puddles are disabled"/>
 		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Puddles are enabled"/>
+
+		<text name="rw_settings_fireEnabled_label" text="Crop Fires"/>
+		<text name="rw_settings_fireEnabled_tooltip_1" text="Crop fires are disabled"/>
+		<text name="rw_settings_fireEnabled_tooltip_2" text="Crop fires are enabled"/>
 	</texts>
 </l10n>

@@ -126,6 +126,16 @@ RWSettings.SETTINGS = {
 		["binaryType"] = "offOn",
 		["values"] = { false, true },
 		["callback"] = PuddleSystem.onSettingChanged
+	},
+
+	["fireEnabled"] = {
+		["index"] = 14,
+		["type"] = "BinaryOption",
+		["dynamicTooltip"] = true,
+		["default"] = 2,
+		["binaryType"] = "offOn",
+		["values"] = { false, true },
+		["callback"] = FireSystem.onSettingChanged
 	}
 
 }

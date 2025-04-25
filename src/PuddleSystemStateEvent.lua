@@ -30,7 +30,7 @@ function PuddleSystemStateEvent:readStream(streamId, connection)
     
     self.puddles = {}
 
-    for i = 1, #numPuddles do
+    for i = 1, numPuddles do
 
         local puddle = Puddle.new()
         local success = puddle:readStream(streamId)

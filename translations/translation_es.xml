@@ -86,21 +86,26 @@
 		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limitado"/>
 
 		<text name="rw_settings_blizzardsEnabled_label" text="Ventiscas"/>
-		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Las ventiscas están desactivadas"/>
-		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Las ventiscas están activadas"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Las ventiscas están deshabilitadas"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Las ventiscas están habilitadas"/>
 
 		<text name="rw_settings_droughtsEnabled_label" text="Sequías"/>
-		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Las sequías están desactivadas"/>
-		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Las sequías están activadas"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Las sequías están deshabilitadas"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Las sequías están habilitadas"/>
 
 		<text name="rw_settings_grassMoistureGainModifier_label" text="Modificador de Humedad Ganada en Hierba"/>
 		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="Cambia la cantidad de humedad que gana la hierba cortada"/>
-		
+
 		<text name="rw_settings_grassMoistureLossModifier_label" text="Modificador de Pérdida de Humedad en Hierba"/>
 		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="Cambia la cantidad de humedad que pierde la hierba cortada"/>
-		
+
 		<text name="rw_settings_puddlesEnabled_label" text="Charcos"/>
 		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Los charcos están desactivados"/>
 		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Los charcos están activados"/>
+
+		<text name="rw_settings_fireEnabled_label" text="Crop Fires"/>
+		<text name="rw_settings_fireEnabled_tooltip_1" text="Crop fires are disabled"/>
+		<text name="rw_settings_fireEnabled_tooltip_2" text="Crop fires are enabled"/>
+
 	</texts>
 </l10n>

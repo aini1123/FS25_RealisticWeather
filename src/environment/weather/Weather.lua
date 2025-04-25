@@ -392,17 +392,22 @@ Weather.fillWeatherForecast = Utils.overwrittenFunction(Weather.fillWeatherForec
 
 
 function RW_Weather:randomizeFog(_, time)
+
     local season = self.owner.currentSeason
     local seasonToFog = self.seasonToFog[season]
 
+    local currentDay = g_currentMission.environment.currentMonotonicDay
+
     local fog
 
-    if seasonToFog == nil then
+    self.lastFogDay = self.lastFogDay or 0
+
+    if seasonToFog == nil or currentDay == self.lastFogDay + 1 then
         fog = nil
     else
         fog = seasonToFog:createFromTemplate()
 
-        if season ~= 2 and math.random() >= 0.9 then
+        if season ~= 2 and math.random() >= 0.92 then
 
             fog.groundFogCoverageEdge0 = math.random(5, 10) / 100
             fog.groundFogCoverageEdge1 = math.random(90, 95) / 100
@@ -415,36 +420,40 @@ function RW_Weather:randomizeFog(_, time)
             fog.groundFogWeatherTypes[WeatherType.SNOW] = true
             fog.groundFogWeatherTypes[WeatherType.RAIN] = true
 
+            self.lastFogDay = currentDay
+
         end
     end
 
     self.fogUpdater:setTargetFog(fog, time)
+
 end
 
 Weather.randomizeFog = Utils.overwrittenFunction(Weather.randomizeFog, RW_Weather.randomizeFog)
 
 
 function RW_Weather:sendInitialState(_, connection)
-    --if self.moisture == nil then self.moisture = math.random(12, 25) / 100 end
 
     local moistureSystem = g_currentMission.moistureSystem
 
-    connection:sendEvent(WeatherStateEvent.new(self.snowHeight, self.timeSinceLastRain, moistureSystem.cellWidth, moistureSystem.cellHeight, moistureSystem.mapWidth, moistureSystem.mapHeight, moistureSystem.currentHourlyUpdateQuarter, moistureSystem.numRows, moistureSystem.numColumns, moistureSystem.rows, moistureSystem.irrigatingFields))
+    connection:sendEvent(WeatherStateEvent.new(self.snowHeight, self.timeSinceLastRain, moistureSystem.cellWidth, moistureSystem.cellHeight, moistureSystem.mapWidth, moistureSystem.mapHeight, moistureSystem.currentHourlyUpdateQuarter, moistureSystem.numRows, moistureSystem.numColumns, moistureSystem.rows, moistureSystem.irrigatingFields, self.lastFogDay))
     connection:sendEvent(WeatherAddObjectEvent.new(self.forecastItems, true, true))
 
-    --if g_currentMission.moistureSystem ~= nil then g_currentMission.moistureSystem:sendInitialState(connection) end
 end
 
 Weather.sendInitialState = Utils.overwrittenFunction(Weather.sendInitialState, RW_Weather.sendInitialState)
 
-function RW_Weather:setInitialState(_, snowHeight, timeSinceLastRain)
+function RW_Weather:setInitialState(_, snowHeight, timeSinceLastRain, lastFogDay)
+
     self.snowHeight = snowHeight
     self.timeSinceLastRain = timeSinceLastRain
-    --self.moisture = moisture
+    self.lastFogDay = lastFogDay
+
     g_currentMission.snowSystem:setSnowHeight(self.snowHeight)
+
 end
 
---Weather.setInitialState = Utils.overwrittenFunction(Weather.setInitialState, RW_Weather.setInitialState)
+Weather.setInitialState = Utils.overwrittenFunction(Weather.setInitialState, RW_Weather.setInitialState)
 
 
 function RW_Weather:saveToXMLFile(handle, key)
@@ -453,15 +462,14 @@ function RW_Weather:saveToXMLFile(handle, key)
 
     if xmlFile == nil then return end
 
-    if self.moisture == nil then self.moisture = math.random(12, 25) / 100 end
-
-    xmlFile:setFloat(key .. "#moisture", self.moisture)
+    xmlFile:setInt(key .. "#lastFogDay", self.lastFogDay or 0)
+    xmlFile:save(false, true)
 
     xmlFile:delete()
 
 end
 
---Weather.saveToXMLFile = Utils.appendedFunction(Weather.saveToXMLFile, RW_Weather.saveToXMLFile)
+Weather.saveToXMLFile = Utils.appendedFunction(Weather.saveToXMLFile, RW_Weather.saveToXMLFile)
 
 
 function RW_Weather:loadFromXMLFile(handle, key)
@@ -470,13 +478,13 @@ function RW_Weather:loadFromXMLFile(handle, key)
 
     if xmlFile == nil then return end
 
-    self.moisture = xmlFile:getFloat(key .. "#moisture", math.random(12, 25) / 100)
+    self.lastFogDay = xmlFile:getInt(key .. "#lastFogDay", 0)
 
     xmlFile:delete()
 
 end
 
---Weather.loadFromXMLFile = Utils.prependedFunction(Weather.loadFromXMLFile, RW_Weather.loadFromXMLFile)
+Weather.loadFromXMLFile = Utils.prependedFunction(Weather.loadFromXMLFile, RW_Weather.loadFromXMLFile)
 
 
 function RW_Weather.onSettingChanged(name, state)

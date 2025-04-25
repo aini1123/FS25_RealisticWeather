@@ -136,6 +136,8 @@ function MoistureSystem:saveToXMLFile(path)
 
     xmlFile:save(false, true)
 
+    xmlFile:delete()
+
     self.isSaving = false
 
 end
@@ -479,6 +481,7 @@ function MoistureSystem:update(delta, timescale)
     end
 
     local puddleSystem = g_currentMission.puddleSystem
+    local fireSystem = g_currentMission.fireSystem
 
     if self.ticksSinceLastUpdate >= MoistureSystem.TICKS_PER_UPDATE and not self.isSaving then
 
@@ -628,6 +631,12 @@ function MoistureSystem:update(delta, timescale)
         puddleSystem.timeSinceLastUpdate = puddleSystem.timeSinceLastUpdate + timescale
     end
 
+    if self.ticksSinceLastUpdate % 10 == 0 then
+        fireSystem:update(timescale, self.ticksSinceLastUpdate == 0)
+    elseif fireSystem.fieldId ~= nil then
+        fireSystem.timeSinceLastUpdate = fireSystem.timeSinceLastUpdate + timescale
+    end
+
     self.ticksSinceLastUpdate = self.ticksSinceLastUpdate + 1
 
 end
@@ -680,7 +689,7 @@ function MoistureSystem:onHourChanged()
     if self.isSaving then return end
 
     if not self.witheringEnabled then
-        if self.isServer and self.needsSync and g_server ~= nil and g_server.netIsRunning then
+        if self.isServer and self.needsSync then
 
             self.needsSync = false
             g_server:broadcastEvent(MoistureSyncEvent.new(self.numRows, self.numColumns, self.rows), false)
@@ -789,7 +798,7 @@ function MoistureSystem:onHourChanged()
 
 
 
-    if self.isServer and self.needsSync and g_server ~= nil and g_server.netIsRunning then
+    if self.isServer and self.needsSync then
 
         self.needsSync = false
         g_server:broadcastEvent(MoistureSyncEvent.new(self.numRows, self.numColumns, self.rows), false)
@@ -1006,5 +1015,25 @@ function MoistureSystem:getUpdaterAtX(x)
     local updater = math.floor((x + self.mapWidth / 2) / (self.mapWidth / #self.updateIterations) + 1)
 
     return self.updateIterations[updater or 1] or self.updateIterations[1]
+
+end
+
+
+function MoistureSystem:getRandomCell()
+
+    local row = math.random(0, self.numRows - 1)
+    local column = math.random(0, self.numColumns - 1)
+
+    local x = -self.mapWidth / 2 + row * self.cellWidth
+    local z = -self.mapHeight / 2 + column * self.cellHeight
+
+    local cell = self:getValuesAtCoords(x, z, { "moisture", "retention", "trend", "witherChance" })
+
+    if cell == nil then return nil end
+
+    cell.x = x
+    cell.z = z
+
+    return cell
 
 end

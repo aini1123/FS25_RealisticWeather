@@ -5,6 +5,7 @@ function RW_FSCareerMissionInfo:saveToXMLFile()
         g_currentMission.grassMoistureSystem:saveToXMLFile(self.savegameDirectory .. "/grassMoisture.xml")
         g_currentMission.moistureSystem:saveToXMLFile(self.savegameDirectory .. "/moisture.xml")
         g_currentMission.puddleSystem:saveToXMLFile(self.savegameDirectory .. "/puddles.xml")
+        g_currentMission.fireSystem:saveToXMLFile(self.savegameDirectory .. "/fires.xml")
         RWSettings.saveToXMLFile()
     end
 end
