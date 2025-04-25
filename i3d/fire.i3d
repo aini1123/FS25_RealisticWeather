@@ -6,13 +6,13 @@
   </Asset>
 
   <Files>
-    <File fileId="3" filename="$data/shaders/subUVShaderFix.xml"/>
     <File fileId="1" filename="fire_diffuse.dds"/>
+    <File fileId="3" filename="subUVShaderFix.xml"/>
   </Files>
 
 
   <Materials>
-    <Material name="Material.001" materialId="5" specularColor="0.356863 1 0" customShaderId="3">
+    <Material name="Material.001" materialId="22" specularColor="0.356863 1 0" customShaderId="3">
       <Texture fileId="1"/>
       <CustomParameter name="playScale" value="15 0 5 5"/>
     </Material>
@@ -23,7 +23,7 @@
   </Shapes>
 
   <Scene>
-    <Shape name="Plane" shapeId="1" clipDistance="300" nodeId="8" castsShadows="false" receiveShadows="false" doubleSided="true" materialIds="5"/>
+    <Shape name="Plane" shapeId="1" clipDistance="300" nodeId="8" castsShadows="false" receiveShadows="false" doubleSided="true" materialIds="22"/>
   </Scene>
 
 </i3D>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<CustomShader version="5">
+    <Parameters>
+        <Parameter name="playScale"    target="playScale"    type="float4" group="base"     defaultValue="30 45 8 8"       minValue="0 0 0 0"         maxValue="60 60 64 64"     description="plays atlas animation with speed set in range [X,Y]\nrandom selected start position, plays over whole atlas\nZ - horizontal size\nW - vertical size"/>
+    </Parameters>
+    <UvUsages>
+        <UvUsage textureName="baseMap"          uvType="uv0" uvScale="1.0"/>
+        <UvUsage textureName="normalMap"        uvType="uv0" uvScale="1.0"/>
+        <UvUsage textureName="glossMap"         uvType="uv0" uvScale="1.0"/>
+        <UvUsage textureName="mLedPanelMaskMap" uvType="uv1" uvScale="1.0"/>
+    </UvUsages>
+	<Textures/>
+    <VertexAttributes>
+        <VertexAttribute name="uv1"   group="uv1"/>
+        <VertexAttribute name="color" group="vtxColor"/>
+    </VertexAttributes>
+	<Variations/>
+    <LodLevel startDistance="0">
+        <CodeInjections>
+            <CodeInjection position="OBJECT_PARAMETERS">
+                <![CDATA[
+                    /*
+                    plays atlas animation with speed set in range [ playScale.x, playScale.y ],
+                    random selected start position (defined by In.color.r), plays over whole atlas.
+                    playScale.z - horizontal size
+                    playScale.w - vertical size
+                    */
+                    float4 playScale;
+                ]]>
+            </CodeInjection>
+            <CodeInjection position="LIB_FUNCTION">
+                <![CDATA[
+                // Custom pixel/vertex functions
+                // #include "$data/shaders/sharedFunctions.gsl"
+                // Extra functions related to the subUVShader only
+				
+				float2 getUVAnimatedSubUV1( float2 incomingUVs, bool isSubUVHorizontal, bool isTimeOverLife, float alphaOverLife,
+                           float2 playSpeed, float atlasesHorizontal, float atlasesVertical, float randomValue ){
+
+                    int  mXsize  = (int)atlasesHorizontal;
+                    int  mYsize  = (int)atlasesVertical;
+                    int  mXYsize = mXsize * mYsize;
+
+                    float2 mOutgoingUV = incomingUVs;
+
+                    if (isSubUVHorizontal){
+                        // SUBUV_MOVIE_HORIZONTAL
+                        float mSUBuvHorTime;
+                        if (isTimeOverLife){
+                            // SUBUV_BY_LIFE
+                            mSUBuvHorTime = alphaOverLife * (float)mXsize;
+                        }else{
+                            float mTime = cTime_s * lerp( playSpeed.x, playSpeed.y, randomValue );
+                            mSUBuvHorTime = mTime + randomValue * (float)mXsize;
+                        }
+                        int mFrame    = (int)mSUBuvHorTime % mXsize;
+                        int mYpos     = (int)((float)mYsize*randomValue); // converted to float and than to int
+                        int2 mSlotPos = int2(mFrame, mYpos);
+                        mOutgoingUV   = ((float2)mSlotPos + incomingUVs ) * float2(1.0/atlasesHorizontal,1.0/atlasesVertical);
+                    }else{
+                        // SUBUV_MOVIE
+                        int mFrame;
+                        if (isTimeOverLife){
+                            // SUBUV_BY_LIFE
+                            float mSUBuvTime = alphaOverLife * (float)mXYsize;
+                            mFrame = int(mSUBuvTime);
+                        }else{
+                            float mTime = cTime_s * lerp( playSpeed.x, playSpeed.y, randomValue );
+                            float mSUBuvTime = mTime + randomValue * (float)mXYsize;
+                            mFrame = (int)mSUBuvTime % mXYsize;
+                        }
+                        int mYpos     = mFrame / mXsize;
+                        int2 mSlotPos = int2( mFrame - mYpos * (mXsize), mYsize - mYpos - 1 );
+						incomingUVs.x *= atlasesHorizontal;
+						incomingUVs.y *= atlasesVertical;
+                        mOutgoingUV   = ( (float2)mSlotPos + incomingUVs ) * float2(1.0/atlasesHorizontal,1.0/atlasesVertical);
+                    }
+                    return mOutgoingUV;
+                }
+                ]]>
+            </CodeInjection>
+            <CodeInjection position="GET_DEFAULT_TEXCOORDS_VS">
+                <![CDATA[
+                    float  mRandomValue = 0.0;
+                    float2 mDefaultUVs = convertDefaultTexCoords( In, object, In.texCoords0.xy );
+                    return getUVAnimatedSubUV1(mDefaultUVs, false, false, 0.0, object.playScale.xy, object.playScale.z, object.playScale.w, mRandomValue);
+                ]]>
+            </CodeInjection>
+        </CodeInjections>
+    </LodLevel>
+</CustomShader>
