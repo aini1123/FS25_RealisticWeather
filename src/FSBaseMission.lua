@@ -2,6 +2,10 @@ RW_FSBaseMission = {}
 local modDirectory = g_currentModDirectory
 
 RW_FSBaseMission.FRUIT_TYPES_MOISTURE = {
+    ["DEFAULT"] = {
+        ["LOW"] = 0.15,
+        ["HIGH"] = 0.18
+    },
     ["BARLEY"] = {
         ["LOW"] = 0.12,
         ["HIGH"] = 0.135
@@ -101,7 +105,7 @@ function RW_FSBaseMission:getHarvestScaleMultiplier(superFunc, fruitTypeIndex, s
 
     local moistureFactor = 1
     local fruitType = g_fruitTypeManager:getFruitTypeNameByIndex(fruitTypeIndex)
-    local fruitTypeMoistureFactor = RW_FSBaseMission.FRUIT_TYPES_MOISTURE[fruitType]
+    local fruitTypeMoistureFactor = RW_FSBaseMission.FRUIT_TYPES_MOISTURE[fruitType] or RW_FSBaseMission.FRUIT_TYPES_MOISTURE.DEFAULT
 
     if fruitTypeMoistureFactor ~= nil then
 

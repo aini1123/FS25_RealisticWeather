@@ -9,12 +9,10 @@ function MoistureSyncEvent.emptyNew()
 end
 
 
-function MoistureSyncEvent.new(numRows, numColumns, rows)
+function MoistureSyncEvent.new(rows)
 
     local self = MoistureSyncEvent.emptyNew()
 
-    self.numRows = numRows
-    self.numColumns = numColumns
     self.rows = rows
 
     return self
@@ -24,62 +22,79 @@ end
 
 function MoistureSyncEvent:readStream(streamId, connection)
 
-    self.numRows = streamReadUInt16(streamId)
-    self.numColumns = streamReadUInt16(streamId)
+    local numRows = streamReadUInt16(streamId)
 
     local rows = {}
 
-    if self.numRows > 0 and self.numColumns > 0 then
+    for i = 1, numRows do
 
-        for i = 1, self.numRows do
+        local numColumns = streamReadUInt16(streamId)
+        local x = streamReadFloat32(streamId)
 
-            local x = streamReadFloat32(streamId)
+        for j = 1, numColumns do
 
-            local row = { [x] = x, ["columns"] = {} }
+            local z = streamReadFloat32(streamId)
 
-            for j = 1, self.numColumns do
+            local numTargets = streamReadUInt8(streamId)
+            local targets = {}
 
-                local z = streamReadFloat32(streamId)
-                local moisture = streamReadFloat32(streamId)
-                local retention = streamReadFloat32(streamId)
-                local witherChance = streamReadFloat32(streamId)
+            for j = 1, numTargets do
 
-                row.columns[z] = { ["z"] = z, ["moisture"] = moisture, ["witherChance"] = witherChance, ["retention"] = retention }
+                local target = streamReadString(streamId)
+                local value = streamReadFloat32(streamId)
+
+                targets[target] = value
 
             end
 
-            rows[x] = row
+            table.insert(rows, {
+                ["x"] = x,
+                ["z"] = z,
+                ["targets"] = targets
+            })
 
         end
 
     end
 
     self.rows = rows
+    self:run(connection)
 
 end
 
 
 function MoistureSyncEvent:writeStream(streamId, connection)
 
-    streamWriteUInt16(streamId, self.numRows or 0)
-    streamWriteUInt16(streamId, self.numColumns or 0)
+    local numRows = self.rows.numRows
 
-    if self.rows ~= nil then
+    streamWriteUInt16(streamId, numRows)
 
-        for x, row in pairs(self.rows) do
 
-            if row.columns ~= nil then
+    for x, row in pairs(self.rows) do
 
-                streamWriteFloat32(streamId, x)
+        if x == "numRows" then continue end
 
-                for z, column in pairs(row.columns) do
+        local numColumns = row.numColumns
 
-                    streamWriteFloat32(streamId, column.z)
-                    streamWriteFloat32(streamId, column.moisture)
-                    streamWriteFloat32(streamId, column.retention)
-                    streamWriteFloat32(streamId, column.witherChance or 0)
+        streamWriteUInt16(streamId, numColumns)
+        streamWriteFloat32(streamId, x)
 
-                end
+        for z, targets in pairs(row) do
+
+            if z == "numColumns" then continue end
+
+            streamWriteFloat32(streamId, z)
+
+            local numTargets = 0
+
+            for target, value in pairs(targets) do numTargets = numTargets + 1 end
+
+            streamWriteUInt8(streamId, numTargets)
+
+            for target, value in pairs(targets) do
+
+                streamWriteString(streamId, target)
+                streamWriteFloat32(streamId, value)
 
             end
 
@@ -96,8 +111,6 @@ function MoistureSyncEvent:run(connection)
 
     if moistureSystem == nil then return end
 
-    moistureSystem.numRows = self.numRows
-    moistureSystem.numColumns = self.numColumns
-    moistureSystem.rows = self.rows
+    moistureSystem:applyUpdaterSync(self.rows)
 
 end
