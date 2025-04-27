@@ -254,8 +254,6 @@ function FireSystem:onHourChanged()
 
         local cell = moistureSystem:getRandomCell()
 
-        print(cell)
-
         if cell == nil or cell.moisture > 0.075 then continue end
 
         local groundTypeValue = g_currentMission.fieldGroundSystem:getValueAtWorldPos(FieldDensityMap.GROUND_TYPE, cell.x, 0, cell.z)

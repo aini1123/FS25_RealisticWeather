@@ -67,6 +67,8 @@ function FireEvent:run(connection)
 
     local fireSystem = g_currentMission.fireSystem
 
+    fireSystem.updateIteration = self.updateIteration
+    fireSystem.timeSinceLastUpdate = self.timeSinceLastUpdate
     fireSystem.fires = self.fires
     fireSystem.fieldId = self.fieldId
 
