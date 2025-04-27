@@ -1,29 +1,17 @@
 RW_PlayerHUDUpdater = {}
 RW_PlayerHUDUpdater.TICKS_PER_FILLTYPE_UPDATE = 50
 
-function RW_PlayerHUDUpdater:fieldAddField(fieldState, box)
 
-    box:addLine(g_i18n:getText("rw_ui_moisture"), string.format("%.2f", (g_currentMission.environment.weather.moisture or 0.2) * 100) .. "%")
 
-    local fruitType = g_fruitTypeManager:getFruitTypeNameByIndex(fieldState.fruitTypeIndex)
-    local fruit = g_fruitTypeManager:getFruitTypeByIndex(fieldState.fruitTypeIndex)
-    local fruitTypeMoistureFactor = RW_FSBaseMission.FRUIT_TYPES_MOISTURE[fruitType]
+-- ####################################################
 
-    if fruitTypeMoistureFactor ~= nil then
-        box:addLine(g_i18n:getText("rw_ui_idealMoisture"), string.format("%.2f", fruitTypeMoistureFactor.LOW * 100) .. "% - " .. string.format("%.2f", fruitTypeMoistureFactor.HIGH * 100) .. "%")
-        box:addLine(g_i18n:getText("rw_ui_perfectMoisture"), string.format("%.2f", ((fruitTypeMoistureFactor.LOW + fruitTypeMoistureFactor.HIGH) / 2) * 100) .. "%")
-    end
+-- NOTES:
 
-    local growthState = fieldState.growthState
+-- using a cache for the translations used in the player hud boxes gives a slight performance boost
+-- (average of 0.000011423 milliseconds per render down to 0.000008681 milliseconds)
 
-    if fruit ~= nil and (fruit:getIsGrowing(growthState) or fruit:getIsPreparable(growthState) or fruit:getIsHarvestable(growthState)) then
-        local yield = fieldState:getHarvestScaleMultiplier()
-        box:addLine(g_i18n:getText("rw_ui_currentYield"), string.format("%.2f", yield * 100) .. "%")
-    end
+-- ####################################################
 
-end
-
---PlayerHUDUpdater.fieldAddField = Utils.appendedFunction(PlayerHUDUpdater.fieldAddField, RW_PlayerHUDUpdater.fieldAddField)
 
 
 local function resolveOwnerFarm(id)
@@ -96,7 +84,7 @@ function RW_PlayerHUDUpdater:showFieldInfo(x, z)
 
         local fruitType = g_fruitTypeManager:getFruitTypeNameByIndex(self.fieldInfo.fruitTypeIndex)
         local fruit = g_fruitTypeManager:getFruitTypeByIndex(self.fieldInfo.fruitTypeIndex)
-        local fruitTypeMoistureFactor = RW_FSBaseMission.FRUIT_TYPES_MOISTURE[fruitType]
+        local fruitTypeMoistureFactor = RW_FSBaseMission.FRUIT_TYPES_MOISTURE[fruitType] or RW_FSBaseMission.FRUIT_TYPES_MOISTURE.DEFAULT
         local growthState = self.fieldInfo.growthState
         local isPlanted = fruit ~= nil and (fruit:getIsGrowing(growthState) or fruit:getIsPreparable(growthState) or fruit:getIsHarvestable(growthState))
 
