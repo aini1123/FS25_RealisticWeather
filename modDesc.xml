@@ -1,6 +1,6 @@
 <modDesc descVersion="97">
     <author>Arrow</author>
-    <version>1.1.2.4</version>
+    <version>1.1.2.5</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -55,6 +55,12 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 
 Changelog:
+
+1.1.2.5
+- Performance improvement for passive irrigation (- ~64% average processing time)
+- Performance improvements for various systems reading and/or changing moisture system values (- ~26% average processing time)
+- Added default harvest moisture range for unrecognised modded crop types
+- Fixed spraying not syncing on MP
 
 1.1.2.4
 - Added crop fires
