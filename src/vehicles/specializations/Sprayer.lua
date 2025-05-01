@@ -11,48 +11,40 @@ function RW_Sprayer:processSprayerArea(superFunc, workArea, dT)
         if moistureSystem == nil then return changedArea, totalArea end
 
         local fillType = self.spec_sprayer.workAreaParameters.sprayFillType
-        local target = { ["moisture"] = MoistureSystem.SPRAY_FACTOR * (fillType == FillType.WATER and 4 or 1) * moistureSystem.moistureGainModifier }
+
+        local factor = MoistureSystem.SPRAY_FACTOR[self.spec_sprayer.isSlurryTanker and "slurry" or "fertilizer"]
+
+        local target = { ["moisture"] = factor * (fillType == FillType.WATER and 4 or 1) * moistureSystem.moistureGainModifier }
 
         local sx, _, sz = getWorldTranslation(workArea.start)
         local wx, _, wz = getWorldTranslation(workArea.width)
         local hx, _, hz = getWorldTranslation(workArea.height)
+        
+        local width = wx - sx
+        local height = wz - sz
 
-        local width = math.abs(wx - sx)
-        local height = math.abs(hz - sz)
-
-        --print(sz, wz, hz, "-------------------")
-        local x1 = math.min(sx, wx, hx)
-        local z1 = math.min(sz, wz, hz)
-        local x2 = math.max(sx, wx, hx)
-        local z2 = math.max(sz, wz, hz)
-
-        --for i = 0, width, moistureSystem.cellWidth * 0.25 do
-
-            --for j = 0, height, moistureSystem.cellHeight * 0.25 do
-                --print(sx + i, sz + j, "------")
-                --moistureSystem:setValuesAtCoords(sx + i, sz + j, target)
-            --end
-
-        --end
+        local realWidth = MathUtil.vector2Length(wx - sx, wz - sz) * 2
+        local realHeightX = (hx - sx) * 0.5
+        local realHeightZ = (hz - sz) * 0.5
 
         local fieldGroundSystem = g_currentMission.fieldGroundSystem
+ 
+        local stepX = width / realWidth
+        local stepZ = height / realWidth
 
-        for x = x1, x2, moistureSystem.cellWidth * 0.5 do
-            for z = z1, z2, moistureSystem.cellHeight * 0.5 do
-                --print(x, z, "----")
+        for i = 0, realWidth do
 
-                local groundTypeValue = fieldGroundSystem:getValueAtWorldPos(FieldDensityMap.GROUND_TYPE, x, 0, z)
-	            local groundType = FieldGroundType.getTypeByValue(groundTypeValue)
+            local x = sx + realHeightX + stepX * i
+            local z = sz + realHeightZ + stepZ * i
+
+            local groundTypeValue = fieldGroundSystem:getValueAtWorldPos(FieldDensityMap.GROUND_TYPE, x, 0, z)
+	        local groundType = FieldGroundType.getTypeByValue(groundTypeValue)
                 
-                if groundType == FieldGroundType.NONE then continue end
+            if groundType == FieldGroundType.NONE then continue end
 
-                moistureSystem:setValuesAtCoords(x, z, target)
-            end
+            moistureSystem:setValuesAtCoords(x, z, target, true)
+
         end
-
-        --print("---------------------------------------------")
-
-        moistureSystem.needsSync = true
 
     end
 

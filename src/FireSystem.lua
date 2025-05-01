@@ -236,7 +236,7 @@ function FireSystem:onHourChanged()
     local season, hour = environment.currentSeason, math.floor(environment:getMinuteOfDay() / 60)
     local temperature = environment.weather.temperatureUpdater:getTemperatureAtTime(environment.dayTime)
 
-    local probability = FireSystem.SEASON_TO_PROBABILITY[season] * (currentWeather.isDraught and 0.75 or 0.12)
+    local probability = FireSystem.SEASON_TO_PROBABILITY[season] * (currentWeather.isDraught and 0.45 or 0.05)
 
     if hour < 6 or hour > 18 then probability = probability * 0.08 end
 
@@ -244,13 +244,11 @@ function FireSystem:onHourChanged()
 
     if temperature < 25 or environment.weather.timeSinceLastRain == 0 then probability = 0 end
 
-    print(probability)
-
     if math.random() >= probability then return end
 
     local moistureSystem = g_currentMission.moistureSystem
 
-    for i = 1, 35 do
+    for i = 1, 25 do
 
         local cell = moistureSystem:getRandomCell()
 

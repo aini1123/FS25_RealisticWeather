@@ -43,6 +43,12 @@
 		<text name="rw_ui_teleport" text="Teleport"/>
 
 
+		<text name="rw_contract_field_irrigation_title" text="Irrigation"/>
+		<text name="rw_contract_field_irrigation_description" text="Irrigate the field to increase the average moisture to the target level"/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="Average moisture"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="Target average moisture"/>
+
+
 
 		<!--  SETTINGS  -->
 
@@ -107,6 +113,9 @@
 		<text name="rw_settings_fireEnabled_label" text="Požáry úrody"/>
 		<text name="rw_settings_fireEnabled_tooltip_1" text="Požáry plodin jsou vypnuté"/>
 		<text name="rw_settings_fireEnabled_tooltip_2" text="Požáry plodin jsou zapnuté"/>
+
+		<text name="rw_settings_moistureYieldFactor_label" text="Moisture Yield Factor"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="Change the harvest yield added by moisture"/>
 		
 	</texts>
 </l10n>

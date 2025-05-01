@@ -167,6 +167,10 @@ function Fire:initialize()
 	setVisibility(node, true)
 	setScale(node, 1, self.height, self.width)
 
+	local shapeNode = getChildAt(node, 0)
+
+	setShaderParameter(shapeNode, "startPosition", math.random(), 0, 0, 0, false)
+
 end
 
 
@@ -288,7 +292,7 @@ function Fire:update(fireSystem, isRaining)
 
 	local x, z = self.position[1], self.position[3]
 	
-	local step = 0.000015 * timescale
+	local step = 0.000018 * timescale
 
 	local isOnCultivatedGround, shrinkFactor = self.isOnCultivatedGround, isRaining and 10 or 1
 
@@ -320,8 +324,6 @@ function Fire:update(fireSystem, isRaining)
 
 	local numFires = #fireSystem.fires
 
-
-
 	if not isOnCultivatedGround and burnTime >= 3 - width * height then
 	
 		local ox, oz = self.oldPosition[1], self.oldPosition[2]
@@ -330,11 +332,35 @@ function Fire:update(fireSystem, isRaining)
 
 		if burnDistance >= 0.5 then
 
-			local area, totalArea = RWUtils.burnArea(ox + 0.2, oz + 0.2, ox - 0.2, oz - 0.2, x, z)
 
-			self.lastBurnArea = (area / totalArea)
+			local burnWidth = x - ox
+			local burnHeight = z - oz
+			local dataPlaneId = g_fruitTypeManager:getDefaultDataPlaneId()
+			local totalBurnArea = 0
+			local burnArea = 0
 
-			burnDistance = burnDistance * (area / totalArea)
+			for i = 0, burnDistance, 0.25 do
+
+				local burnX = ox + 0.25 + burnWidth * (i / burnDistance)
+				local burnZ = oz + 0.25 + burnHeight * (i / burnDistance)
+				
+				local fruitTypeIndex = getDensityTypeIndexAtWorldPos(dataPlaneId, burnX, 0, burnZ)
+				local fruitType = g_fruitTypeManager:getFruitTypeByDensityTypeIndex(fruitTypeIndex)
+
+				local growthState = getDensityStatesAtWorldPos(dataPlaneId, burnX, 0, burnZ)
+
+				if growthState > 0 and growthState <= fruitType.maxHarvestingGrowthState then burnArea = burnArea + 1 end
+
+				totalBurnArea = totalBurnArea + 1
+
+			end
+
+			RWUtils.burnArea(ox + 0.2, oz + 0.2, ox - 0.2, oz - 0.2, x, z)
+
+
+			self.lastBurnArea = (burnArea / totalBurnArea)
+
+			burnDistance = burnDistance * (burnArea / totalBurnArea)
 
 			burnTime = 0
 			fuel = fuel + burnDistance * 80 * width * height
@@ -343,7 +369,7 @@ function Fire:update(fireSystem, isRaining)
 			width = math.min(width + burnDistance * 0.0006, 1.4)
 			height = math.min(width + burnDistance * 0.00075, 1.6)
 
-			if self.timeSinceLastChild >= 350 and fuel > width * height * 100 and numFires < 35 then
+			if self.timeSinceLastChild >= 350 and fuel > width * height * 100 and numFires < 20 then
 			
 				self.width, self.height = width, height
 				self.timeSinceLastChild = 0
@@ -361,14 +387,13 @@ function Fire:update(fireSystem, isRaining)
 	end
 
 
-
 	self.width, self.height = width, height
 	self.burnTime, self.fuel = burnTime, fuel
 
 	setScale(self.node, 1, height, width)
 
 	self.timeSinceLastUpdate = 0
-	self.timeSinceLastChild = self.timeSinceLastChild + 1 * numFires
+	self.timeSinceLastChild = math.min(self.timeSinceLastChild + 1 * numFires, 1000)
 	self.updatesSinceLastGroundCheck = self.updatesSinceLastGroundCheck + 1 * numFires
 
 	if self.updatesSinceLastGroundCheck >= 100 then

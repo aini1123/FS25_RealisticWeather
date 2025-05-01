@@ -41,6 +41,12 @@
 		<text name="rw_ui_allFields" text="Все поля"/>
 		<text name="rw_ui_teleport" text="Teleport"/>
 
+
+		<text name="rw_contract_field_irrigation_title" text="Irrigation"/>
+		<text name="rw_contract_field_irrigation_description" text="Irrigate the field to increase the average moisture to the target level"/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="Average moisture"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="Target average moisture"/>
+
 		<!--  SETTINGS	-->
 
 		<text name="rw_settings" text="Реалистичная погода"/>
@@ -103,5 +109,8 @@
 		<text name="rw_settings_fireEnabled_label" text="Crop Fires"/>
 		<text name="rw_settings_fireEnabled_tooltip_1" text="Crop fires are disabled"/>
 		<text name="rw_settings_fireEnabled_tooltip_2" text="Crop fires are enabled"/>
+
+		<text name="rw_settings_moistureYieldFactor_label" text="Moisture Yield Factor"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="Change the harvest yield added by moisture"/>
 	</texts>
 </l10n>

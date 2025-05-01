@@ -115,8 +115,6 @@ function RWUtils.burnArea(sx, sz, wx, wz, hx, hz)
 	local fieldFilter = cache.fieldFilter
 	local notCultivatedFilter = cache.notCultivatedFilter
 
-	local area, totalArea = RWUtils.getCropDensityAtArea(sx, sz, wx, wz, hx, hz)
-
 	g_currentMission.growthSystem:setIgnoreDensityChanges(true)
 
 	if multiModifier == nil then
@@ -160,51 +158,5 @@ function RWUtils.burnArea(sx, sz, wx, wz, hx, hz)
 
 	FSDensityMapUtil.removeWeedArea(sx, sz, wx, wz, hx, hz)
 	g_currentMission.growthSystem:setIgnoreDensityChanges(false)
-
-	return area, totalArea
-
-end
-
-
-function RWUtils.getCropDensityAtArea(sx, sz, wx, wz, hx, hz)
-
-	local cache = RWUtils.functionCache.getCropDensityAtArea
-
-	if cache == nil then
-
-		local fruitTypes = g_fruitTypeManager:getFruitTypes()
-		local multiModifier = DensityMapMultiModifier.new()
-
-		cache = {}
-
-		for _, fruitType in pairs(fruitTypes) do
-
-			if fruitType.terrainDataPlaneId == nil then continue end
-
-			local modifier = DensityMapModifier.new(fruitType.terrainDataPlaneId, fruitType.startStateChannel, fruitType.numStateChannels, g_terrainNode)
-			
-			for state = 1, fruitType.numFoliageStates do
-
-				local filter = DensityMapFilter.new(modifier)
-				filter:setValueCompareParams(DensityValueCompareType.EQUAL, state)
-				multiModifier:addExecuteGet(fruitType.name .. "|" .. state, modifier, filter)
-
-			end
-
-		end
-
-		cache.multiModifier	= multiModifier
-
-		RWUtils.functionCache.getCropDensityAtArea = cache
-
-	end
-
-	local multiModifier = cache.multiModifier
-
-	multiModifier:resetStats()
-	multiModifier:updateParallelogramWorldCoords(sx, sz, wx, wz, hx, hz, DensityCoordType.POINT_POINT_POINT)
-	local _, area, _, totalArea = multiModifier:execute(nil)
-
-	return area, totalArea
 
 end

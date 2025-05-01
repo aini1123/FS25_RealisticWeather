@@ -3,17 +3,6 @@ RW_PlayerHUDUpdater.TICKS_PER_FILLTYPE_UPDATE = 50
 
 
 
--- ####################################################
-
--- NOTES:
-
--- using a cache for the translations used in the player hud boxes gives a slight performance boost
--- (average of 0.000011423 milliseconds per render down to 0.000008681 milliseconds)
-
--- ####################################################
-
-
-
 local function resolveOwnerFarm(id)
     local ownerFarmId = g_farmlandManager:getFarmlandOwner(id)
 

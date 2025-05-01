@@ -4,6 +4,8 @@ function RW_FieldState:update(x, z)
 
     local moistureSystem = g_currentMission.moistureSystem
 
+    self.x, self.z = x, z
+
     if moistureSystem == nil then return end
 
     local values = moistureSystem:getValuesAtCoords(x, z, { "moisture", "retention" } )

@@ -1,5 +1,6 @@
-<map xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="$data/shared/xml/schema/fillTypes.xsd">
+<map>
 	<fillTypeCategories>
-		<fillTypeCategory name="SPRAYER">LIQUIDFERTILIZER HERBICIDE WATER</fillTypeCategory>
+		<fillTypeCategory name="SPRAYER">WATER</fillTypeCategory>
+		<fillTypeCategory name="SLURRYTANK">WATER</fillTypeCategory>
 	</fillTypeCategories>
 </map>

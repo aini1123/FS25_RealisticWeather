@@ -1,0 +1,81 @@
+<missionVehicles>
+
+	<mission type="irrigationMission">
+		
+		<!-- SPRAYERS -->
+
+		<group size="small">
+
+			<vehicle filename="$data/vehicles/masseyFerguson/series5700S/series5700S.xml"/>
+			<vehicle filename="$data/vehicles/hardi/mega1200L/mega1200L.xml"/>
+			<vehicle filename="$data/vehicles/hardi/mega1200L/mega1200LTank.xml"/>
+
+		</group>
+
+		<group size="small">
+
+			<vehicle filename="$data/vehicles/claas/arion550/arion550.xml">
+				<configuration name="motor" id="2"/>
+			</vehicle>
+			<vehicle filename="$data/vehicles/hardi/aeon5200/aeon5200.xml"/>
+			
+		</group>
+
+		<group size="medium">
+
+			<vehicle filename="$data/vehicles/caseIH/puma/puma.xml">
+				<configuration name="motor" id="2"/>
+			</vehicle>
+			<vehicle filename="$data/vehicles/amazone/ux5201Super/ux5201Super.xml">
+				<configuration name="folding" id="3"/>
+				<configuration name="variableWorkWidth" id="3"/>
+				<configuration name="ai" id="3"/>
+			</vehicle>
+			
+		</group>
+
+		<group size="large">
+			
+			<vehicle filename="$data/vehicles/agrifac/condorEndurance2/condorEndurance2.xml">
+				<configuration name="folding" id="3"/>
+				<configuration name="animation" id="3"/>
+				<configuration name="cylindered" id="3"/>
+				<configuration name="variableWorkWidth" id="3"/>
+				<configuration name="ai" id="3"/>
+			</vehicle>
+			
+		</group>
+		
+		<!-- SLURRY TANKERS -->
+
+		<group size="small">
+
+			<vehicle filename="$data/vehicles/fendt/vario500/vario500.xml">
+				<configuration name="motor" id="2"/>
+			</vehicle>
+			<vehicle filename="$data/vehicles/farmtech/supercis800/supercis800.xml"/>
+
+		</group>
+
+		<group size="medium">
+
+			<vehicle filename="$data/vehicles/newHolland/t7/t7.xml">
+				<configuration name="motor" id="4"/>
+			</vehicle>
+			<vehicle filename="$data/vehicles/fliegl/pfw18000MaxxLinePlus/pfw18000MaxxLinePlus.xml"/>
+
+		</group>
+
+		<group size="large">
+
+			<vehicle filename="$data/vehicles/caseIH/magnumT4B/magnumT4B.xml">
+				<configuration name="motor" id="2"/>
+			</vehicle>
+			<vehicle filename="$data/vehicles/samsonAgro/pgII28Genesis/pgII28Genesis.xml"/>
+			<vehicle filename="$data/vehicles/samsonAgro/sbh4_36/sbh4_36.xml"/>
+
+		</group>
+
+	</mission>
+	
+</missionVehicles>

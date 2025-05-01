@@ -113,21 +113,32 @@ function RW_FSBaseMission:getHarvestScaleMultiplier(superFunc, fruitTypeIndex, s
         local highMoisture = fruitTypeMoistureFactor.HIGH
         local perfectMoisture = (highMoisture + lowMoisture) / 2
 
-        if moisture >= perfectMoisture - 0.0025 and moisture <= perfectMoisture + 0.0025 then
-            moistureFactor = 1.5
-        elseif moisture < lowMoisture then
-            moistureFactor = moisture / lowMoisture
-        elseif moisture < perfectMoisture then
-            moistureFactor = 1 + (moisture / perfectMoisture) * 0.2
-        elseif moisture > highMoisture then
-            moistureFactor = highMoisture / moisture
-        elseif moisture > perfectMoisture then
-            moistureFactor = 1 + (perfectMoisture / moisture) * 0.2
-        end
+
+        moistureFactor = moisture / perfectMoisture
+
+        if moisture > perfectMoisture then moistureFactor = 2 - moistureFactor end
+
+        moistureFactor = math.clamp(moistureFactor, 0.1, 1)
+
+        if moisture >= lowMoisture and moisture <= highMoisture then moistureFactor = moistureFactor + math.max(1.5 - 2 * (1 - moistureFactor), 0.5) end
+
+        --if moisture >= perfectMoisture - 0.0025 and moisture <= perfectMoisture + 0.0025 then
+          --  moistureFactor = 2.5
+        --elseif moisture < lowMoisture then
+         --   moistureFactor = moisture / lowMoisture
+        --elseif moisture < perfectMoisture then
+         --   moistureFactor = 1 + (moisture / perfectMoisture) * 0.2
+        --elseif moisture > highMoisture then
+        --    moistureFactor = highMoisture / moisture
+        --elseif moisture > perfectMoisture then
+            --moistureFactor = 1 + (perfectMoisture / moisture) * 0.2
+        --end
 
     end
 
-    return baseYield * math.clamp(moistureFactor, 0.5, 1.5)
+    --return baseYield * math.clamp(moistureFactor, 0.5, 1.5) * self.moistureYieldFactor
+
+    return math.max(baseYield + (-1 + moistureFactor) * self.moistureYieldFactor, 0)
 
 end
 
@@ -239,3 +250,8 @@ function RW_FSBaseMission:initTerrain(_, _)
 end
 
 FSBaseMission.initTerrain = Utils.appendedFunction(FSBaseMission.initTerrain, RW_FSBaseMission.initTerrain)
+
+
+function RW_FSBaseMission.onSettingChanged(name, state)
+    g_currentMission[name] = state
+end

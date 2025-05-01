@@ -34,7 +34,7 @@ function FireEvent:readStream(streamId, connection)
     
     self.fires = {}
 
-    for i = 1, #numFires do
+    for i = 1, numFires do
 
         local fire = Fire.new()
         local success = fire:readStream(streamId)

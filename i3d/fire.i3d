@@ -12,9 +12,10 @@
 
 
   <Materials>
-    <Material name="Material.001" materialId="22" specularColor="0.356863 1 0" customShaderId="3">
+    <Material name="Material.001" materialId="13" specularColor="0.356863 1 0" alphaBlending="true" customShaderId="3">
       <Texture fileId="1"/>
-      <CustomParameter name="playScale" value="15 0 5 5"/>
+      <CustomParameter name="playScale" value="15 0 8 8"/>
+      <CustomParameter name="startPosition" value="0.5"/>
     </Material>
   </Materials>
 
@@ -23,7 +24,7 @@
   </Shapes>
 
   <Scene>
-    <Shape name="Plane" shapeId="1" clipDistance="300" nodeId="8" castsShadows="false" receiveShadows="false" doubleSided="true" materialIds="22"/>
+    <Shape name="Plane" shapeId="1" clipDistance="300" nodeId="8" castsShadows="false" receiveShadows="false" doubleSided="true" materialIds="13"/>
   </Scene>
 
 </i3D>

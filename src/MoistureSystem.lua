@@ -1,6 +1,6 @@
 MoistureSystem = {}
 
-MoistureSystem.VERSION = "1.1.2.2"
+MoistureSystem.VERSION = "1.1.2.6"
 
 table.insert(FinanceStats.statNames, "irrigationUpkeep")
 FinanceStats.statNameToIndex["irrigationUpkeep"] = #FinanceStats.statNames
@@ -27,7 +27,12 @@ MoistureSystem.MAP_WIDTH = 2048
 MoistureSystem.MAP_HEIGHT = 2048
 MoistureSystem.TICKS_PER_UPDATE = 40
 MoistureSystem.IRRIGATION_FACTOR = 0.0000008
-MoistureSystem.SPRAY_FACTOR = 0.00002
+
+MoistureSystem.SPRAY_FACTOR = {
+    ["slurry"] = 0.000045,
+    ["fertilizer"] = 0.000015
+}
+
 MoistureSystem.IRRIGATION_BASE_COST = 0.00000025
 
 local moistureSystem_mt = Class(MoistureSystem)
@@ -64,6 +69,7 @@ function MoistureSystem.new()
     self.moistureOverlayBehaviour = 3
     self.moistureFrameBehaviour = 1
 
+    self.currentHourlyUpdateIteration = 1
     self.currentUpdateIteration = 1
     self.updateIterations = {
         {
@@ -287,9 +293,8 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
     local firstRow = true
     local numRows = 0
     local numColumns = 0
-    local baseMoisture = math.random(100, 150) / 1000
+    local baseMoisture = math.random(125, 200) / 1000
     local i = 0
-
 
     for x = -self.mapWidth / 2, self.mapWidth / 2, self.cellWidth do
 
@@ -310,9 +315,12 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
 
             local isIncrease = math.random() >= 0.5
 
+            local seconds = getTimeSec() * 1000000
+            local seed = (seconds % math.random(3, 30)) * (math.random(500, 1500) / 1000)
+
             if firstRow and firstColumn then
                 firstColumn = false
-                moisture = (isIncrease and math.random(baseMoisture * 1000, baseMoisture * 1012) or math.random(baseMoisture * 988, baseMoisture * 1000)) / 1000
+                moisture = (isIncrease and math.random(baseMoisture * 1000, baseMoisture * 1015) or math.random(baseMoisture * 985, baseMoisture * 1000)) / 1000
             else
 
                 if firstColumn then
@@ -320,12 +328,12 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
                     firstColumn = false
 
                     local downMoisture = self.rows[x - self.cellWidth].columns[z].moisture
-                    moisture = (isIncrease and math.random(downMoisture * 1000, downMoisture * 1012) or math.random(downMoisture * 988, downMoisture * 1000)) / 1000
+                    moisture = (isIncrease and math.random(downMoisture * 1000, downMoisture * 1015) or math.random(downMoisture * 985, downMoisture * 1000)) / 1000
 
                 elseif firstRow then
 
                     local leftMoisture = row.columns[z - self.cellHeight].moisture
-                    moisture = (isIncrease and math.random(leftMoisture * 1000, leftMoisture * 1012) or math.random(leftMoisture * 988, leftMoisture * 1000)) / 1000
+                    moisture = (isIncrease and math.random(leftMoisture * 1000, leftMoisture * 1015) or math.random(leftMoisture * 985, leftMoisture * 1000)) / 1000
 
                 else
 
@@ -333,14 +341,21 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
                     local downMoisture = self.rows[x - self.cellWidth].columns[z].moisture * 1000
 
                     if leftMoisture > downMoisture then
-                        moisture = (isIncrease and math.random(downMoisture * 1, leftMoisture * 1.012) or math.random(downMoisture * 0.988, leftMoisture * 1)) / 1000
+                        moisture = (isIncrease and math.random(downMoisture * 1, leftMoisture * 1.015) or math.random(downMoisture * 0.985, leftMoisture * 1)) / 1000
                     else
-                        moisture = (isIncrease and math.random(leftMoisture * 1, downMoisture * 1.012) or math.random(leftMoisture * 0.988, downMoisture * 1)) / 1000
+                        moisture = (isIncrease and math.random(leftMoisture * 1, downMoisture * 1.015) or math.random(leftMoisture * 0.985, downMoisture * 1)) / 1000
                     end
 
                 end
 
             end
+
+            if seed < 1 then
+                moisture = moisture * (math.random(250, 500) / 1000)
+            elseif seed >= 22 then
+                moisture = moisture * (math.random(1500, 1750) / 1000)
+            end
+
 
             moisture = math.clamp(moisture, 0, 1)
             moisture = math.clamp(moisture, baseMoisture * 0.25, baseMoisture * 1.75)
@@ -361,9 +376,25 @@ function MoistureSystem:generateNewMapMoisture(xmlFile, force)
 
     print(string.format("--- Generated %s rows with %s columns each", numRows, numColumns))
 
+    if force then
+
+        local event = MoistureSyncEvent.new(self.rows, true)
+
+        if self.isServer then
+            g_server:broadcastEvent(event)
+        else
+            g_client:getServerConnection():sendEvent(event)
+        end
+
+    end
+
 end
 
-
+---Get target values at coordinates
+-- @param float x x coordinate
+-- @param float z z coordinate
+-- @param table values values in the format { "key" }
+-- @return boolean values values in the format { ["key"] = value } where value is the value of the respective key
 function MoistureSystem:getValuesAtCoords(x, z, values)
 
     if values == nil or #values == 0 or self.isSaving then return nil end
@@ -420,6 +451,11 @@ function MoistureSystem:getValuesAtCoords(x, z, values)
 end
 
 
+---Set target values at coordinates
+-- @param float x x coordinate
+-- @param float z z coordinate
+-- @param table values values in the format { ["key"] = value } where the value will be added to the current value
+-- @param boolean addToPendingSync add to pending synchronisation queue for MP
 function MoistureSystem:setValuesAtCoords(x, z, values, addToPendingSync)
 
     if values == nil or self.isSaving then return end
@@ -540,9 +576,15 @@ function MoistureSystem:update(delta, timescale)
                     if cacheUpdatePending then
 
                         local groundTypeValue = fieldGroundSystem:getValueAtWorldPos(FieldDensityMap.GROUND_TYPE, x, 0, z)
+                        local fruitTypeIndex, growthState
                         
                         column.fieldId = g_farmlandManager:getFarmlandIdAtWorldPosition(x, z)
                         column.groundType = FieldGroundType.getTypeByValue(groundTypeValue)
+                        
+                        --if column.groundType ~= FieldGroundType.NONE then fruitTypeIndex, growthState = FSDensityMapUtil.getFruitTypeIndexAtWorldPos(x, z) end
+
+                        --column.fruitTypeIndex = fruitTypeIndex
+                        --column.growthState = growthState
 
                     end
 
@@ -741,42 +783,39 @@ end
 
 function MoistureSystem:onHourChanged()
 
-    if self.isSaving then return end
-
-    if not self.witheringEnabled then
-        --if self.isServer and self.needsSync then
-
-            --self.needsSync = false
-            --g_server:broadcastEvent(MoistureSyncEvent.new(self.numRows, self.numColumns, self.rows), false)
-
-        --end
-        return
-    end
+    if self.isSaving or not self.witheringEnabled then return end
 
     local i = 0
-    local maxRows = self.numRows / 4
+    local maxRows = self.numRows / 24
 
     local x = -self.mapWidth / 2
 
-    if self.currentHourlyUpdateQuarter > 1 then
-        x = x + self.cellWidth * self.numRows * ((self.currentHourlyUpdateQuarter - 1) / 4)
-    end
+    local currentHourlyUpdateIteration = self.currentHourlyUpdateIteration
+
+    x = x + ((currentHourlyUpdateIteration - 1) / 24) * self.mapWidth
 
     x = math.round(x)
 
-    for correctionOffset = -self.cellWidth, self.cellWidth do
-        if self.rows[x + correctionOffset] ~= nil then
-            x = x + correctionOffset
-            break
+    if self.rows[x] == nil then
+    
+        for correctionOffset = -self.cellWidth, self.cellWidth do
+            if self.rows[x + correctionOffset] ~= nil then
+                x = x + correctionOffset
+                break
+            end
         end
+
     end
 
     -- a maximum number of withering cells per hour is required otherwise the game has massive lag spikes, especially during/after droughts
 
-    local maxWithers = math.round(self.numRows * self.numColumns * 0.25 * 0.03)
+    local maxWithers = math.round(self.numRows * self.numColumns * 0.005)
     local timeSinceLastRain = MathUtil.msToMinutes(g_currentMission.environment.weather.timeSinceLastRain)
+    local isWinter = g_currentMission.environment.currentSeason == Season.WINTER
 
     if self.rows[x] ~= nil then
+
+        local groundTypeNone, groundTypeStubble, groundTypeCultivated, groundTypePlowed, groundTypeGrass, groundTypeCutGrass = FieldGroundType.NONE, FieldGroundType.STUBBLE_TILLAGE, FieldGroundType.CULTIVATED, FieldGroundType.PLOWED, FieldGroundType.GRASS, FieldGroundType.GRASS_CUT
 
         while i <= maxRows do
 
@@ -791,6 +830,13 @@ function MoistureSystem:onHourChanged()
             end
 
             for z, column in pairs(row.columns) do
+
+                if isWinter or column.groundType == groundTypeNone or column.groundType == groundTypeStubble or column.groundType == groundTypeCultivated or column.groundType == groundTypePlowed or column.groundType == groundTypeGrass or column.groundType == groundTypeCutGrass then
+                    column.witherChance = 0
+                    continue
+                end
+
+                if timeSinceLastRain <= 60 then continue end
 
                 local fruitTypeIndex, densityState = FSDensityMapUtil.getFruitTypeIndexAtWorldPos(x, z)
 
@@ -820,7 +866,7 @@ function MoistureSystem:onHourChanged()
 
                 witherChance = math.clamp(witherChance, 0, 1)
 
-                if self.isServer and witherChance > 0 and maxWithers > 0 and timeSinceLastRain > 60 then
+                if self.isServer and witherChance > 0 and maxWithers > 0 then
 
                     if math.random() < witherChance then
 
@@ -847,17 +893,10 @@ function MoistureSystem:onHourChanged()
 
     end
 
-    self.currentHourlyUpdateQuarter = self.currentHourlyUpdateQuarter >= 4 and 1 or (self.currentHourlyUpdateQuarter + 1)
 
+    self.currentHourlyUpdateIteration = currentHourlyUpdateIteration + 1
 
-
-    if self.isServer and self.needsSync then
-
-        --self.needsSync = false
-        --g_server:broadcastEvent(MoistureSyncEvent.new(self.numRows, self.numColumns, self.rows), false)
-
-    end
-
+    if self.currentHourlyUpdateIteration > 24 then self.currentHourlyUpdateIteration = 1 end
 
 end
 
@@ -944,10 +983,12 @@ function MoistureSystem:onLeaveVehicle()
 end
 
 
-function MoistureSystem:getCellsInsidePolygon(polygon)
+function MoistureSystem:getCellsInsidePolygon(polygon, targets)
 
     local cells = {}
 	local cx, cz = 0, 0
+
+    targets = targets or { "moisture", "retention", "trend", "witherChance" }
 
 	for i = 1, #polygon, 2 do
 
@@ -1004,16 +1045,7 @@ function MoistureSystem:getCellsInsidePolygon(polygon)
 
                 if column == nil then break end
 
-                local cell = self:getValuesAtCoords(row.x, column.z, { "moisture", "retention", "trend", "witherChance" })
-
-                --local cell = {
-                    --["x"] = row.x,
-                    --["z"] = column.z,
-                    --["moisture"] = column.moisture,
-                    --["retention"] = column.retention,
-                    --["trend"] = column.trend,
-                    --["witherChance"] = self.witheringEnabled and column.witherChance or 0
-                --}
+                local cell = self:getValuesAtCoords(row.x, column.z, targets)
 
                 cell.x = row.x
                 cell.z = column.z
@@ -1113,5 +1145,23 @@ end
 function MoistureSystem:applyUpdaterSync(rows)
 
     for _, row in pairs(rows) do self:setValuesAtCoords(row.x, row.z, row.targets) end
+
+end
+
+
+function MoistureSystem:applyResetFromSync(rows, numRows, numColumns, cellWidth, cellHeight)
+
+    self.rows, self.numRows, self.numColumns, self.cellWidth, self.cellHeight = rows, numRows, numColumns, cellWidth, cellHeight
+
+    for _, updateIteration in pairs(self.updateIterations) do
+        updateIteration.moistureDelta = 0
+        updateIteration.timeSinceLastUpdate = 0
+        updateIteration.cacheUpdatePending = true
+        updateIteration.pendingSync = { ["numRows"] = 0 }
+    end
+
+    self.currentUpdateIteration = 1
+
+    for _, irrigatingField in pairs(self.irrigatingFields) do irrigatingField.isActive = false end
 
 end

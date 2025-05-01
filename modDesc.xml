@@ -1,6 +1,6 @@
 <modDesc descVersion="97">
     <author>Arrow</author>
-    <version>1.1.2.5</version>
+    <version>1.1.2.6</version>
     <title>
         <en>Realistic Weather</en>
         <de>Realistisches Wetter</de>
@@ -55,6 +55,21 @@ https://github.com/Arrow-kb/FS25_RealisticWeather
 
 
 Changelog:
+
+1.1.2.6
+- Added irrigation missions
+- Added irrigation support for slurry tankers (3x more output than sprayers)
+- Changes to the fire model
+- Changes to the moisture map generation for more variation
+- Reworked moisture harvest yield
+- Reworked sprayer irrigation to be more accurate
+- Added the following settings options:
+--- Change moisture harvest yield factor
+- Lowered the spray effect on moisture
+- Rebuild moisture map setting is now synced on MP
+- Improved fire performance
+- Significantly improved hourly lag
+- Fixed a fire sync issue when loading in MP
 
 1.1.2.5
 - Performance improvement for passive irrigation (- ~64% average processing time)
@@ -340,6 +355,7 @@ Journal des modifications :
         <sourceFile filename="src/gui/MoistureArgumentsDialog.lua"/>
         <sourceFile filename="src/gui/RealisticWeatherFrame.lua"/>
         <sourceFile filename="src/missions/field/HarvestMission.lua"/>
+        <sourceFile filename="src/missions/field/IrrigationMission.lua"/>
         <sourceFile filename="src/player/PlayerHUDUpdater.lua"/>
         <sourceFile filename="src/player/PlayerInputComponent.lua"/>
         <sourceFile filename="src/sounds/AmbientSoundSystem.lua"/>
@@ -378,4 +394,5 @@ Journal des modifications :
     <actions>
         <action name="Irrigation"/>
     </actions>
+	<missionVehicles filename="xml/missionVehicles.xml"/>
 </modDesc>

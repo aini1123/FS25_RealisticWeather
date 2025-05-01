@@ -136,6 +136,15 @@ RWSettings.SETTINGS = {
 		["binaryType"] = "offOn",
 		["values"] = { false, true },
 		["callback"] = FireSystem.onSettingChanged
+	},
+
+	["moistureYieldFactor"] = {
+		["index"] = 15,
+		["type"] = "MultiTextOption",
+		["default"] = 11,
+		["valueType"] = "float",
+		["values"] = { 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0 },
+		["callback"] = RW_FSBaseMission.onSettingChanged
 	}
 
 }
