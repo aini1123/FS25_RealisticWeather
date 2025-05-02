@@ -40,14 +40,13 @@
 		<text name="rw_ui_cellHeight" text="Altura de celda"/>
 		<text name="rw_ui_ownedFields" text="Campos propios"/>
 		<text name="rw_ui_allFields" text="Todos los campos"/>
-		<text name="rw_ui_teleport" text="Teleport"/>
+		<text name="rw_ui_teleport" text="Teletransportar"/>
 
 
-		<text name="rw_contract_field_irrigation_title" text="Irrigation"/>
-		<text name="rw_contract_field_irrigation_description" text="Irrigate the field to increase the average moisture to the target level"/>
-		<text name="rw_contract_field_irrigation_currentAverage" text="Average moisture"/>
-		<text name="rw_contract_field_irrigation_targetAverage" text="Target average moisture"/>
-
+		<text name="rw_contract_field_irrigation_title" text="Riego"/>
+		<text name="rw_contract_field_irrigation_description" text="Riega el campo para aumentar la humedad promedio al nivel objetivo"/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="Humedad promedio"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="Humedad promedio objetivo"/>
 
 
 		<!--  CONFIGURACIONES  -->
@@ -113,8 +112,8 @@
 		<text name="rw_settings_fireEnabled_tooltip_1" text="Los incendios de cultivos están desactivados"/>
 		<text name="rw_settings_fireEnabled_tooltip_2" text="Se permiten los incendios de cultivos"/>
 
-		<text name="rw_settings_moistureYieldFactor_label" text="Moisture Yield Factor"/>
-		<text name="rw_settings_moistureYieldFactor_tooltip" text="Change the harvest yield added by moisture"/>
+		<text name="rw_settings_moistureYieldFactor_label" text="Factor de rendimiento por humedad"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="Cambia el rendimiento de cosecha afectado por la humedad"/>
 
 	</texts>
 </l10n>
