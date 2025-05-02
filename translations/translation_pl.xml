@@ -1,121 +1,113 @@
 <l10n>
+	<translationContributors>Ziuta</translationContributors>
 	<texts>
 
-		<text name="rw_ui_fog" text="Gęsta Mgła"/>
-		<text name="rw_ui_hour" text="przez %s godzinę" tag="format"/>
-		<text name="rw_ui_hours" text="przez %s godziny" tag="format"/>
-		<text name="rw_ui_minute" text="przez %s minutę" tag="format"/>
-		<text name="rw_ui_minutes" text="przez %s minuty" tag="format"/>
+		<text name="rw_ui_fog" text="Gęsta mgła"/>
+		<text name="rw_ui_hour" text="przez %s h" tag="format"/>
+		<text name="rw_ui_hours" text="przez %s h" tag="format"/>
+		<text name="rw_ui_minute" text="przez %s min" tag="format"/>
+		<text name="rw_ui_minutes" text="przez %s min" tag="format"/>
 		<text name="rw_ui_aboutToWither" text="Pole %s wkrótce uschnie" tag="format"/>
 		<text name="rw_ui_hasWithered" text="Pole %s uschło" tag="format"/>
 		<text name="rw_ui_currentYield" text="Bieżąca rentowność"/>
 		<text name="rw_ui_moisture" text="Wilgotność"/>
-		<text name="rw_ui_witherChance" text="Szansa na wyginięcie"/>
-		<text name="rw_ui_retention" text="Zatrzymywanie wilgoci"/>
-		<text name="rw_ui_idealMoisture" text="Idealna wilgotność"/>
-		<text name="rw_ui_perfectMoisture" text="Doskonała wilgotność"/>
-		<text name="rw_ui_blizzard_coming" text="Nadchodzi Zamieć"/>
+		<text name="rw_ui_witherChance" text="Ryzyko uschnięcia"/>
+		<text name="rw_ui_retention" text="Retencja glebowa"/>
+		<text name="rw_ui_idealMoisture" text="Optymalna wilgotność"/>
+		<text name="rw_ui_perfectMoisture" text="Idealna wilgotność"/>
+		<text name="rw_ui_blizzard_coming" text="Nadchodzi zamieć"/>
 		<text name="rw_ui_blizzard_now" text="Zamieć w toku"/>
 		<text name="rw_ui_drought_coming" text="Nadchodzi susza"/>
-		<text name="rw_ui_drought_now" text="Trwająca suszau"/>
-		<text name="rw_ui_snowExpected" text="%scm - %scm oczekiwane" tag="format"/>
+		<text name="rw_ui_drought_now" text="Trwająca susza"/>
+		<text name="rw_ui_snowExpected" text="Opad %scm - %scm" tag="format"/>
 
 		<text name="rw_ui_amount" text="Kwota"/>
 		<text name="rw_ui_requiredMoisture" text="Wymagana wilgotność"/>
-		<text name="rw_ui_needsTedding" text="Wymaga przetarcia"/>
+		<text name="rw_ui_needsTedding" text="Wymaga przetrząśnięcia"/>
 		<text name="rw_ui_yes" text="Tak"/>
 		<text name="rw_ui_no" text="Nie"/>
 
 		<text name="input_Irrigation" text="Nawadnianie"/>
 		<text name="finance_irrigationUpkeep" text="Nawadnianie"/>
-		<text name="rw_ui_irrigation_start" text="Rozpoczęcie nawadniania"/>
-		<text name="rw_ui_irrigation_stop" text="Zaprzestanie nawadniania"/>
-		<text name="rw_ui_pendingIrrigationCost" text="Oczekujący koszt nawadniania"/>
-		<text name="rw_ui_irrigationUpkeep" text="Utrzymanie nawadniania"/>
-		<text name="rw_ui_inactive" text="Nieaktywny"/>
-		<text name="rw_ui_active" text="Aktywny"/>
+		<text name="rw_ui_irrigation_start" text="Rozpocznij nawadnianie"/>
+		<text name="rw_ui_irrigation_stop" text="Zatrzymaj nawadnianie"/>
+		<text name="rw_ui_pendingIrrigationCost" text="Bieżący koszt nawadniania"/>
+		<text name="rw_ui_irrigationUpkeep" text="Obsługa nawadniania"/>
+		<text name="rw_ui_inactive" text="Nieaktywne"/>
+		<text name="rw_ui_active" text="Aktywne"/>
 
-		<text name="rw_ui_today" text="Today"/>
-		<text name="rw_ui_cellWidth" text="Cell Width"/>
-		<text name="rw_ui_cellHeight" text="Cell Height"/>
-		<text name="rw_ui_ownedFields" text="Owned Fields"/>
-		<text name="rw_ui_allFields" text="All Fields"/>
+		<text name="rw_ui_today" text="Dzisiaj"/>
+		<text name="rw_ui_cellWidth" text="Szerokość"/>
+		<text name="rw_ui_cellHeight" text="Wysokość"/>
+		<text name="rw_ui_ownedFields" text="Własne pola"/>
+		<text name="rw_ui_allFields" text="Wszystkie"/>
 		<text name="rw_ui_teleport" text="Teleport"/>
-
-
-		<text name="rw_contract_field_irrigation_title" text="Irrigation"/>
-		<text name="rw_contract_field_irrigation_description" text="Irrigate the field to increase the average moisture to the target level"/>
-		<text name="rw_contract_field_irrigation_currentAverage" text="Average moisture"/>
-		<text name="rw_contract_field_irrigation_targetAverage" text="Target average moisture"/>
 
 
 
 		<!--  SETTINGS  -->
 
 
-		<text name="rw_settings" text="Realistic Weather"/>
+		<text name="rw_settings" text="Realistyczna pogoda"/>
 
-		<text name="rw_settings_off" text="Off"/>
-		<text name="rw_settings_on" text="On"/>
+		<text name="rw_settings_off" text="Wyłączone"/>
+		<text name="rw_settings_on" text="Włączone"/>
 
-		<text name="rw_settings_witheringEnabled_label" text="Crop Withering"/>
-		<text name="rw_settings_witheringEnabled_tooltip_1" text="Crops will not wither from low moisture"/>
-		<text name="rw_settings_witheringEnabled_tooltip_2" text="Crops will wither from low moisture"/>
+		<text name="rw_settings_witheringEnabled_label" text="Usychanie upraw"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="Uprawy nie usychają z powodu niskiej wilgotności"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="Uprawy usychają z powodu niskiej wilgotności"/>
 
-		<text name="rw_settings_rebuildMoistureMap_label" text="Rebuild Moisture Map"/>
-		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Delete and rebuild the moisture map with custom arguments"/>
-		<text name="rw_settings_rebuildMoistureMap_text" text="Rebuild Moisture Map"/>
+		<text name="rw_settings_rebuildMoistureMap_label" text="Przebuduj mapę wilgotności"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Usuń i odbuduj mapę wilgotności z niestandardowymi argumentami"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="Przebuduj mapę wilgotności"/>
 
-		<text name="rw_settings_performanceIndex_label" text="Performance Index"/>
-		<text name="rw_settings_performanceIndex_tooltip" text="Increase this value to improve performance"/>
+		<text name="rw_settings_performanceIndex_label" text="Wskaźnik wydajności"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="Zwiększenie tej wartości poprawia wydajność"/>
 
-		<text name="rw_settings_witheringChance_label" text="Withering Chance"/>
-		<text name="rw_settings_witheringChance_tooltip" text="Change the likelihood of crops withering due to low moisture"/>
+		<text name="rw_settings_witheringChance_label" text="Ryzyko usychania"/>
+		<text name="rw_settings_witheringChance_tooltip" text="Zmiana ryzyka usychania upraw z powodu niskiej wilgotności."/>
 
-		<text name="rw_settings_moistureGainModifier_label" text="Moisture Gain Modifier"/>
-		<text name="rw_settings_moistureGainModifier_tooltip" text="Change the amount of moisture gained"/>
+		<text name="rw_settings_moistureGainModifier_label" text="Modyfikator przyrostu wilgotności"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="Zmiana ilości uzyskiwanej wilgoci"/>
 
-		<text name="rw_settings_moistureLossModifier_label" text="Moisture Loss Modifier"/>
-		<text name="rw_settings_moistureLossModifier_tooltip" text="Change the amount of moisture lost"/>
+		<text name="rw_settings_moistureLossModifier_label" text="Modyfikator utraty wilgotności"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="Zmiana ilości utraty wilgoci"/>
 
-		<text name="rw_settings_moistureOverlayBehaviour_label" text="Moisture Overlay"/>
-		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="The moisture overlay will never be shown"/>
-		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="The moisture overlay will only be shown when in a field"/>
-		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="The moisture overlay will always be shown"/>
-		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Off"/>
-		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Limited"/>
-		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="On"/>
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="Nakładka wilgotności"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="Nakładka wilgotności nigdy nie będzie wyświetlana"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="Nakładka wilgotności będzie wyświetlana tylko w polu"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="Nakładka wilgotności będzie wyświetlana zawsze"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Wyłączone"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Ograniczone"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="Włączone"/>
 
-		<text name="rw_settings_moistureFrameBehaviour_label" text="Moisture Screen"/>
-		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="The moisture screen in the main menu will show all cells in the selected field"/>
-		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="The moisture screen in the main menu will show the average values of each field (better for performance)"/>
-		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detailed"/>
-		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Limited"/>
+		<text name="rw_settings_moistureFrameBehaviour_label" text="Zakładka wilgotności"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="Zakładka wilgotności w menu głównym pokaże wszystkie komórki na wybranym polu"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="Zakładka wilgotności w menu głównym pokaże średnie wartości każdego pola (lepsze dla wydajności)"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Szczegółowy"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Ograniczony"/>
 
-		<text name="rw_settings_blizzardsEnabled_label" text="Blizzards"/>
-		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Blizzards are disabled"/>
-		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Blizzards are enabled"/>
+		<text name="rw_settings_blizzardsEnabled_label" text="Zamiecie"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Zamiecie są wyłączone"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Zamiecie są włączone"/>
 
-		<text name="rw_settings_droughtsEnabled_label" text="Droughts"/>
-		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Droughts are disabled"/>
-		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Droughts are enabled"/>
+		<text name="rw_settings_droughtsEnabled_label" text="Susze"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Susze są wyłączone"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Susze są włączone"/>
 
-		<text name="rw_settings_grassMoistureGainModifier_label" text="Grass Moisture Gain Modifier"/>
-		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="Change the amount of moisture gained for cut grass"/>
+		<text name="rw_settings_grassMoistureGainModifier_label" text="Modyfikator przyrostu wilgotności trawy"/>
+		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="Zmiana ilości wilgotności przyrostu dla skoszonej trawy"/>
 
-		<text name="rw_settings_grassMoistureLossModifier_label" text="Grass Moisture Loss Modifier"/>
-		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="Change the amount of moisture lost for cut grass"/>
+		<text name="rw_settings_grassMoistureLossModifier_label" text="Modyfikator utraty wilgotności trawy"/>
+		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="Zmiana ilości wilgotności utraty dla skoszonej trawy"/>
 
-		<text name="rw_settings_puddlesEnabled_label" text="Puddles"/>
-		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Puddles are disabled"/>
-		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Puddles are enabled"/>
+		<text name="rw_settings_puddlesEnabled_label" text="Kałuże"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Kałuże są wyłączone"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Kałuże są włączone"/>
 
-		<text name="rw_settings_fireEnabled_label" text="Crop Fires"/>
-		<text name="rw_settings_fireEnabled_tooltip_1" text="Crop fires are disabled"/>
-		<text name="rw_settings_fireEnabled_tooltip_2" text="Crop fires are enabled"/>
-
-		<text name="rw_settings_moistureYieldFactor_label" text="Moisture Yield Factor"/>
-		<text name="rw_settings_moistureYieldFactor_tooltip" text="Change the harvest yield added by moisture"/>
+		<text name="rw_settings_fireEnabled_label" text="Pożary upraw"/>
+		<text name="rw_settings_fireEnabled_tooltip_1" text="Pożary upraw są wyłączone"/>
+		<text name="rw_settings_fireEnabled_tooltip_2" text="Pożary upraw są włączone"/>
 
 	</texts>
 </l10n>
