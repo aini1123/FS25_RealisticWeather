@@ -44,6 +44,12 @@
 		<text name="rw_ui_teleport" text="Teleport"/>
 
 
+		<text name="rw_contract_field_irrigation_title" text="Nawadnianie"/>
+		<text name="rw_contract_field_irrigation_description" text="Nawadnianie pola w celu zwiększenia średniej wilgotności do poziomu docelowego."/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="Średnia wilgotność"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="Docelowa średnia wilgotność"/>
+
+
 
 		<!--  SETTINGS  -->
 
@@ -109,5 +115,8 @@
 		<text name="rw_settings_fireEnabled_tooltip_1" text="Pożary upraw są wyłączone"/>
 		<text name="rw_settings_fireEnabled_tooltip_2" text="Pożary upraw są włączone"/>
 
+		<text name="rw_settings_moistureYieldFactor_label" text="Współczynnik zbiorów"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="Zmienia plon przez dodanie bonusu za wilgotność"/>
+		
 	</texts>
 </l10n>
