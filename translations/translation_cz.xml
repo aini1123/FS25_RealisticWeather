@@ -43,10 +43,10 @@
 		<text name="rw_ui_teleport" text="Teleport"/>
 
 
-		<text name="rw_contract_field_irrigation_title" text="Irrigation"/>
-		<text name="rw_contract_field_irrigation_description" text="Irrigate the field to increase the average moisture to the target level"/>
-		<text name="rw_contract_field_irrigation_currentAverage" text="Average moisture"/>
-		<text name="rw_contract_field_irrigation_targetAverage" text="Target average moisture"/>
+		<text name="rw_contract_field_irrigation_title" text="Zavlažování"/>
+		<text name="rw_contract_field_irrigation_description" text="Zavlažování pole pro zvýšení průměrné vlhkosti na cílovou úroveň."/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="Průměrná vlhkost"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="Cílová průměrná vlhkost"/>
 
 
 
@@ -114,8 +114,8 @@
 		<text name="rw_settings_fireEnabled_tooltip_1" text="Požáry plodin jsou vypnuté"/>
 		<text name="rw_settings_fireEnabled_tooltip_2" text="Požáry plodin jsou zapnuté"/>
 
-		<text name="rw_settings_moistureYieldFactor_label" text="Moisture Yield Factor"/>
-		<text name="rw_settings_moistureYieldFactor_tooltip" text="Change the harvest yield added by moisture"/>
+		<text name="rw_settings_moistureYieldFactor_label" text="Faktor výnosu vlhkosti"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="Změna výnosu sklizně přidaná podle vlhkosti"/>
 		
 	</texts>
 </l10n>
