@@ -1,0 +1,121 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="Yoğun Sis"/>
+		<text name="rw_ui_hour" text="kadar %s saat" tag="format"/>
+		<text name="rw_ui_hours" text="kadar %s saat" tag="format"/>
+		<text name="rw_ui_minute" text="kadar %s dakika" tag="format"/>
+		<text name="rw_ui_minutes" text="kadar %s dakika" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="Tarla %s üzere solmak" tag="format"/>
+		<text name="rw_ui_hasWithered" text="Tarla %s soldu" tag="format"/>
+		<text name="rw_ui_currentYield" text="Mevcut Verim"/>
+		<text name="rw_ui_moisture" text="Nem"/>
+		<text name="rw_ui_witherChance" text="Solma Şansı/>
+		<text name="rw_ui_retention" text="Nem Tutma"/>
+		<text name="rw_ui_idealMoisture" text="İdeal Nem"/>
+		<text name="rw_ui_perfectMoisture" text="Mükemmel Nem"/>
+		<text name="rw_ui_blizzard_coming" text="Tipi Geliyor"/>
+		<text name="rw_ui_blizzard_now" text="Tipi Sürüyor"/>
+		<text name="rw_ui_drought_coming" text="Kuraklık Geliyor"/>
+		<text name="rw_ui_drought_now" text="Kuraklık Sürüyor"/>
+		<text name="rw_ui_snowExpected" text="%scm - %scm bekleniyor" tag="format"/>
+		
+		<text name="rw_ui_amount" text="Miktar"/>
+		<text name="rw_ui_requiredMoisture" text="Gereken Nem"/>
+		<text name="rw_ui_needsTedding" text="Kurutma Gerekiyor"/>
+		<text name="rw_ui_yes" text="Evet"/>
+		<text name="rw_ui_no" text="Hayır"/>
+
+        <text name="input_Irrigation" text="Sulama"/>
+        <text name="finance_irrigationUpkeep" text="Sulama"/>
+        <text name="rw_ui_irrigation_start" text="Sulamayı Başlat"/>
+        <text name="rw_ui_irrigation_stop" text="Sulamayı Durdur"/>
+        <text name="rw_ui_pendingIrrigationCost" text="Bekleyen Sulama Tutarı"/>
+        <text name="rw_ui_irrigationUpkeep" text="Sulama Ücreti"/>
+		<text name="rw_ui_inactive" text="Kapalı"/>
+		<text name="rw_ui_active" text="Aktif"/>
+
+		<text name="rw_ui_today" text="Bugün"/>
+		<text name="rw_ui_cellWidth" text="Hücre Genişliği"/>
+		<text name="rw_ui_cellHeight" text="Hücre Yüksekliği"/>
+		<text name="rw_ui_ownedFields" text="Tarlalarım"/>
+		<text name="rw_ui_allFields" text="Bütün Tarlalar"/>
+		<text name="rw_ui_teleport" text="Işınlanma"/>
+		
+		
+		<text name="rw_contract_field_irrigation_title" text="Sulama"/>
+		<text name="rw_contract_field_irrigation_description" text="Ortalama nemi hedef seviyeye çıkarmak için tarlayı sulayın"/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="Ortalama Nem"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="Ortalama Nem Hedefi"/>
+		
+		
+		
+		<!--  SETTINGS  -->
+
+
+		<text name="rw_settings" text="Gerçekçi Hava Durumu"/>
+
+		<text name="rw_settings_off" text="Kapalı"/>
+		<text name="rw_settings_on" text="Açık"/>
+		
+		<text name="rw_settings_witheringEnabled_label" text="Mahsül Solması"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="Mahsuller düşük nemden dolayı solmaz"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="Mahsuller düşük nemden dolayı solacak"/>
+		
+		<text name="rw_settings_rebuildMoistureMap_label" text="Nem Haritasını Yeniden Oluşturun"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="Nem haritasını silme ve özel bağımsız değişkenlerle yeniden oluşturma"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="Nem Haritasını Yeniden Oluşturun"/>
+
+		<text name="rw_settings_performanceIndex_label" text="Performans Endeksi"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="Performansı artırmak için bu değeri artırın"/>
+
+		<text name="rw_settings_witheringChance_label" text="Solma Şansı"/>
+		<text name="rw_settings_witheringChance_tooltip" text="Düşük nem nedeniyle mahsullerin solma olasılığını değiştirin"/>
+
+		<text name="rw_settings_moistureGainModifier_label" text="Nem Kazancı Değiştirici"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="Kazanılan nem miktarını değiştirin"/>
+
+		<text name="rw_settings_moistureLossModifier_label" text="Nem Kaybı Değiştirici"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="Kaybedilen nem miktarını değiştirin"/>
+
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="Nem Ekranı"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="Nem Ekranı Kapalı"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="Nem Ekranı Sadece Tarlalarda Açık"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="Nem Ekranı Her Zaman Açık"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Kapalı"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="Kısıtlı"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="Açık"/>
+
+		<text name="rw_settings_moistureFrameBehaviour_label" text="Nem Ekranı"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="Ana menüdeki nem ekranı seçilen alandaki tüm hücreleri gösterecektir"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="Ana menüdeki nem ekranı her bir alanın ortalama değerlerini gösterecektir (performans için daha iyidir)"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="Detaylı"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="Kısıtlı"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="Tipi"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="Tipi Kapalı"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="Tipi Açık"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="Kuraklık"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="Kuraklık Kapalı"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="Kuraklık Açık"/>
+
+		<text name="rw_settings_grassMoistureGainModifier_label" text="Çim Nem Kazancı Değiştirici"/>
+		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="Kesilen çim için kazanılan nem miktarını değiştirin"/>
+
+		<text name="rw_settings_grassMoistureLossModifier_label" text="Çim Nem Kaybı Değiştirici"/>
+		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="Kesilen çim için kaybedilen nem miktarını değiştirin"/>
+
+		<text name="rw_settings_puddlesEnabled_label" text="Su Birikintisi"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_1" text="Su Birikintisi Kapalı"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_2" text="Su Birikintisi Açık"/>
+
+		<text name="rw_settings_fireEnabled_label" text="Mahsül Yangını"/>
+		<text name="rw_settings_fireEnabled_tooltip_1" text="Mahsül Yanıgını Kapalı"/>
+		<text name="rw_settings_fireEnabled_tooltip_2" text="Mahsül Yangını Açık"/>
+
+		<text name="rw_settings_moistureYieldFactor_label" text="Nem Verim Faktörü"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="Nem ile eklenen hasat verimini değiştirin"/>
+		
+	</texts>
+</l10n>
