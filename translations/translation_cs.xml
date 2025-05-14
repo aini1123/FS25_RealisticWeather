@@ -1,0 +1,121 @@
+<l10n>
+	<texts>
+
+		<text name="rw_ui_fog" text="浓雾"/>
+		<text name="rw_ui_hour" text="持续 %s 小时" tag="format"/>
+		<text name="rw_ui_hours" text="持续 %s 小时" tag="format"/>
+		<text name="rw_ui_minute" text="持续 %s 分钟" tag="format"/>
+		<text name="rw_ui_minutes" text="持续 %s 分钟" tag="format"/>
+		<text name="rw_ui_aboutToWither" text="字段 %s 即将枯萎" tag="format"/>
+		<text name="rw_ui_hasWithered" text="字段 %s 已经枯萎" tag="format"/>
+		<text name="rw_ui_currentYield" text="当前收益率"/>
+		<text name="rw_ui_moisture" text="湿度"/>
+		<text name="rw_ui_witherChance" text="枯萎的几率"/>
+		<text name="rw_ui_retention" text="（土壤）持水量"/>
+		<text name="rw_ui_idealMoisture" text="理想的湿度"/>
+		<text name="rw_ui_perfectMoisture" text="完美的保湿度"/>
+		<text name="rw_ui_blizzard_coming" text="暴风雪来了"/>
+		<text name="rw_ui_blizzard_now" text="暴风雪正在进行"/>
+		<text name="rw_ui_drought_coming" text="干旱即将来临"/>
+		<text name="rw_ui_drought_now" text="持续干旱"/>
+		<text name="rw_ui_snowExpected" text="%scm - %供应链管理 需要" tag="format"/>
+		
+		<text name="rw_ui_amount" text="金额"/>
+		<text name="rw_ui_requiredMoisture" text="所需湿度"/>
+		<text name="rw_ui_needsTedding" text="需要翻晒"/>
+		<text name="rw_ui_yes" text="Yes"/>
+		<text name="rw_ui_no" text="No"/>
+
+        <text name="input_Irrigation" text="灌溉"/>
+        <text name="finance_irrigationUpkeep" text="灌溉"/>
+        <text name="rw_ui_irrigation_start" text="开始灌溉"/>
+        <text name="rw_ui_irrigation_stop" text="停止灌溉"/>
+        <text name="rw_ui_pendingIrrigationCost" text="待定灌溉成本"/>
+        <text name="rw_ui_irrigationUpkeep" text="灌溉维护费用"/>
+		<text name="rw_ui_inactive" text="未激活"/>
+		<text name="rw_ui_active" text="已激活"/>
+
+		<text name="rw_ui_today" text="今天"/>
+		<text name="rw_ui_cellWidth" text="标准宽度"/>
+		<text name="rw_ui_cellHeight" text="标准高度"/>
+		<text name="rw_ui_ownedFields" text="拥有的字段"/>
+		<text name="rw_ui_allFields" text="所有字段"/>
+		<text name="rw_ui_teleport" text="传送"/>
+		
+		
+		<text name="rw_contract_field_irrigation_title" text="灌溉"/>
+		<text name="rw_contract_field_irrigation_description" text="灌溉田地，将平均湿度增加到目标水平"/>
+		<text name="rw_contract_field_irrigation_currentAverage" text="平均湿度"/>
+		<text name="rw_contract_field_irrigation_targetAverage" text="目标平均湿度"/>
+		
+		
+		
+		<!--  SETTINGS  -->
+
+
+		<text name="rw_settings" text="真实天气"/>
+
+		<text name="rw_settings_off" text="Off"/>
+		<text name="rw_settings_on" text="On"/>
+		
+		<text name="rw_settings_witheringEnabled_label" text="作物枯萎"/>
+		<text name="rw_settings_witheringEnabled_tooltip_1" text="作物不会因水分低而枯萎"/>
+		<text name="rw_settings_witheringEnabled_tooltip_2" text="作物因水分低而枯萎"/>
+		
+		<text name="rw_settings_rebuildMoistureMap_label" text="重建湿度贴图"/>
+		<text name="rw_settings_rebuildMoistureMap_tooltip" text="使用自定义参数删除并重建湿度贴图"/>
+		<text name="rw_settings_rebuildMoistureMap_text" text="重建湿度贴图"/>
+
+		<text name="rw_settings_performanceIndex_label" text="性能指标"/>
+		<text name="rw_settings_performanceIndex_tooltip" text="增加此值以提高性能"/>
+
+		<text name="rw_settings_witheringChance_label" text="枯萎的几率"/>
+		<text name="rw_settings_witheringChance_tooltip" text="改变作物因低水分而枯萎的可能性"/>
+
+		<text name="rw_settings_moistureGainModifier_label" text="水分增加修改器"/>
+		<text name="rw_settings_moistureGainModifier_tooltip" text="更改获得的水分量"/>
+
+		<text name="rw_settings_moistureLossModifier_label" text="水分损失修改器"/>
+		<text name="rw_settings_moistureLossModifier_tooltip" text="更改水分损失量"/>
+
+		<text name="rw_settings_moistureOverlayBehaviour_label" text="潮湿覆盖层"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_1" text="永远不会显示湿气覆盖层"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_2" text="只有在野外时才会显示湿气覆盖层"/>
+		<text name="rw_settings_moistureOverlayBehaviour_tooltip_3" text="始终显示湿气覆盖层"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_1" text="Off"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_2" text="限制"/>
+		<text name="rw_settings_moistureOverlayBehaviour_texts_3" text="On"/>
+
+		<text name="rw_settings_moistureFrameBehaviour_label" text="防潮网"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_1" text="主菜单中的湿度屏幕将显示所选字段中的所有单元格"/>
+		<text name="rw_settings_moistureFrameBehaviour_tooltip_2" text="主菜单中的湿度屏幕将显示每个字段的平均值（性能更佳）"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_1" text="详细说明"/>
+		<text name="rw_settings_moistureFrameBehaviour_texts_2" text="限制"/>
+
+		<text name="rw_settings_blizzardsEnabled_label" text="暴风雪"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_1" text="暴风雪已禁用"/>
+		<text name="rw_settings_blizzardsEnabled_tooltip_2" text="暴雪已启用"/>
+
+		<text name="rw_settings_droughtsEnabled_label" text="干旱"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_1" text="干旱被禁用"/>
+		<text name="rw_settings_droughtsEnabled_tooltip_2" text="干旱已启用"/>
+
+		<text name="rw_settings_grassMoistureGainModifier_label" text="牧草增湿修改器"/>
+		<text name="rw_settings_grassMoistureGainModifier_tooltip" text="更改割草获得的水分量"/>
+
+		<text name="rw_settings_grassMoistureLossModifier_label" text="草水分损失修改器"/>
+		<text name="rw_settings_grassMoistureLossModifier_tooltip" text="改变割草的水分损失量"/>
+
+		<text name="rw_settings_puddlesEnabled_label" text="水坑"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_1" text="水坑 已禁用"/>
+		<text name="rw_settings_puddlesEnabled_tooltip_2" text="水坑 已启用"/>
+
+		<text name="rw_settings_fireEnabled_label" text="农作物火灾"/>
+		<text name="rw_settings_fireEnabled_tooltip_1" text="作物火灾被禁用"/>
+		<text name="rw_settings_fireEnabled_tooltip_2" text="作物火灾已启用"/>
+
+		<text name="rw_settings_moistureYieldFactor_label" text="水分产量系数"/>
+		<text name="rw_settings_moistureYieldFactor_tooltip" text="改变水分增加的收获产量"/>
+		
+	</texts>
+</l10n>
